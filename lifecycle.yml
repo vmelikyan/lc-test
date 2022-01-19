@@ -4,3 +4,4 @@ service:
     env:
       ENV_SOURCE: 'yaml'
       FOOBAR_KEY: '304870ujdfojdfjdlfdf'
+      BRANCH: 'main'
