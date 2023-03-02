@@ -12,6 +12,7 @@ services:
       repository: 'vmelikyan/lc-docker-test-app'
       branchName: 'main'
       docker:
+        defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           ports:
