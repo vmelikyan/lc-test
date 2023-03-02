@@ -3,7 +3,7 @@ version: '0.0.3-alpha-1'
 
 environment:
   defaultServices:
-    - vahan-lc-dev
+    - 'vahan-lc-dev'
 
 services:
   - name: 'vahan-lc-dev'
