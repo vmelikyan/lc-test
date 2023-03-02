@@ -3,10 +3,10 @@ version: '0.0.3-alpha-1'
 
 environment:
   defaultServices:
-    - lc-docker-test-app
+    - lc-test
 
 services:
-  - name: lc-docker-test-app
+  - name: lc-test
     defaultUUID: 'good-dev-0'
     github:
       repository: 'vmelikyan/lc-docker-test-app'
