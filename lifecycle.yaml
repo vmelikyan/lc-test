@@ -3,7 +3,7 @@ version: '0.0.3-alpha-1'
 
 environment:
   defaultServices:
-    - lc-test
+    - name: lc-test
 
 services:
   - name: lc-test
