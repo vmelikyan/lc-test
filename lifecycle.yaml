@@ -16,7 +16,7 @@ services:
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           ports:
-            - 8080
+            - "8080"
         init:
           dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
       deployment:
