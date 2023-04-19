@@ -19,6 +19,7 @@ services:
             YOLO: '{{yolo-db_internalHostname}}'
             TEST_HOST: '{{test-host_internalHostname}}'
             POS_DB: '{{pos-discounts-db_internalHostname}}'
+            MY_SERVICE: '{{lc-test_internalHostname}}'
           ports:
             - 8080
         init:
