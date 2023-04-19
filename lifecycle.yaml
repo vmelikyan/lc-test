@@ -16,6 +16,7 @@ services:
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           env:
+            BUILD_ID: '{{something-something_buildUUID}}'
             YOLO: '{{yolo-db_internalHostname}}'
             TEST_HOST: '{{test-host_internalHostname}}'
             POS_DB: '{{pos-discounts-db_internalHostname}}'
