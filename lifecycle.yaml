@@ -15,6 +15,10 @@ services:
         defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          env:
+            YOLO: '{{yolo-db_internalHostname}}'
+            TEST_HOST: '{{test-host_internalHostname}}'
+            POS_DB: '{{pos-discounts-db_internalHostname}}'
           ports:
             - 8080
         init:
