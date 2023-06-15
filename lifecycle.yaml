@@ -13,6 +13,8 @@ services:
       branchName: 'main'
       docker:
         defaultTag: 'main'
+        afterBuildPipelineId: '620fe0f1122195648b067b56'
+        detatchAfterBuildPipeline: false
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           env:
