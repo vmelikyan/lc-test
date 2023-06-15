@@ -21,6 +21,8 @@ services:
             POS_DB: '{{pos-discounts-db_internalHostname}}'
           ports:
             - 8080
+          afterBuildPipelineId: 620fe0f1122195648b067b56
+          detatchAfterBuildPipeline: false
         init:
           dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
       deployment:
