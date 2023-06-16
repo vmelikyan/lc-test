@@ -4,6 +4,8 @@ version: '0.0.3-alpha-1'
 environment:
   defaultServices:
     - name: 'lc-test'
+  optionalServices:
+    - name: 'lc-test2'  
 
 services:
   - name: 'lc-test'
@@ -35,3 +37,35 @@ services:
           tcpSocketPort: 8080
           httpGet:
             port: 8080
+            
+  - name: 'lc-test2'
+    defaultUUID: 'good-dev-0'
+    github:
+      repository: 'vmelikyan/lc-docker-test-app'
+      branchName: 'main'
+      docker:
+        defaultTag: 'main'
+        afterBuildPipelineId: '620fe0f1122195648b067b56'
+        detatchAfterBuildPipeline: false
+        app:
+          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          env:
+            YOLO: '{{yolo-db_internalHostname}}'
+            TEST_HOST: '{{test-host_internalHostname}}'
+            POS_DB: '{{pos-discounts-db_internalHostname}}'
+          ports:
+            - 8080
+        init:
+          dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
+      deployment:
+        public: true
+        capacityType: 'SPOT'
+        resource:
+          cpu:
+            request: '10m'
+          memory:
+            request: '100Mi'
+        readiness:
+          tcpSocketPort: 8080
+          httpGet:
+            port: 8080            
