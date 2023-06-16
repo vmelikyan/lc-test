@@ -15,6 +15,10 @@ services:
         defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          afterBuildPipelineConfig:
+            afterBuildPipelineId: 620fe0f1122195648b067b56
+            detatchAfterBuildPipeline: false
+            description: 'Some pretty name for the pipeline'
           env:
             YOLO: '{{yolo-db_internalHostname}}'
             TEST_HOST: '{{test-host_internalHostname}}'
