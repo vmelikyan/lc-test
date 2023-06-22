@@ -1,37 +1,40 @@
 ---
-version: '0.0.3-alpha-1'
+version: 0.0.3-alpha-1
+
 
 environment:
   defaultServices:
-    - name: 'lc-test'
+    - name: "lifecycle-dev-test"
 
 services:
-  - name: 'lc-test'
-    defaultUUID: 'good-dev-0'
+  - name: lifecycle-dev-test
     github:
-      repository: 'vmelikyan/lc-docker-test-app'
-      branchName: 'main'
+      repository: yowainwright/lifecycle-dev-test
+      branchName: main
       docker:
-        defaultTag: 'main'
+        defaultTag: main
         app:
-          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          dockerfilePath: Dockerfile
           env:
-            YOLO: '{{yolo-db_internalHostname}}'
-            TEST_HOST: '{{test-host_internalHostname}}'
-            POS_DB: '{{pos-discounts-db_internalHostname}}'
+            COMPONENT: app
           ports:
             - 8080
-        init:
-          dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
       deployment:
         public: true
-        capacityType: 'SPOT'
+        capacityType: "SPOT"
         resource:
           cpu:
-            request: '10m'
+            request: "10m"
           memory:
-            request: '100Mi'
+            request: "100Mi"
         readiness:
-          tcpSocketPort: 8080
-          httpGet:
-            port: 8080
+          tcpSocketPort: 8090
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 5
+        hostnames:
+          host: "lifecycle.dev.goodrx.com"
+          defaultInternalHostname: "lifecycle-test-good-dev-0"
+          defaultPublicUrl: "lifecycle-test-good-dev-0.lifecycle.dev.goodrx.com"
