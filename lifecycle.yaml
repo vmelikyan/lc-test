@@ -4,6 +4,7 @@ version: '0.0.3-alpha-1'
 environment:
   defaultServices:
     - name: 'lc-test'
+    - name: 'codefresh-test'
 
 services:
   - name: 'lc-test'
@@ -35,7 +36,7 @@ services:
           tcpSocketPort: 8080
           httpGet:
             port: 8080
-  - name: 'optimizely'
+  - name: 'codefresh-test'
     defaultUUID: 'good-dev-0'
     codefresh:
       repository: 'GoodRx/fastly-infrastructure'
