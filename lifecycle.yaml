@@ -35,3 +35,16 @@ services:
           tcpSocketPort: 8080
           httpGet:
             port: 8080
+  - name: 'optimizely'
+    defaultUUID: 'good-dev-0'
+    codefresh:
+      repository: 'GoodRx/fastly-infrastructure'
+      branchName: 'master'
+      env:
+        COMPUTE_BUILD_ENABLED: true
+      deploy:
+        pipelineId: '61a832aecb657804cd847dc4'
+        trigger: 'pr_verify'
+      destroy: 
+        pipelineId: '61a832aecb657804cd847dc4'
+        trigger: 'pr_verify'
