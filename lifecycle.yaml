@@ -40,7 +40,7 @@ services:
     defaultUUID: 'good-dev-0'
     codefresh:
       repository: 'vmelikyan/lc-test'
-      branchName: 'codefresh-test'
+      branchName: 'main'
       env:
         COMPUTE_BUILD_ENABLED: true
       deploy:
