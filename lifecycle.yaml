@@ -4,6 +4,7 @@ version: '0.0.3-alpha-1'
 environment:
   defaultServices:
     - name: 'lc-test'
+    - name: 'codefresh-test'
 
 services:
   - name: 'lc-test'
@@ -35,3 +36,16 @@ services:
           tcpSocketPort: 8080
           httpGet:
             port: 8080
+  - name: 'codefresh-test'
+    defaultUUID: 'good-dev-0'
+    codefresh:
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
+      env:
+        COMPUTE_BUILD_ENABLED: true
+      deploy:
+        pipelineId: '61a832aecb657804cd847dc4'
+        trigger: 'pr_verify'
+      destroy: 
+        pipelineId: '61a832aecb657804cd847dc4'
+        trigger: 'pr_verify'
