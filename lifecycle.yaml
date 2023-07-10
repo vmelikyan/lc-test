@@ -39,8 +39,8 @@ services:
   - name: 'codefresh-test'
     defaultUUID: 'good-dev-0'
     codefresh:
-      repository: 'GoodRx/fastly-infrastructure'
-      branchName: 'master'
+      repository: 'vmelikyan/lc-test'
+      branchName: 'codefresh-test'
       env:
         COMPUTE_BUILD_ENABLED: true
       deploy:
