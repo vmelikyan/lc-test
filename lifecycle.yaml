@@ -9,7 +9,7 @@ services:
   - name: 'lc-test'
     defaultUUID: 'good-dev-0'
     github:
-      repository: 'vmelikyan/lc-docker-test-app'
+      repository: 'vmelikyan/lc_test'
       branchName: 'main'
       docker:
         defaultTag: 'main'
