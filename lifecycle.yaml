@@ -37,4 +37,4 @@ services:
             port: 8080
         network:
           ingressAnnotations:
-            nginx.ingress.kubernetes.io/server-snippet: 'large_client_header_buffers 4 8k'
+            nginx.ingress.kubernetes.io/server-snippet: 'large_client_header_buffers 4 8k;'
