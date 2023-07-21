@@ -38,3 +38,23 @@ services:
         network:
           ingressAnnotations:
             nginx.ingress.kubernetes.io/server-snippet: 'large_client_header_buffers 4 8k'
+
+  - name: "lc-test-db"
+    docker:
+      dockerImage: "postgres"
+      defaultTag: "14.6-alpine"
+      ports:
+        - 5432
+      env:
+        POSTGRES_USER: "postgres"
+        POSTGRES_PASSWORD: "mysecretpassword"
+        POSTGRES_DB: "postgres"
+        PGDATA: "/var/lib/postgresql/data/pgdata"
+      deployment:
+        public: false
+        capacityType: "SPOT"
+        serviceDisks:
+          - name: "postgres-volume"
+            mountPath: "/var/lib/postgresql/data"
+            accessModes: "ReadWriteOnce"
+            storageSize: "1Gi"
