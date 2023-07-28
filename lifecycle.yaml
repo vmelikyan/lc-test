@@ -2,6 +2,7 @@
 version: '0.0.3-alpha-1'
 
 environment:
+  autoDeploy: true
   defaultServices:
     - name: 'lc-test'
 
