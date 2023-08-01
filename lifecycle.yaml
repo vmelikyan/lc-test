@@ -50,7 +50,7 @@ services:
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           env:
-            YOLO: '{{yolo-db_internalHostname}}'
+            YOLO: '{{lc-test-helm_internalHostname}}'
             TEST_HOST: '{{test-host_internalHostname}}'
             POS_DB: '{{pos-discounts-db_internalHostname}}'
           ports:
