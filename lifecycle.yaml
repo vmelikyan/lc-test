@@ -3,11 +3,11 @@ version: '0.0.3-alpha-1'
 
 environment:
   defaultServices:
-    - name: 'lc-test-helm'
+    - name: 'lc-test'
     - name: 'lc-test-k8s'
 
 services:
-  - name: 'lc-test-helm'
+  - name: 'lc-test'
     defaultUUID: 'good-dev-0'
     github:
       repository: 'vmelikyan/lc-test'
