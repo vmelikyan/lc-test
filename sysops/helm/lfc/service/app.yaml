@@ -37,9 +37,8 @@ ingress:
 deployment:
 
   replicaCount: 1
-
-  appImage: 441168312025.dkr.ecr.us-west-2.amazonaws.com/goodrx/rec/app:{{ $.Values.version }}
-  initImage: 441168312025.dkr.ecr.us-west-2.amazonaws.com/goodrx/rec/init:{{ $.Values.version }}
+  appImage: 455244397559.dkr.ecr.us-west-2.amazonaws.com/goodrx/lifecycle-deployments:{{ $.Values.version }}
+  initImage: 455244397559.dkr.ecr.us-west-2.amazonaws.com/goodrx/lifecycle-deployments:init-{{ $.Values.version }}
 
   terminationGracePeriodSeconds: 300
   # Resource limits can be tuned according to particular application requirements
@@ -87,16 +86,11 @@ deployment:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: 5%
+      maxUnavailable: 50%
       maxSurge: 100%
 
   args: ["app", "-config", "/config/config.toml"]
 
-autoscaling:
-  enabled: true
-  minReplicas: 1
-  maxReplicas: 3
-  targetCPUUtilizationPercentage: 70
 
 podDisruptionBudget:
   enabled: true
