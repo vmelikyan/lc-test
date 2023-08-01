@@ -1,5 +1,4 @@
 ---
-appShort: lct
 env: lfc                  # Short name of the environment (sbx, stg or prd)
 component: app            # Component name, should be equal to component name in Codefresh pipeline and name of this yml file.
 componentType: server     # Component (server, cron, migrations, etc)
