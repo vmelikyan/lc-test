@@ -25,6 +25,7 @@ services:
         init:
           dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
       deployment:
+        helm: true
         public: true
         capacityType: 'SPOT'
         resource:
@@ -36,9 +37,6 @@ services:
           tcpSocketPort: 8080
           httpGet:
             port: 8080
-        network:
-          ingressAnnotations:
-            nginx.ingress.kubernetes.io/server-snippet: 'large_client_header_buffers 4 8k'
   - name: 'lc-test-k8s'
     defaultUUID: 'good-dev-0'
     github:
@@ -70,4 +68,4 @@ services:
             port: 8080
         network:
           ingressAnnotations:
-            nginx.ingress.kubernetes.io/server-snippet: 'large_client_header_buffers 4 8k'
+            nginx.ingress.kubernetes.io/server-snippet: 'large_client_header_buffers 4 16k'
