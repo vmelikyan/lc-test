@@ -3,7 +3,8 @@ version: '0.0.3-alpha-1'
 
 environment:
   defaultServices:
-    - name: 'lc-test'
+    - name: 'lc-test-helm'
+    - name: 'lc-test-k8s'
 
 services:
   - name: 'lc-test-helm'
