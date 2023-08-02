@@ -1,1 +1,1 @@
-FROM ginxdemos/hello:latest
+FROM hello-world:latest
