@@ -10,6 +10,10 @@ ports:
     servicePort: 8080
     containerPort: 8080
 
+serviceAccount:
+  create: false
+  name: "default"
+
 service:
   enabled: true
 
