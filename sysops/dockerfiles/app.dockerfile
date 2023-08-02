@@ -1,1 +1,1 @@
-FROM boxboat/hello-world-webapp:latest
+FROM ginxdemos/hello:latest
