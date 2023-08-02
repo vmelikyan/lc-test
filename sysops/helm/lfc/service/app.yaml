@@ -29,6 +29,7 @@ deployment:
 
   replicaCount: 1
   appImage: 455244397559.dkr.ecr.us-west-2.amazonaws.com/goodrx/lifecycle-deployments:{{ $.Values.version }}
+  initImage: 455244397559.dkr.ecr.us-west-2.amazonaws.com/goodrx/lifecycle-deployments:init-{{ $.Values.version }}
 
   terminationGracePeriodSeconds: 300
   # Resource limits can be tuned according to particular application requirements
