@@ -1,1 +1,1 @@
-FROM boxboat/hello-world-webapp
+FROM boxboat/hello-world-webapp:latest
