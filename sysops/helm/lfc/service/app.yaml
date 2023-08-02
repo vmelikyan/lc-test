@@ -34,8 +34,6 @@ deployment:
     requests:
       cpu: 10m
       memory: 100Mi
-    limits:
-      memory: 1000Mi
   # Probe values can be tuned according to particular application requirements
   # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   startupProbe:
