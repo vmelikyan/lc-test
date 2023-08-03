@@ -1,4 +1,5 @@
 ---
+appShort: lct
 env: lfc                  # Short name of the environment (sbx, stg or prd)
 component: app            # Component name, should be equal to component name in Codefresh pipeline and name of this yml file.
 componentType: server     # Component (server, cron, migrations, etc)
@@ -9,37 +10,26 @@ ports:
     servicePort: 8080
     containerPort: 8080
 
+serviceAccount:
+  create: false
+  name: "default"
+
 service:
   enabled: true
 
-ingress:
-  enabled: true
-  host: rec-stg-app.stg.uw2.eng.grxweb.com
-  port: 8080
-  ipAllowlist:
-    - 160.72.30.82/32     # Pen Factory Santa Monica
-    - 160.72.30.84/32     # Pen Factory VPN
-    - 64.125.252.70/32    # San Francisco Office VPN
-    - 35.82.172.188/32    # eng-ops nat ips
-    - 52.10.232.209/32    # eng-ops nat ips
-    - 54.68.233.59/32     # eng-ops nat ips
-    - 130.41.49.197/32    # Prisma VPN (US Northeast)
-    - 130.41.49.198/32    # Prisma VPN (US Northeast)
-    - 130.41.56.141/32    # Prisma VPN (US West)
-    - 130.41.56.72/32     # Prisma VPN (US West)
-    - 137.83.229.130/32   # Prisma VPN (US Central)
-    - 137.83.229.16/32    # Prisma VPN (US Central)
-    - 208.127.110.203/32  # Prisma VPN (US South)
-    - 208.127.110.204/32  # Prisma VPN (US South)
-    - 130.41.70.21/32     # Prisma VPN (US Southeast)
-    - 130.41.70.22/32     # Prisma VPN (US Southeast)
-
 deployment:
+  customNodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+          - key: eks.amazonaws.com/capacityType
+            operator: In
+            values:
+              - SPOT
 
   replicaCount: 1
-
-  appImage: 441168312025.dkr.ecr.us-west-2.amazonaws.com/goodrx/rec/app:{{ $.Values.version }}
-  initImage: 441168312025.dkr.ecr.us-west-2.amazonaws.com/goodrx/rec/init:{{ $.Values.version }}
+  appImage: 455244397559.dkr.ecr.us-west-2.amazonaws.com/goodrx/lifecycle-deployments:{{ $.Values.version }}
+  initImage: 455244397559.dkr.ecr.us-west-2.amazonaws.com/goodrx/lifecycle-deployments:init-{{ $.Values.version }}
 
   terminationGracePeriodSeconds: 300
   # Resource limits can be tuned according to particular application requirements
@@ -48,8 +38,6 @@ deployment:
     requests:
       cpu: 10m
       memory: 100Mi
-    limits:
-      memory: 1000Mi
   # Probe values can be tuned according to particular application requirements
   # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   startupProbe:
@@ -58,7 +46,7 @@ deployment:
     httpGet:
       scheme: HTTP
       path: /__lbheartbeat__
-      port: 8090
+      port: 3000
 
   readinessProbe:
     periodSeconds: 10
@@ -66,7 +54,7 @@ deployment:
     httpGet:
       scheme: HTTP
       path: /__lbheartbeat__
-      port: 8090
+      port: 3000
 
   livenessProbe:
     periodSeconds: 60
@@ -75,7 +63,7 @@ deployment:
     httpGet:
       scheme: HTTP
       path: /__lbheartbeat__
-      port: 8090
+      port: 3000
 
   lifecycle:
     preStop:
@@ -87,16 +75,11 @@ deployment:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: 5%
+      maxUnavailable: 50%
       maxSurge: 100%
 
   args: ["app", "-config", "/config/config.toml"]
 
-autoscaling:
-  enabled: true
-  minReplicas: 1
-  maxReplicas: 3
-  targetCPUUtilizationPercentage: 70
 
 podDisruptionBudget:
   enabled: true
