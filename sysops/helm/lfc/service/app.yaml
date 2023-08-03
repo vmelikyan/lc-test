@@ -46,7 +46,7 @@ deployment:
     httpGet:
       scheme: HTTP
       path: /__lbheartbeat__
-      port: 8090
+      port: 3000
 
   readinessProbe:
     periodSeconds: 10
@@ -54,7 +54,7 @@ deployment:
     httpGet:
       scheme: HTTP
       path: /__lbheartbeat__
-      port: 8090
+      port: 3000
 
   livenessProbe:
     periodSeconds: 60
@@ -63,7 +63,7 @@ deployment:
     httpGet:
       scheme: HTTP
       path: /__lbheartbeat__
-      port: 8090
+      port: 3000
 
   lifecycle:
     preStop:
