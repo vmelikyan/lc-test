@@ -18,6 +18,9 @@ serviceAccount:
 service:
   enabled: true
 
+ingress:
+  port: 80
+
 deployment:
   customNodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
