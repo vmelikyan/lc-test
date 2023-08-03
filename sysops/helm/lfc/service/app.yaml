@@ -5,10 +5,11 @@ component: app            # Component name, should be equal to component name in
 componentType: server     # Component (server, cron, migrations, etc)
 
 ports:
-  - name: http
+  - name: tcp
     protocol: TCP
-    servicePort: 8080
+    servicePort: 80
     containerPort: 8080
+    appProtocol: http
 
 serviceAccount:
   create: false
@@ -46,7 +47,7 @@ deployment:
     httpGet:
       scheme: HTTP
       path: /__lbheartbeat__
-      port: 3000
+      port: 8080
 
   readinessProbe:
     periodSeconds: 10
@@ -54,7 +55,7 @@ deployment:
     httpGet:
       scheme: HTTP
       path: /__lbheartbeat__
-      port: 3000
+      port: 8080
 
   livenessProbe:
     periodSeconds: 60
@@ -63,7 +64,7 @@ deployment:
     httpGet:
       scheme: HTTP
       path: /__lbheartbeat__
-      port: 3000
+      port: 8080
 
   lifecycle:
     preStop:
