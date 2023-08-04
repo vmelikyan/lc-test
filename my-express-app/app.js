@@ -3,7 +3,7 @@ const app = express()
 const port = 8080
 
 app.get('/', (req, res) => {
-  res.send('Hello from lifecycle via helm!')
+  res.send('Hello from lifecycle via helm! DEV Tools demo')
 })
 
 app.get('/__lbheartbeat__', (req, res) => {
