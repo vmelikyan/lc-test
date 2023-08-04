@@ -14,7 +14,7 @@ RUN npm install --only=production
 COPY ../my-express-app/ .
 
 # The app listens on port 3000, so let's expose this port
-EXPOSE 3000
+EXPOSE 8080
 
 # Run the application
 CMD [ "node", "app.js" ]
