@@ -33,6 +33,6 @@ services:
           memory:
             request: '100Mi'
         readiness:
-          tcpSocketPort: 8080
+          tcpSocketPort: 3000
           httpGet:
-            port: 8080
+            port: 3000
