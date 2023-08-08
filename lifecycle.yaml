@@ -1,10 +1,9 @@
 ---
-version: '0.0.3-alpha-1'
+version: '0.0.4'
 
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'lc-test-k8s'
 
 services:
   - name: 'lc-test'
@@ -26,14 +25,3 @@ services:
           dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
       deployment:
         helm: true
-        public: true
-        capacityType: 'SPOT'
-        resource:
-          cpu:
-            request: '10m'
-          memory:
-            request: '100Mi'
-        readiness:
-          tcpSocketPort: 8080
-          httpGet:
-            port: 8080
