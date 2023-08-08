@@ -30,7 +30,7 @@ services:
         capacityType: 'SPOT'
         resource:
           cpu:
-            request: '10m'
+            request: '100m'
           memory:
             request: '100Mi'
         readiness:
