@@ -24,15 +24,6 @@ services:
         init:
           dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
       deployment:
-        helm: true
-        public: true
-        capacityType: 'SPOT'
-        resource:
-          cpu:
-            request: '10m'
-          memory:
-            request: '100Mi'
-        readiness:
-          tcpSocketPort: 8080
-          httpGet:
-            port: 8080
+        helm:
+          enabled: true
+          chartName: vahan
