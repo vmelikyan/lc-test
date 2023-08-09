@@ -31,9 +31,6 @@ services:
           chartVersion: "1.1.1.1.1"
           cmdPs: "cmd ps goes here"
           action: "action goes here"
-          customValueFiles:
-            - "/test/test/test"
-            - "/sysops/sysops/sysops"
           customValues:
             - "value1=value1"
             - "value2=value"
