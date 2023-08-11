@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package simple;
+
+option go_package = "grpc-echo/pkg/echo;echo";
+
+service SimpleService {
+    rpc Echo (SimpleRequest) returns (SimpleResponse);
+}
+
+message SimpleRequest {
+    string value = 1;
+}
+
+message SimpleResponse {
+    string value = 1;
+}
+
