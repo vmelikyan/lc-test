@@ -4,6 +4,7 @@ version: '0.0.3-alpha-1'
 environment:
   defaultServices:
     - name: 'lc-test'
+    - name: 'grpc-echo'
 
 services:
   - name: 'lc-test'
@@ -37,3 +38,34 @@ services:
           tcpSocketPort: 8080
           httpGet:
             port: 8080
+
+  - name: "grpc-echo"
+      github:
+        repository: "vmelikyan/lc-test"
+        branchName: "main"
+        docker:
+          defaultTag: "main"
+          app:
+            dockerfilePath: "grpc-echo/Dockerfile"
+            ports:
+              - 8090
+            env:
+              COMPONENT: "app"
+        deployment:
+          public: true
+          capacityType: "SPOT"
+          resource:
+            cpu:
+              request: "10m"
+            memory:
+              request: "100Mi"
+          readiness:
+            tcpSocketPort: 8090
+            httpGet:
+              path: "/__lbheartbeat__"
+              port: 8090
+          network:
+            grpc:
+              enable: true
+              host: "lifecycle-grpc.dev.goodrx.com"
+              defaultHost: "pos-discounts-good-dev-0.lifecycle-grpc.dev.goodrx.com"
