@@ -4,6 +4,7 @@ version: '0.0.3-alpha-1'
 environment:
   defaultServices:
     - name: 'lc-test'
+    - name: 'grpc-echo'
 
 services:
   - name: 'lc-test'
