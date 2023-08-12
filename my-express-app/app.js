@@ -15,7 +15,7 @@ const packageDefinition = protoLoader.loadSync(__dirname + '/echo-me.proto', {
 });
 
 const echo_proto = grpc.loadPackageDefinition(packageDefinition).simple;
-const client = new echo_proto.SimpleService('localhost:50051', grpc.credentials.createInsecure());
+const client = new echo_proto.SimpleService(process.env.CLIENT_HOST, grpc.credentials.createInsecure());
 
 app.get('/', (req, res) => {
     res.send('Hello from express app');
