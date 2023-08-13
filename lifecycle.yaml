@@ -64,9 +64,9 @@ services:
             path: "/__lbheartbeat__"
             port: 8090
         hostnames:
-          host: 'lifecycle-grpc.dev.goodrx.com'
+          host: 'lifecycle.dev.goodrx.com'
           defaultInternalHostname: 'grpc-echo-good-dev-0'
-          defaultPublicUrl: 'grpc-echo-good-dev-0.lifecycle-grpc.dev.goodrx.com'
+          defaultPublicUrl: 'grpc-echo-good-dev-0.lifecycle.dev.goodrx.com'
         network:
           grpc:
             enable: true
