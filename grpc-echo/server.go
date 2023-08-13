@@ -22,7 +22,7 @@ func (s *server) Echo(ctx context.Context, in *echo.SimpleRequest) (*echo.Simple
 
 func main() {
 	// Create a new gRPC server
-	lis, err := net.Listen("tcp", ":8090")
+	lis, err := net.Listen("tcp", ":8080")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
@@ -33,7 +33,7 @@ func main() {
   reflection.Register(s)
 
 	// Start the gRPC server
-	log.Println("Starting server on port :8090...")
+	log.Println("Starting server on port :8080...")
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
