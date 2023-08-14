@@ -5,6 +5,8 @@ environment:
   defaultServices:
     - name: 'lc-test'
     - name: 'grpc-echo'
+  optionalServices:
+    - name: 'yolo-db'
 
 services:
   - name: 'lc-test'
@@ -18,9 +20,6 @@ services:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           env:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-            YOLO: '{{yolo-db_internalHostname}}'
-            TEST_HOST: '{{test-host_internalHostname}}'
-            POS_DB: '{{pos-discounts-db_internalHostname}}'
           ports:
             - 8080
         init:
@@ -72,3 +71,23 @@ services:
             enable: true
             host: "lifecycle-grpc.dev.goodrx.com"
             defaultHost: "grpc-echo-good-dev-0.lifecycle-grpc.dev.goodrx.com"
+
+  - name: "yolo-db"
+    docker:
+      dockerImage: "postgres"
+      defaultTag: "14.6-alpine"
+      ports:
+        - 5432
+      env:
+        POSTGRES_USER: "postgres"
+        POSTGRES_PASSWORD: "mysecretpassword"
+        POSTGRES_DB: "postgres"
+        PGDATA: "/var/lib/postgresql/data/pgdata"
+      deployment:
+        public: true
+        capacityType: "SPOT"
+        serviceDisks:
+          - name: "postgres-volume"
+            mountPath: "/var/lib/postgresql/data"
+            accessModes: "ReadWriteOnce"
+            storageSize: "1Gi"
