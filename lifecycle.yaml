@@ -5,6 +5,8 @@ environment:
   defaultServices:
     - name: 'lc-test'
     - name: 'grpc-echo'
+optionalServices:
+    - name: 'yolo-db'
 
 services:
   - name: 'lc-test'
@@ -73,7 +75,7 @@ services:
             host: "lifecycle-grpc.dev.goodrx.com"
             defaultHost: "grpc-echo-good-dev-0.lifecycle-grpc.dev.goodrx.com"
 
-  - name: "yolo"
+  - name: "yolo-db"
     docker:
       dockerImage: "postgres"
       defaultTag: "14.6-alpine"
