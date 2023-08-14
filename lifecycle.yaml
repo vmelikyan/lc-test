@@ -19,8 +19,6 @@ services:
           env:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             YOLO: '{{yolo-db_internalHostname}}'
-            TEST_HOST: '{{test-host_internalHostname}}'
-            POS_DB: '{{pos-discounts-db_internalHostname}}'
           ports:
             - 8080
         init:
