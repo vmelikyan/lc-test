@@ -5,7 +5,6 @@ environment:
   defaultServices:
     - name: 'lc-test'
     - name: 'grpc-echo'
-  optionalServices:
     - name: 'yolo-db'
 
 services:
