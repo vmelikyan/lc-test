@@ -5,7 +5,6 @@ const protoLoader = require('@grpc/proto-loader');
 const app = express();
 const port = 8080;
 
-// Load gRPC client
 const packageDefinition = protoLoader.loadSync(__dirname + '/echo-me.proto', {
     keepCase: true,
     longs: String,
@@ -18,10 +17,8 @@ const echo_proto = grpc.loadPackageDefinition(packageDefinition).simple;
 const client = new echo_proto.SimpleService(process.env.CLIENT_HOST, grpc.credentials.createInsecure());
 
 app.get('/', (req, res) => {
-    res.send('Hello from express app');
+    res.send(`Hello from express app: CLIENT_HOST: ${process.env.CLIENT_HOST}`);
 });
-
-// ... (other parts of your app.js)
 
 app.get('/echo', (req, res) => {
     let message = req.query.message || "You did not specify a message!";
