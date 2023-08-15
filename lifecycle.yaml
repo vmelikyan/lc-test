@@ -90,3 +90,5 @@ services:
       deployment:
         helm:
           enabled: true
+          customValueFiles:
+            - './sysops/helm/${{ENV}}/db/db.yaml'
