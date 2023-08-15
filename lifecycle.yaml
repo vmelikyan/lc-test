@@ -25,6 +25,8 @@ services:
         init:
           dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
       deployment:
+        helm:
+          enabled: true
         public: true
         capacityType: 'SPOT'
         resource:
