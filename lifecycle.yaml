@@ -4,9 +4,8 @@ version: '1.0.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    # - name: 'grpc-echo'
-  # optionalServices:
     - name: 'yolo-db'
+    # - name: 'grpc-echo'
 
 services:
   - name: 'lc-test'
