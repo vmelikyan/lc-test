@@ -39,16 +39,6 @@ deployment:
     requests:
       cpu: 10m
       memory: 100Mi
-  # Probe values can be tuned according to particular application requirements
-  # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
-  startupProbe:
-    periodSeconds: 5
-    failureThreshold: 60
-    httpGet:
-      scheme: HTTP
-      path: /__lbheartbeat__
-      port: 8080
-
   readinessProbe:
     periodSeconds: 10
     failureThreshold: 30
