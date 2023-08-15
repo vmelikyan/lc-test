@@ -92,6 +92,7 @@ services:
       deployment:
         helm:
           enabled: true
+          attachePvc: true
           customValueFiles:
             - './sysops/helm/common.yaml'
             - './sysops/helm/${{ENV}}/db/db.yaml'
