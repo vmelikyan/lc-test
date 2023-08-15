@@ -31,8 +31,8 @@ deployment:
               - SPOT
 
   replicaCount: 1
-  appImage: {{ $.Values.version }}
-  initImage: {{ $.Values.version }}
+  # appImage: {{ $.Values.version }}
+  # initImage: {{ $.Values.version }}
 
   terminationGracePeriodSeconds: 300
   # Resource limits can be tuned according to particular application requirements
