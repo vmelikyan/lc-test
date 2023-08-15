@@ -75,6 +75,7 @@ services:
 
   - name: "yolo-db"
     docker:
+      repository: 'vmelikyan/lc-test'
       dockerImage: "postgres"
       defaultTag: "14.6-alpine"
       ports:
