@@ -1,11 +1,11 @@
 ---
-version: '0.0.3-alpha-1'
+version: '1.0.0'
 
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'grpc-echo'
-  optionalServices:
+    # - name: 'grpc-echo'
+  # optionalServices:
     - name: 'yolo-db'
 
 services:
@@ -79,7 +79,7 @@ services:
       docker:
         defaultTag: "main"
         app:
-          dockerfilePath: "sysops/dockerfiles/app.dockerfile"
+          dockerfilePath: "sysops/dockerfiles/db.dockerfile"
           ports:
             - 5432
           env:
