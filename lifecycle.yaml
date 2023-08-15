@@ -73,21 +73,20 @@ services:
             defaultHost: "grpc-echo-good-dev-0.lifecycle-grpc.dev.goodrx.com"
 
   - name: "yolo-db"
-    docker:
-      dockerImage: "postgres"
-      defaultTag: "14.6-alpine"
-      ports:
-        - 5432
-      env:
-        POSTGRES_USER: "postgres"
-        POSTGRES_PASSWORD: "mysecretpassword"
-        POSTGRES_DB: "postgres"
-        PGDATA: "/var/lib/postgresql/data/pgdata"
+    github:
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
+      docker:
+        defaultTag: "main"
+        app:
+          dockerfilePath: "sysops/dockerfiles/app.dockerfile"
+          ports:
+            - 5432
+          env:
+            POSTGRES_USER: "postgres"
+            POSTGRES_PASSWORD: "mysecretpassword"
+            POSTGRES_DB: "postgres"
+            PGDATA: "/var/lib/postgresql/data/pgdata"
       deployment:
-        public: true
-        capacityType: "SPOT"
-        serviceDisks:
-          - name: "postgres-volume"
-            mountPath: "/var/lib/postgresql/data"
-            accessModes: "ReadWriteOnce"
-            storageSize: "1Gi"
+        helm:
+          enabled: true
