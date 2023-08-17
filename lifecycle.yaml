@@ -5,7 +5,9 @@ environment:
   defaultServices:
     - name: 'lc-test'
     - name: 'grpc-echo'
-  # optionalServices:
+    - name: 'vahan-lc-dev'
+      serviceId: 149
+  optionalServices:
     - name: 'yolo-db'
 
 services:
