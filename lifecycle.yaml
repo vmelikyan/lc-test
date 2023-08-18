@@ -74,12 +74,12 @@ services:
             host: "lifecycle-grpc.dev.goodrx.com"
             defaultHost: "grpc-echo-good-dev-0.lifecycle-grpc.dev.goodrx.com"
             
- - name: "helm-db"
-    helm:
-      name: postgres
-      chartName: postgresql
-      chartRepoUrl: 'oci://registry-1.docker.io/bitnamicharts/postgresql'
-      chartVersion: '12.8.2'
+   - name: "helm-db"
+      helm:
+        name: postgres
+        chartName: postgresql
+        chartRepoUrl: 'oci://registry-1.docker.io/bitnamicharts/postgresql'
+        chartVersion: '12.8.2'
 
 
   # - name: "yolo-db"
