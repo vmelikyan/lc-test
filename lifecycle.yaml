@@ -4,6 +4,7 @@ version: '1.0.0'
 environment:
   defaultServices:
     - name: 'lc-test'
+    - name: 'helm-db'
     # - name: 'grpc-echo'
   # optionalServices:
     - name: 'yolo-db'
