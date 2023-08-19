@@ -6,7 +6,7 @@ environment:
     - name: 'lc-test'
     # - name: 'grpc-echo'
   # optionalServices:
-    - name: 'yolo-db'
+    - name: 'helm-db'
 
 services:
   - name: 'lc-test'
