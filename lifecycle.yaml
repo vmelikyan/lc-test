@@ -22,8 +22,8 @@ services:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
           ports:
             - 8080
-        init:
-          dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
+        # init:
+        #   dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
       deployment:
         helm:
           enabled: true
