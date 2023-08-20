@@ -6,7 +6,7 @@ environment:
     - name: 'lc-test'
     # - name: 'grpc-echo'
   # optionalServices:
-    - name: 'yolo-db'
+    - name: 'helm-db'
 
 services:
   - name: 'lc-test'
@@ -22,8 +22,8 @@ services:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
           ports:
             - 8080
-        init:
-          dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
+        # init:
+        #   dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
       deployment:
         helm:
           enabled: true
@@ -74,27 +74,39 @@ services:
             host: "lifecycle-grpc.dev.goodrx.com"
             defaultHost: "grpc-echo-good-dev-0.lifecycle-grpc.dev.goodrx.com"
 
-  - name: "yolo-db"
-    github:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      docker:
-        defaultTag: "main"
-        app:
-          dockerfilePath: "sysops/dockerfiles/db.dockerfile"
-          ports:
-            - 5432
-          env:
-            POSTGRES_USER: "postgres"
-            POSTGRES_PASSWORD: "mysecretpassword"
-            POSTGRES_DB: "postgres"
-            PGDATA: "/var/lib/postgresql/data/pgdata"
-      deployment:
-        helm:
-          enabled: true
-          attachPvc:
-            enabled: true
-            mountPath: '/var/lib/postgresql/data'
-          customValueFiles:
-            - './sysops/helm/common.yaml'
-            - './sysops/helm/${{ENV}}/db/db.yaml'
+  - name: "helm-db"
+    helmChart:
+      name: postgresql
+      chartName: postgresql
+      chartRepoUrl: 'https://charts.bitnami.com/bitnami'
+      chartVersion: '12.8.2'
+      customValues:
+        - 'auth.username=postgres'
+        - 'auth.password=mysecretpassword'
+        - 'auth.database=postgres'
+        - 'auth.enablePostgresUser=true'
+      
+  # - name: "yolo-db"
+  #   github:
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     docker:
+  #       defaultTag: "main"
+  #       app:
+  #         dockerfilePath: "sysops/dockerfiles/db.dockerfile"
+  #         ports:
+  #           - 5432
+  #         env:
+  #           POSTGRES_USER: "postgres"
+  #           POSTGRES_PASSWORD: "mysecretpassword"
+  #           POSTGRES_DB: "postgres"
+  #           PGDATA: "/var/lib/postgresql/data/pgdata"
+  #     deployment:
+  #       helm:
+  #         enabled: true
+  #         attachPvc:
+  #           enabled: true
+  #           mountPath: '/var/lib/postgresql/data'
+  #         customValueFiles:
+  #           - './sysops/helm/common.yaml'
+  #           - './sysops/helm/${{ENV}}/db/db.yaml'
