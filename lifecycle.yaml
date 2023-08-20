@@ -80,6 +80,11 @@ services:
       chartName: postgresql
       chartRepoUrl: 'https://charts.bitnami.com/bitnami'
       chartVersion: '12.8.2'
+      custom_values:
+        - 'auth.username=postgres'
+        - 'auth.password=mysecretpassword'
+        - 'auth.database=postgres'
+        - 'auth.enablePostgresUser=true'
       
   # - name: "yolo-db"
   #   github:
