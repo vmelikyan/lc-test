@@ -76,6 +76,8 @@ services:
 
   - name: "helm-db"
     helmChart:
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
       name: postgresql
       chartName: postgresql
       chartRepoUrl: 'https://charts.bitnami.com/bitnami'
