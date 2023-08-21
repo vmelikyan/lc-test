@@ -79,14 +79,6 @@ services:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       name: postgresql
-      chartName: postgresql
-      chartRepoUrl: 'https://charts.bitnami.com/bitnami'
-      chartVersion: '12.8.2'
-      customValues:
-        - 'auth.username=postgres'
-        - 'auth.password=mysecretpassword'
-        - 'auth.database=postgres'
-        - 'auth.enablePostgresUser=true'
       
   # - name: "yolo-db"
   #   github:
