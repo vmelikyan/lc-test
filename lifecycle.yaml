@@ -79,6 +79,8 @@ services:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       name: postgresql
+      customValues:
+        - 'auth.password=vahansPassword'
       
   # - name: "yolo-db"
   #   github:
