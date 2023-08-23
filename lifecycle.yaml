@@ -43,6 +43,9 @@ services:
       name: postgresql
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
+      customValues:
+        - 'auth.password=vahansPassword'
+        - 'auth.database=wasssup'
   
   # - name: "grpc-echo"
   #   github:
