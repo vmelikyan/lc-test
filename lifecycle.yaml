@@ -41,14 +41,20 @@ services:
   - name: 'postgre-db'
     helmChart:
       name: 'postgresql'
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
       
   - name: 'mysql-db'
     helmChart:
       name: 'mysql'
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
 
   - name: 'redis-cache'
     helmChart:
       name: 'redis'
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
       
   - name: "grpc-echo"
     github:
