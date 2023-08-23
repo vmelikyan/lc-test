@@ -4,7 +4,10 @@ version: '1.0.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'grpc-echo'
+    - name: 'postgres-db'
+    - name: 'mysql-db'
+    - name: 'redis'
+    # - name: 'grpc-echo'
 
 services:
   - name: 'lc-test'
@@ -35,6 +38,18 @@ services:
           httpGet:
             port: 8080
 
+  - name: 'postgre-db'
+    helmChart:
+      name: 'postgresql'
+      
+  - name: 'mysql-db'
+    helmChart:
+      name: 'mysql'
+
+  - name: 'redis-cache'
+    helmChart:
+      name: 'redis'
+      
   - name: "grpc-echo"
     github:
       repository: "vmelikyan/lc-test"
