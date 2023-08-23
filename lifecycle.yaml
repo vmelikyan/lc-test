@@ -6,7 +6,7 @@ environment:
     - name: 'lc-test'
     - name: 'postgres-db'
     - name: 'mysql-db'
-    - name: 'redis'
+    - name: 'redis-cache'
     # - name: 'grpc-echo'
 
 services:
@@ -38,7 +38,7 @@ services:
           httpGet:
             port: 8080
 
-  - name: 'postgre-db'
+  - name: 'postgres-db'
     helmChart:
       name: 'postgresql'
       repository: 'vmelikyan/lc-test'
