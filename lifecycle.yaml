@@ -43,6 +43,8 @@ services:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       name: 'postgresql'
+      customValues:
+        - "auth.username=postgres1111111"
 
   - name: 'redis'
     helmChart:
