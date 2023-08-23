@@ -45,6 +45,7 @@ services:
       name: 'postgresql'
       customValues:
         - "auth.username=postgres1111111"
+        - "auth.password=postgres1111111"
 
   - name: 'redis'
     helmChart:
