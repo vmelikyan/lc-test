@@ -41,8 +41,6 @@ services:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       name: 'postgresql'
-      customValues:
-        - 'auth.username=helm-demo'
 
   - name: 'redis'
     helmChart:
