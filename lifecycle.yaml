@@ -1,10 +1,10 @@
 ---
-version: '1.0.0'
+version: '0.0.3-alpha-1'
 
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'grpc-echo'
+    - name: 'pharmacy-db'
 
 services:
   - name: 'lc-test'
