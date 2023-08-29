@@ -16,7 +16,7 @@ services:
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           env:
-            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+            CLIENT_HOST: '8080'
           ports:
             - 8080
         init:
