@@ -3,37 +3,37 @@ version: '1.0.0'
 
 environment:
   defaultServices:
-    # - name: 'lc-test'
+    - name: 'lc-test'
     - name: 'helm-service'
 
-# services:
-#   - name: 'lc-test'
-#     defaultUUID: 'good-dev-0'
-#     github:
-#       repository: 'vmelikyan/lc-test'
-#       branchName: 'main'
-#       docker:
-#         defaultTag: 'main'
-#         app:
-#           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
-#           env:
-#             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-#           ports:
-#             - 8080
-#         init:
-#           dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
-#       deployment:
-#         public: true
-#         capacityType: 'SPOT'
-#         resource:
-#           cpu:
-#             request: '10m'
-#           memory:
-#             request: '100Mi'
-#         readiness:
-#           tcpSocketPort: 8080
-#           httpGet:
-#             port: 8080
+services:
+  - name: 'lc-test'
+    defaultUUID: 'good-dev-0'
+    github:
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
+      docker:
+        defaultTag: 'main'
+        app:
+          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          env:
+            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+          ports:
+            - 8080
+        init:
+          dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
+      deployment:
+        public: true
+        capacityType: 'SPOT'
+        resource:
+          cpu:
+            request: '10m'
+          memory:
+            request: '100Mi'
+        readiness:
+          tcpSocketPort: 8080
+          httpGet:
+            port: 8080
 
   - name: "helm-service"
     helm:
