@@ -39,11 +39,6 @@ services:
     helm:
       name: 'postgresql'
       chart:
-        values:
-          - "auth.username=postgres"
-          - "auth.password=password"
-          - "auth.database=postgres"
-          - "auth.enablePostgresUser=true"
         valueFiles:
           repository: 'vmelikyan/lc-test'
           branchName: 'main'
