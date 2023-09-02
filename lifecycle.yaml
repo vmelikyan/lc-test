@@ -38,3 +38,5 @@ services:
   - name: "helm-service"
     helm:
       name: 'postgresql'
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
