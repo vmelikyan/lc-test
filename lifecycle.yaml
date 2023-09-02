@@ -40,7 +40,7 @@ services:
       name: 'postgresql'
       chart:
         values:
-          - "auth.username=vahanjaja"
-          - "auth.password=vahansPassword"
+          - "auth.username=postgres"
+          - "auth.password=password"
           - "auth.database=postgres"
           - "auth.enablePostgresUser=true"
