@@ -39,6 +39,9 @@ services:
     helm:
       name: 'postgresql'
       chart:
+        values:
+          - "auth.username=vahansusername"
+          - "auth.password=vahanspassword"
         valueFiles:
           repository: 'vmelikyan/lc-test'
           branchName: 'main'
