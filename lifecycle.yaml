@@ -39,7 +39,7 @@ services:
     helm:
       name: 'postgresql'
       values:
-        - "auth.username=vahanjaja",
-        - "auth.password=vahansPassword",
-        - "auth.database=postgres",
+        - "auth.username=vahanjaja"
+        - "auth.password=vahansPassword"
+        - "auth.database=postgres"
         - "auth.enablePostgresUser=true"
