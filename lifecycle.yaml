@@ -5,6 +5,9 @@ environment:
   defaultServices:
     - name: 'lc-test'
     - name: 'helm-service'
+    - name: 'helm-redis'
+    - name: 'helm-mysql'
+    - name: 'helm-elasticsearch'
 
 services:
   - name: 'lc-test'
