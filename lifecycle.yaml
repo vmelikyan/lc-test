@@ -47,3 +47,13 @@ services:
           branchName: 'main'
           paths:
             - 'sysops/helm/lfc/db/db.yaml'
+  - name: 'helm-mysql'
+    helm:
+      name: 'mysql'
+  - name: 'helm-redis'
+    helm:
+      name: 'redis'
+  - name: 'helm-elasticsearch'
+    helm:
+      name: 'elasticsearch'
+      
