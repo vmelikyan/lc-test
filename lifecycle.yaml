@@ -40,7 +40,7 @@ services:
       name: 'postgresql'
       chart:
         values:
-          - "auth.username=vahansusername"
+          - "auth.username=postgres"
           - "auth.password=vahanspassword"
         valueFiles:
           repository: 'vmelikyan/lc-test'
