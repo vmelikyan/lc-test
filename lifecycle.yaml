@@ -44,3 +44,8 @@ services:
           - "auth.password=password"
           - "auth.database=postgres"
           - "auth.enablePostgresUser=true"
+        valueFiles:
+          repository: 'vmelikyan/lc-test'
+          branchName: 'main'
+          paths:
+            - 'sysops/helm/lfc/db/db.yaml'
