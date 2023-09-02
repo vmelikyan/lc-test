@@ -38,3 +38,5 @@ services:
   - name: "grpc-echo"
     helmChart:
       name: 'postgresql'
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
