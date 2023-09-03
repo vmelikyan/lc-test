@@ -64,7 +64,7 @@ services:
     helm:
       version: "3.7.2"
       cmdPs: "--reuse-values --debug --timeout 60m0s"
-      action: "install",
+      action: "install"
       helm:
         name: 'jenkins'
         repoUrl: 'https://charts.bitnami.com/bitnami'
