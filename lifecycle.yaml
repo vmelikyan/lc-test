@@ -73,5 +73,5 @@ services:
         version: '12.3.0'
         values:
           - 'ingress.enabled=true'
-          - 'ingress.hostname=ac-which-come-true.lifecycle.dev.goodrx.com'
+          - 'ingress.hostname=ac-wish-come-true.lifecycle.dev.goodrx.com'
       
