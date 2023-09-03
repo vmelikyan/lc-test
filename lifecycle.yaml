@@ -71,4 +71,7 @@ services:
         name: 'jenkins'
         repoUrl: 'https://charts.bitnami.com/bitnami'
         version: '12.3.0'
+        values:
+          - 'ingress.enabled=true'
+          - 'ingress.hostname=ac-which-come-true.lifecycle.dev.goodrx.com'
       
