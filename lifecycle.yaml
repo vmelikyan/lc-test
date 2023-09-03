@@ -4,7 +4,7 @@ version: '1.0.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'helm-service'
+    - name: 'helm-postgres'
     - name: 'helm-redis'
     - name: 'helm-mysql'
     - name: 'helm-elasticsearch'
@@ -38,7 +38,7 @@ services:
           httpGet:
             port: 8080
 
-  - name: "helm-service"
+  - name: "helm-postgres"
     helm:
       name: 'postgresql'
       chart:
