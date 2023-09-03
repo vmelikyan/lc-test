@@ -65,7 +65,7 @@ services:
     helm:
       name: 'jenkins'
       version: '3.7.2'
-      cmdPs: '--reuse-values --debug --timeout 60m0s'
+      args: '--reuse-values --debug --timeout 60m0s'
       action: "install"
       chart:
         name: 'jenkins'
