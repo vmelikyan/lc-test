@@ -61,11 +61,12 @@ services:
     helm:
       name: 'elasticsearch'
   - name: 'helm-jenkins'
-    version: "3.7.2"
-    cmdPs: "--reuse-values --debug --timeout 60m0s"
-    action: "install",
     helm:
-      name: 'jenkins'
-      repoUrl: 'https://charts.bitnami.com/bitnami'
-      version: '12.3.0'
+      version: "3.7.2"
+      cmdPs: "--reuse-values --debug --timeout 60m0s"
+      action: "install",
+      helm:
+        name: 'jenkins'
+        repoUrl: 'https://charts.bitnami.com/bitnami'
+        version: '12.3.0'
       
