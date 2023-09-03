@@ -8,6 +8,7 @@ environment:
     - name: 'helm-redis'
     - name: 'helm-mysql'
     - name: 'helm-elasticsearch'
+    - name: 'helm-jenkins'
 
 services:
   - name: 'lc-test'
@@ -59,4 +60,12 @@ services:
   - name: 'helm-elasticsearch'
     helm:
       name: 'elasticsearch'
+  - name: 'helm-jenkins'
+    version: "3.7.2"
+    cmdPs: "--reuse-values --debug --timeout 60m0s"
+    action: "install",
+    helm:
+      name: 'jenkins'
+      repoUrl: 'https://charts.bitnami.com/bitnami'
+      version: '12.3.0'
       
