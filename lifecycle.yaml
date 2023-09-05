@@ -59,7 +59,7 @@ services:
       docker:
         defaultTag: 'main'
         app:
-          dockerfilePath: 'sysops/dockerfiles/helm-test.dockerfile'
+          dockerfilePath: 'sysops/dockerfiles/test-helm.dockerfile'
           env:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
           ports:
