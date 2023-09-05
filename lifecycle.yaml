@@ -37,6 +37,7 @@ services:
 
   - name: "wtfsuso"
     helm:
+      name: 'postgresql'
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       chart:
