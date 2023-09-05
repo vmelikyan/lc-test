@@ -41,7 +41,6 @@ services:
       branchName: 'main'
       chart:
         name: 'postgresql'
-        chart:
         values:
           - "auth.username=postgres"
           - "auth.password=vahanspassword"
