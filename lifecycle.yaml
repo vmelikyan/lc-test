@@ -35,6 +35,11 @@ services:
           httpGet:
             port: 8080
 
+  - name: "wtfsusu"
+    helm:
+      chart:
+        name: 'postgresql'
+        
   - name: "lc-helm-test"
     helm:
       chart:
