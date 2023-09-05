@@ -3,12 +3,7 @@ version: '1.0.0'
 
 environment:
   defaultServices:
-    - name: 'lc-test'
-    - name: 'helm-postgres'
-    - name: 'helm-redis'
-    - name: 'helm-mysql'
-    - name: 'helm-elasticsearch'
-    - name: 'helm-jenkins'
+    - name: 'grpc-echo'
 
 services:
   - name: 'lc-test'
@@ -39,39 +34,37 @@ services:
           httpGet:
             port: 8080
 
-  - name: "helm-postgres"
-    helm:
-      name: 'postgresql'
-      chart:
-        values:
-          - "auth.username=postgres"
-          - "auth.password=vahanspassword"
-        valueFiles:
-          repository: 'vmelikyan/lc-test'
-          branchName: 'main'
-          paths:
-            - 'sysops/helm/lfc/db/db.yaml'
-  - name: 'helm-mysql'
-    helm:
-      name: 'mysql'
-  - name: 'helm-redis'
-    helm:
-      name: 'redis'
-  - name: 'helm-elasticsearch'
-    helm:
-      name: 'elasticsearch'
-      
-  - name: 'helm-jenkins'
-    helm:
-      name: 'jenkins'
-      version: '3.7.2'
-      args: '--reuse-values --debug --timeout 60m0s'
-      action: "install"
-      chart:
-        name: 'jenkins'
-        repoUrl: 'https://charts.bitnami.com/bitnami'
-        version: '12.3.0'
-        values:
-          - 'ingress.enabled=true'
-          - 'ingress.hostname=ac-wish-come-true.lifecycle.dev.goodrx.com'
-      
+  - name: "grpc-echo"
+    github:
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
+      docker:
+        defaultTag: "main"
+        app:
+          dockerfilePath: "grpc-echo/Dockerfile"
+          ports:
+            - 8080
+          env:
+            COMPONENT: "app"
+      deployment:
+        public: true
+        capacityType: "SPOT"
+        resource:
+          cpu:
+            request: "10m"
+          memory:
+            request: "100Mi"
+        readiness:
+          tcpSocketPort: 8090
+          httpGet:
+            path: "/__lbheartbeat__"
+            port: 8090
+        hostnames:
+          host: 'lifecycle.dev.goodrx.com'
+          defaultInternalHostname: 'grpc-echo-good-dev-0'
+          defaultPublicUrl: 'grpc-echo-good-dev-0.lifecycle.dev.goodrx.com'
+        network:
+          grpc:
+            enable: true
+            host: "lifecycle-grpc.dev.goodrx.com"
+            defaultHost: "grpc-echo-good-dev-0.lifecycle-grpc.dev.goodrx.com"
