@@ -49,17 +49,17 @@ services:
             - 'sysops/helm/lfc/db/db.yaml'
 
         
-  - name: "lc-helm-test"
-    helm:
-      chart:
-        name: 'goodrx-app'
-      docker:
-        defaultTag: 'main'
-        app:
-          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
-          env:
-            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-          ports:
-            - 8080
-        init:
-          dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
+  # - name: "lc-helm-test"
+  #   helm:
+  #     chart:
+  #       name: 'goodrx-app'
+  #     docker:
+  #       defaultTag: 'main'
+  #       app:
+  #         dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+  #         env:
+  #           CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+  #         ports:
+  #           - 8080
+  #       init:
+  #         dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
