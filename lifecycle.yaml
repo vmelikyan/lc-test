@@ -35,7 +35,7 @@ services:
           httpGet:
             port: 8080
 
-  - name: "wtfsusu"
+  - name: "wtfsuso"
     helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
