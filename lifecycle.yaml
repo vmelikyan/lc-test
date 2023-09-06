@@ -6,6 +6,10 @@ environment:
     - name: 'lc-test'
     - name: 'lc-helm-test'
     - name: 'postgres-by-helm'
+    - name: 'redis-helm'
+    - name: 'mysql-helm'
+    - name: 'elasticsearch-helm'
+
 
 services:
   - name: 'lc-test'
