@@ -5,7 +5,7 @@ environment:
   defaultServices:
     - name: 'lc-test'
     - name: 'lc-helm-test'
-    # - name: 'wtfsuso'
+    - name: 'wtfsuso'
 
 services:
   - name: 'lc-test'
