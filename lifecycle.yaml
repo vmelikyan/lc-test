@@ -49,6 +49,22 @@ services:
         valueFiles:
             - 'sysops/helm/lfc/db/db.yaml'
 
+  - name: "redis-helm"
+    helm:
+      name: "redis"
+      chart:
+        name: "redis"
+  - name: "mysql-helm"
+    helm:
+      name: "mysql"
+      chart:
+        name: "mysql"
+  - name: "elasticsearch-helm"
+    helm:
+      name: "elasticsearch"
+      chart:
+        name: "elasticsearch"
+
         
   - name: "lc-helm-test"
     helm:
