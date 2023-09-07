@@ -5,8 +5,8 @@ environment:
   defaultServices:
     - name: 'lc-test'
     - name: 'grpc-echo'
-    - name: 'postgres-by-helm'
-    - name: 'lc-helm-test'
+    # - name: 'postgres-by-helm'
+    # - name: 'lc-helm-test'
     
 services:
   - name: 'lc-test'
@@ -38,9 +38,12 @@ services:
             port: 8080
 
   - name: "grpc-echo"
-    github:
+    helm:
+      name: 'goodrx-app'
       repository: "vmelikyan/lc-test"
       branchName: "main"
+      chart:
+        name: 'goodrx-app'
       docker:
         defaultTag: "main"
         app:
@@ -49,29 +52,24 @@ services:
             - 8080
           env:
             COMPONENT: "app"
-      deployment:
-        public: true
-        capacityType: "SPOT"
-        resource:
-          cpu:
-            request: "10m"
-          memory:
-            request: "100Mi"
-        readiness:
-          tcpSocketPort: 8090
-          httpGet:
-            path: "/__lbheartbeat__"
-            port: 8090
-        hostnames:
-          host: 'lifecycle.dev.goodrx.com'
-          defaultInternalHostname: 'grpc-echo-good-dev-0'
-          defaultPublicUrl: 'grpc-echo-good-dev-0.lifecycle.dev.goodrx.com'
-        network:
-          grpc:
-            enable: true
-            host: "lifecycle-grpc.dev.goodrx.com"
-            defaultHost: "grpc-echo-good-dev-0.lifecycle-grpc.dev.goodrx.com"
-  
+            
+  - name: "lc-helm-test"
+    helm:
+      name: 'goodrx-app'
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
+      chart:
+        name: 'goodrx-app'
+      docker:
+        defaultTag: 'main'
+        app:
+          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          env:
+            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+            TEST_TEST: 'test'
+          ports:
+            - 8080
+            
   - name: "postgres-by-helm"
     helm:
       name: 'postgresql'
@@ -102,19 +100,4 @@ services:
         name: "elasticsearch"
 
         
-  - name: "lc-helm-test"
-    helm:
-      name: 'goodrx-app'
-      repository: 'vmelikyan/lc-test'
-      branchName: 'main'
-      chart:
-        name: 'goodrx-app'
-      docker:
-        defaultTag: 'main'
-        app:
-          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
-          env:
-            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-            TEST_TEST: 'test'
-          ports:
-            - 8080
+
