@@ -6,7 +6,7 @@ componentType: server     # Component (server, cron, migrations, etc)
 ports:
   - name: tcp
     protocol: TCP
-    servicePort: 80
+    servicePort: 8080
     containerPort: 8080
     appProtocol: http
 
