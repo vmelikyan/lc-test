@@ -18,7 +18,7 @@ service:
   enabled: true
 
 ingress:
-  port: 80
+  port: 8080
 
 deployment:
   customNodeAffinity:
