@@ -45,7 +45,7 @@ services:
       chart:
         name: 'goodrx-app'
         valueFiles:
-          - 'sysops/helm/lfc/common.yaml'
+          - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/grpc-service.yaml'
       docker:
         defaultTag: "main"
