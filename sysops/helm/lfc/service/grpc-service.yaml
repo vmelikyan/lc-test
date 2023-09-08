@@ -43,22 +43,20 @@ deployment:
       memory: 100Mi
   # Probe values can be tuned according to particular application requirements
   # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
-  startupProbe:
-    periodSeconds: 5
-    failureThreshold: 60
-    tcpSocket:
-      port: 8090
 
   readinessProbe:
     periodSeconds: 10
-    failureThreshold: 3
+    failureThreshold: 30
+    timeoutSeconds: 1
+    successThreshold: 1
     tcpSocket:
       port: 8090
 
   livenessProbe:
-    periodSeconds: 60
-    timeoutSeconds: 59
-    failureThreshold: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 30
+    successThreshold: 1
     tcpSocket:
       port: 8090
 
