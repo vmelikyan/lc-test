@@ -1,0 +1,81 @@
+---
+env: lfc                  # Short name of the environment (sbx, stg or prd)
+component: echo            # Component name, should be equal to component name in Codefresh pipeline and name of this yml file.
+componentType: server     # Component (server, cron, migrations, etc)
+
+ports:
+  - name: tcp
+    protocol: TCP
+    servicePort: 8080
+    containerPort: 8080
+    appProtocol: http
+
+serviceAccount:
+  create: false
+  name: "default"
+
+service:
+  enabled: true
+
+ingress:
+  port: 8080
+
+deployment:
+  customNodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+          - key: eks.amazonaws.com/capacityType
+            operator: In
+            values:
+              - SPOT
+
+  replicaCount: 1
+  # appImage: {{ $.Values.version }}
+  # initImage: {{ $.Values.version }}
+
+  terminationGracePeriodSeconds: 300
+  # Resource limits can be tuned according to particular application requirements
+  # https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes
+  resources:
+    requests:
+      cpu: 10m
+      memory: 100Mi
+  # Probe values can be tuned according to particular application requirements
+  # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
+
+  readinessProbe:
+    periodSeconds: 10
+    failureThreshold: 30
+    timeoutSeconds: 1
+    successThreshold: 1
+    tcpSocket:
+      port: 8080
+
+  livenessProbe:
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 30
+    successThreshold: 1
+    tcpSocket:
+      port: 8080
+
+  lifecycle:
+    preStop:
+      exec:
+        command: ["/bin/sh", "-c", "sleep 120"]
+
+  # Slowly rollout new pods during a deployment to
+  # prevent too many being unavailable at any given time
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
+      maxSurge: 100%
+
+  # args: ["app", "-config", "/config/config.toml"]
+
+
+podDisruptionBudget:
+  enabled: true
+  maxUnavailable: 25%
