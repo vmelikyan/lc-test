@@ -4,6 +4,7 @@ version: '1.0.0'
 environment:
   defaultServices:
     - name: 'lc-test'
+    - name: 'redis-helm'
     # - name: 'grpc-echo'
     # - name: 'postgres-by-helm'
     # - name: 'lc-helm-test'
@@ -121,13 +122,13 @@ services:
   #       valueFiles:
   #           - 'sysops/helm/lfc/db/db.yaml'
 
-  # - name: "redis-helm"
-  #   helm:
-  #     name: "redis"
-  #     repository: "vmelikyan/lc-test"
-  #     branchName: "main"
-  #     chart:
-  #       name: "redis"
+  - name: "redis-helm"
+    helm:
+      name: "redis"
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
+      chart:
+        name: "redis"
   # - name: "mysql-helm"
   #   helm:
   #     name: "mysql"
