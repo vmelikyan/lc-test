@@ -124,16 +124,22 @@ services:
   - name: "redis-helm"
     helm:
       name: "redis"
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
       chart:
         name: "redis"
   - name: "mysql-helm"
     helm:
       name: "mysql"
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
       chart:
         name: "mysql"
   - name: "elasticsearch-helm"
     helm:
       name: "elasticsearch"
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
       chart:
         name: "elasticsearch"
 
