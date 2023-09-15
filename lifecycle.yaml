@@ -4,12 +4,13 @@ version: '1.0.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'redis-helm'
-    - name: 'grpc-echo'
-    - name: 'postgres-helm'
-    - name: 'lc-helm-test'
-    - name: 'mysql-helm'
-    - name: 'elasticsearch-helm'
+    # - name: 'redis-helm'
+    # - name: 'grpc-echo'
+    # - name: 'postgres-helm'
+    # - name: 'lc-helm-test'
+    # - name: 'mysql-helm'
+    # - name: 'elasticsearch-helm'
+    - name: 'grafana'
     
 services:
   - name: 'lc-test'
@@ -89,6 +90,21 @@ services:
           - "auth.password=vahanspassword"
         valueFiles:
             - 'sysops/helm/lfc/db/db.yaml'
+
+  - name: "grafana"
+    helm:
+      name: 'grafana'
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
+      version: '3.7.2'
+      args: '--reuse-values --debug --timeout 60m0s'
+      action: 'install'
+      chart:
+        name: 'grafana'
+        repoUrl: 'https://charts.bitnami.com/bitnami'
+        version: '9.1.2'
+        values:
+        valueFiles:
 
   - name: "redis-helm"
     helm:
