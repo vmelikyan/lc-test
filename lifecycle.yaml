@@ -93,7 +93,7 @@ services:
   #           host: "lifecycle-grpc.dev.goodrx.com"
   #           defaultHost: "grpc-echo-good-dev-0.lifecycle-grpc.dev.goodrx.com"
   
-   - name: "lc-test"
+  - name: "lc-test"
     helm:
       name: 'goodrx-app'
       repository: 'vmelikyan/lc-test'
