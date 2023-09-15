@@ -10,33 +10,33 @@ environment:
     # - name: 'lc-helm-test'
     
 services:
-  - name: 'lc-test'
-    defaultUUID: 'good-dev-0'
-    github:
-      repository: 'vmelikyan/lc-test'
-      branchName: 'main'
-      docker:
-        defaultTag: 'main'
-        app:
-          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
-          env:
-            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-          ports:
-            - 8080
-        init:
-          dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
-      deployment:
-        public: true
-        capacityType: 'SPOT'
-        resource:
-          cpu:
-            request: '10m'
-          memory:
-            request: '100Mi'
-        readiness:
-          tcpSocketPort: 8080
-          httpGet:
-            port: 8080
+  # - name: 'lc-test'
+  #   defaultUUID: 'good-dev-0'
+  #   github:
+  #     repository: 'vmelikyan/lc-test'
+  #     branchName: 'main'
+  #     docker:
+  #       defaultTag: 'main'
+  #       app:
+  #         dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+  #         env:
+  #           CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+  #         ports:
+  #           - 8080
+  #       init:
+  #         dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
+  #     deployment:
+  #       public: true
+  #       capacityType: 'SPOT'
+  #       resource:
+  #         cpu:
+  #           request: '10m'
+  #         memory:
+  #           request: '100Mi'
+  #       readiness:
+  #         tcpSocketPort: 8080
+  #         httpGet:
+  #           port: 8080
 
   - name: "grpc-echo"
     helm:
@@ -93,22 +93,22 @@ services:
   #           host: "lifecycle-grpc.dev.goodrx.com"
   #           defaultHost: "grpc-echo-good-dev-0.lifecycle-grpc.dev.goodrx.com"
   
-   # - name: "lc-helm-test"
-  #   helm:
-  #     name: 'goodrx-app'
-  #     repository: 'vmelikyan/lc-test'
-  #     branchName: 'main'
-  #     chart:
-  #       name: 'goodrx-app'
-  #     docker:
-  #       defaultTag: 'main'
-  #       app:
-  #         dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
-  #         env:
-  #           CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-  #           TEST_TEST: 'test'
-  #         ports:
-  #           - 8080
+   - name: "lc-test"
+    helm:
+      name: 'goodrx-app'
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
+      chart:
+        name: 'goodrx-app'
+      docker:
+        defaultTag: 'main'
+        app:
+          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          env:
+            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+            TEST_TEST: 'test'
+          ports:
+            - 8080
             
   # - name: "postgres-by-helm"
   #   helm:
