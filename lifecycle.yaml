@@ -102,6 +102,8 @@ services:
       chart:
         name: 'grafana'
         repoUrl: 'https://charts.bitnami.com/bitnami'
+        values:
+          - 'ingress.enabled=true'
 
   - name: "redis-helm"
     helm:
