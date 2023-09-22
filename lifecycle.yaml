@@ -7,7 +7,7 @@ environment:
     - name: 'lc-test-helm'
     # - name: 'redis-helm'
     # - name: 'grpc-echo'
-    # - name: 'postgres-by-helm'
+    - name: 'postgres-by-helm'
     # - name: 'mysql-helm'
     # - name: 'elasticsearch-helm'
     
@@ -120,6 +120,7 @@ services:
       chart:
         name: 'postgresql'
         values:
+          - "someValue={{lc-test-helm_internalHostname}}literal-string"
           - "auth.username=postgres"
           - "auth.password=vahanspassword"
         valueFiles:
