@@ -121,6 +121,10 @@ services:
         name: 'postgresql'
         values:
           - "someValue={{lc-test-helm_internalHostname}}literal-string"
+          - "branchName={{lc-test-helm_branchName}}"
+          - "publicUrl={{lc-test-helm_publicUrl}}"
+          - "anotherService={lc-test_internalHostname}"
+          - "postgresHostname={{postgres-by-helm_internalHostname}}"
           - "auth.username=postgres"
           - "auth.password=vahanspassword"
         valueFiles:
