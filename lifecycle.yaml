@@ -5,11 +5,11 @@ environment:
   defaultServices:
     - name: 'lc-test'
     - name: 'lc-test-helm'
-    - name: 'redis-helm'
-    - name: 'grpc-echo'
-    - name: 'postgres-by-helm'
-    - name: 'mysql-helm'
-    - name: 'elasticsearch-helm'
+    # - name: 'redis-helm'
+    # - name: 'grpc-echo'
+    # - name: 'postgres-by-helm'
+    # - name: 'mysql-helm'
+    # - name: 'elasticsearch-helm'
     
 services:
   - name: 'lc-test'
