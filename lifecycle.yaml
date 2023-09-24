@@ -38,7 +38,6 @@ services:
 
   - name: "wtfsuso"
     helm:
-      name: 'postgresql'
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       chart:
@@ -52,7 +51,6 @@ services:
         
   - name: "lc-helm-test"
     helm:
-      name: 'goodrx-app'
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       chart:
