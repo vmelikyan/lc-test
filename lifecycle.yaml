@@ -18,7 +18,7 @@ services:
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           env:
-            CLIENT_HOST: '{{wtfsuso_internalHostname}}'
+            CLIENT_HOST: '{{wtfsuso_internalHostname}}asd'
           ports:
             - 8080
         init:
