@@ -92,7 +92,6 @@ services:
   
   - name: "grpc-echo"
     helm:
-      name: 'goodrx-app'
       repository: "vmelikyan/lc-test"
       branchName: "main"
       chart:
