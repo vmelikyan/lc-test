@@ -126,7 +126,6 @@ services:
 
   - name: "redis-helm"
     helm:
-      name: "redis"
       repository: "vmelikyan/lc-test"
       branchName: "main"
       chart:
