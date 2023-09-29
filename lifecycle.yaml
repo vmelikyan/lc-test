@@ -11,32 +11,21 @@ environment:
     
 services:
   - name: 'lc-test'
-    defaultUUID: 'good-dev-0'
-    github:
+    helm:
+      name: 'goodrx-app'
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
+      chart:
+        name: 'goodrx-app'
       docker:
         defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           env:
-            CLIENT_HOST: '{{postgres-by-helm_internalHostname}}:8080'
+            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+            TEST_TEST: 'test'
           ports:
             - 8080
-        init:
-          dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
-      deployment:
-        public: true
-        capacityType: 'SPOT'
-        resource:
-          cpu:
-            request: '10m'
-          memory:
-            request: '100Mi'
-        readiness:
-          tcpSocketPort: 8080
-          httpGet:
-            port: 8080
 
   # - name: "grpc-echo-legacy"
   #   github:
