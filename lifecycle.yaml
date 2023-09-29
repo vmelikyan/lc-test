@@ -12,7 +12,6 @@ environment:
 services:
   - name: 'lc-test'
     helm:
-      name: 'goodrx-app'
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       chart:
