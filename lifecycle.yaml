@@ -4,29 +4,29 @@ version: '1.0.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'redis-helm'
+    # - name: 'redis-helm'
     # - name: 'grpc-echo'
-    - name: 'postgres-by-helm'
+    # - name: 'postgres-by-helm'
     # - name: 'lc-helm-test'
     
 services:
-  - name: 'lc-test'
-    helm:
-      repository: 'vmelikyan/lc-test'
-      branchName: 'main'
-      chart:
-        name: 'goodrx-app'
-        values:
-          - 'test={{lc-test_buildUUID}}'
-      docker:
-        defaultTag: 'main'
-        app:
-          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
-          env:
-            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-            TEST_TEST: 'test'
-          ports:
-            - 8080
+  # - name: 'lc-test'
+  #   helm:
+  #     repository: 'vmelikyan/lc-test'
+  #     branchName: 'main'
+  #     chart:
+  #       name: 'goodrx-app'
+  #       values:
+  #         - 'test={{lc-test_buildUUID}}'
+  #     docker:
+  #       defaultTag: 'main'
+  #       app:
+  #         dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+  #         env:
+  #           CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+  #           TEST_TEST: 'test'
+  #         ports:
+  #           - 8080
 
   # - name: "grpc-echo-legacy"
   #   github:
@@ -99,7 +99,7 @@ services:
   #         ports:
   #           - 8080
             
-  - name: "postgres-by-helm"
+  - name: "lc-test"
     helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
@@ -108,15 +108,17 @@ services:
         values:
           - "auth.username=postgres"
           - "auth.password=vahanspassword"
+          - 'test=somethjing-{{lc-test_internalHostname}}'
+          - 'uuid=yolo={{lc-test_buildUUID}}'
   #       valueFiles:
   #           - 'sysops/helm/lfc/db/db.yaml'
 
-  - name: "redis-helm"
-    helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      chart:
-        name: "redis"
+  # - name: "redis-helm"
+  #   helm:
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     chart:
+  #       name: "redis"
   # - name: "mysql-helm"
   #   helm:
   #     name: "mysql"
