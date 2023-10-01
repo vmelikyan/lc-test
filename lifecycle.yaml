@@ -109,7 +109,7 @@ services:
           - "auth.username=postgres"
           - "auth.password=vahanspassword"
           - 'test=somethjing-{{lc-test_internalHostname}}'
-          - 'uuid=yolo={{lc-test_UUID}}'
+          - 'uuid=yolo-{{lc-test_UUID}}'
   #       valueFiles:
   #           - 'sysops/helm/lfc/db/db.yaml'
 
