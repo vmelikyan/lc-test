@@ -16,6 +16,8 @@ services:
       branchName: 'main'
       chart:
         name: 'goodrx-app'
+        values:
+          - 'test={{lc-test_buildUUID}}
       docker:
         defaultTag: 'main'
         app:
