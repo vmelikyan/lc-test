@@ -4,7 +4,7 @@ version: '1.0.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'redis-helm'
+    # - name: 'redis-helm'
     # - name: 'grpc-echo'
     # - name: 'postgres-by-helm'
     # - name: 'lc-helm-test'
