@@ -10,7 +10,7 @@ environment:
     # - name: 'lc-helm-test'
     
 services:
-  - name: 'redpanda'
+  - name: 'lc-test'
     defaultUUID: 'good-dev-0'
     helm:
       version: '3.7.2'
