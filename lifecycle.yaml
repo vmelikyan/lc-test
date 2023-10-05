@@ -10,33 +10,18 @@ environment:
     # - name: 'lc-helm-test'
     
 services:
-  - name: 'lc-test'
+  - name: 'redpanda'
     defaultUUID: 'good-dev-0'
-    github:
-      repository: 'vmelikyan/lc-test'
-      branchName: 'main'
-      docker:
-        defaultTag: 'main'
-        app:
-          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
-          env:
-            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-          ports:
-            - 8080
-        init:
-          dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
-      deployment:
-        public: true
-        capacityType: 'SPOT'
-        resource:
-          cpu:
-            request: '10m'
-          memory:
-            request: '100Mi'
-        readiness:
-          tcpSocketPort: 8080
-          httpGet:
-            port: 8080
+    helm:
+      version: '3.7.2'
+      action: 'install'
+      repository: 'GoodRx/api-specs'
+      branchName: 'master'
+      chart:
+        name: 'redpanda'
+        repoUrl: 'https://charts.redpanda.com'
+        valueFiles:
+          - 'sysops/helm/lfc/redpanda.yaml'
 
   # - name: "grpc-echo-legacy"
   #   github:
