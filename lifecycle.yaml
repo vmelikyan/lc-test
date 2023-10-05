@@ -50,7 +50,7 @@ services:
         name: 'redpanda'
         repoUrl: 'https://charts.redpanda.com'
         values:
-          - 'fullnameOverride={{redpands_InternalHostname}}
+          - 'fullnameOverride={{redpands_InternalHostname}}'
         valueFiles:
           - 'sysops/helm/lfc/redpanda.yaml'
 
