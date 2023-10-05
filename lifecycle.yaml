@@ -44,8 +44,8 @@ services:
     helm:
       version: '3.7.2'
       action: 'install'
-      repository: 'GoodRx/api-specs'
-      branchName: 'master'
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
       chart:
         name: 'redpanda'
         repoUrl: 'https://charts.redpanda.com'
