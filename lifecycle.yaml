@@ -4,12 +4,12 @@ version: '1.0.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'grpc-echo
+    - name: 'grpc-echo'
     
 services:
   - name: "lc-test"
     requires:
-      - name: 'redis-helm'
+      - name: redis-helm
     helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
