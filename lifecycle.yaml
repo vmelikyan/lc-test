@@ -5,8 +5,7 @@ environment:
   defaultServices:
     - name: 'lc-test'
     # - name: 'redis-helm'
-    - name: 'grpc-echo'
-    - name: 'postgres-by-helm'
+    - name: 'grpc-echo
     # - name: 'lc-helm-test'
     
 services:
