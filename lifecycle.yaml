@@ -12,7 +12,7 @@ environment:
 services:
   - name: "lc-test"
     requires:
-      - 'postgres-by-helm'
+      - name: 'postgres-by-helm'
     helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
