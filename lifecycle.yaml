@@ -34,9 +34,7 @@ services:
           memory:
             request: '100Mi'
         readiness:
-          tcpSocketPort: 8080
-          httpGet:
-            port: 8080
+          disabled: true
 
   # - name: "grpc-echo-legacy"
   #   github:
