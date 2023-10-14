@@ -12,7 +12,7 @@ services:
     helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
-      action: '--replace'
+      args: '--replace'
       chart:
         name: 'goodrx-app'
       docker:
