@@ -20,6 +20,10 @@ app.get('/', (req, res) => {
     res.send(`Hello from express app: CLIENT_HOST: ${process.env.CLIENT_HOST}`);
 });
 
+app.get('/vahan', (req, res) => {
+    res.send('Hello apo jan');
+});
+
 app.get('/echo', (req, res) => {
     let message = req.query.message || "You did not specify a message!";
 
