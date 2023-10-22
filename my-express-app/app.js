@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/kai', (req, res) => {
-    res.send(`Hello artur axper`);
+    res.send(`Hello adsfasdfasdfasdf asdfasdfasdfasdfsdaf`);
 });
 
 app.get('/echo', (req, res) => {
