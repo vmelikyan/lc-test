@@ -25,7 +25,7 @@ deployment:
           - key: eks.amazonaws.com/capacityType
             operator: In
             values:
-              - SPOT
+              - ON_DEMAND
 
   replicaCount: 1
   # appImage: {{ $.Values.version }}
