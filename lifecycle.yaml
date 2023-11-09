@@ -55,41 +55,6 @@ services:
   #         tcpSocketPort: 8080
   #         httpGet:
   #           port: 8080
-
-  # - name: "grpc-echo-legacy"
-  #   github:
-  #     repository: "vmelikyan/lc-test"
-  #     branchName: "main"
-  #     docker:
-  #       defaultTag: "main"
-  #       app:
-  #         dockerfilePath: "grpc-echo/Dockerfile"
-  #         ports:
-  #           - 8080
-  #         env:
-  #           COMPONENT: "app"
-  #     deployment:
-  #       public: true
-  #       capacityType: "SPOT"
-  #       resource:
-  #         cpu:
-  #           request: "10m"
-  #         memory:
-  #           request: "100Mi"
-  #       readiness:
-  #         tcpSocketPort: 8090
-  #         httpGet:
-  #           path: "/__lbheartbeat__"
-  #           port: 8090
-  #       hostnames:
-  #         host: 'lifecycle.dev.goodrx.com'
-  #         defaultInternalHostname: 'grpc-echo-good-dev-0'
-  #         defaultPublicUrl: 'grpc-echo-good-dev-0.lifecycle.dev.goodrx.com'
-  #       network:
-  #         grpc:
-  #           enable: true
-  #           host: "lifecycle-grpc.dev.goodrx.com"
-  #           defaultHost: "grpc-echo-good-dev-0.lifecycle-grpc.dev.goodrx.com"
   
   - name: "grpc-echo"
     helm:
