@@ -1,1 +1,1 @@
-# lifecycle-test-app-dockerasdasdasd
+# lifecycle-test-app-docker
