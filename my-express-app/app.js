@@ -27,7 +27,7 @@ app.get('/echo', (req, res) => {
         if (err) {
             res.send('Error: ' + err.message);
         } else {
-            res.send('Received from gRPC server: ' + response.value);
+            res.send(`Received from gRPC server: ${response.value}`);
         }
     });
 });
