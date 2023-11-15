@@ -6,8 +6,6 @@ environment:
     - name: 'lc-test'
     # - name: 'redis-helm'
     - name: 'grpc-echo'
-    # - name: 'postgres-by-helm'
-    # - name: 'lc-helm-test'
     
 services:
   - name: "lc-test"
@@ -26,70 +24,6 @@ services:
             WHAT: "is-this"
           ports:
             - 8080  
-
-
-  # - name: 'lc-test'
-  #   defaultUUID: 'good-dev-0'
-  #   github:
-  #     repository: 'vmelikyan/lc-test'
-  #     branchName: 'main'
-  #     docker:
-  #       defaultTag: 'main'
-  #       app:
-  #         dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
-  #         env:
-  #           CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-  #         ports:
-  #           - 8080
-  #       init:
-  #         dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
-  #     deployment:
-  #       public: true
-  #       capacityType: 'SPOT'
-  #       resource:
-  #         cpu:
-  #           request: '10m'
-  #         memory:
-  #           request: '100Mi'
-  #       readiness:
-  #         tcpSocketPort: 8080
-  #         httpGet:
-  #           port: 8080
-
-  # - name: "grpc-echo-legacy"
-  #   github:
-  #     repository: "vmelikyan/lc-test"
-  #     branchName: "main"
-  #     docker:
-  #       defaultTag: "main"
-  #       app:
-  #         dockerfilePath: "grpc-echo/Dockerfile"
-  #         ports:
-  #           - 8080
-  #         env:
-  #           COMPONENT: "app"
-  #     deployment:
-  #       public: true
-  #       capacityType: "SPOT"
-  #       resource:
-  #         cpu:
-  #           request: "10m"
-  #         memory:
-  #           request: "100Mi"
-  #       readiness:
-  #         tcpSocketPort: 8090
-  #         httpGet:
-  #           path: "/__lbheartbeat__"
-  #           port: 8090
-  #       hostnames:
-  #         host: 'lifecycle.dev.goodrx.com'
-  #         defaultInternalHostname: 'grpc-echo-good-dev-0'
-  #         defaultPublicUrl: 'grpc-echo-good-dev-0.lifecycle.dev.goodrx.com'
-  #       network:
-  #         grpc:
-  #           enable: true
-  #           host: "lifecycle-grpc.dev.goodrx.com"
-  #           defaultHost: "grpc-echo-good-dev-0.lifecycle-grpc.dev.goodrx.com"
   
   - name: "grpc-echo"
     helm:
@@ -110,21 +44,6 @@ services:
           env:
             COMPONENT: "app"
             ENV: "lifecycle"
-            
-
-            
-  # - name: "postgres-by-helm"
-  #   helm:
-  #     name: 'postgresql'
-  #     repository: 'vmelikyan/lc-test'
-  #     branchName: 'main'
-  #     chart:
-  #       name: 'postgresql'
-  #       values:
-  #         - "auth.username=postgres"
-  #         - "auth.password=vahanspassword"
-  #       valueFiles:
-  #           - 'sysops/helm/lfc/db/db.yaml'
 
   - name: "redis-helm"
     helm:
@@ -132,20 +51,6 @@ services:
       branchName: "main"
       chart:
         name: "redis"
-  # - name: "mysql-helm"
-  #   helm:
-  #     name: "mysql"
-  #     repository: "vmelikyan/lc-test"
-  #     branchName: "main"
-  #     chart:
-  #       name: "mysql"
-  # - name: "elasticsearch-helm"
-  #   helm:
-  #     name: "elasticsearch"
-  #     repository: "vmelikyan/lc-test"
-  #     branchName: "main"
-  #     chart:
-  #       name: "elasticsearch"
 
         
 
