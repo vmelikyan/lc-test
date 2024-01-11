@@ -6,6 +6,7 @@ environment:
     - name: 'lc-test'
     - name: 'redis-helm'
     - name: 'grpc-echo'
+
     
 services:
   - name: "lc-test"
@@ -54,6 +55,7 @@ services:
       branchName: "main"
       chart:
         name: "redis"
+
 
         
 
