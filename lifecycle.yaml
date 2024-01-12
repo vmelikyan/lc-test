@@ -10,6 +10,8 @@ environment:
     
 services:
   - name: "lc-test"
+    requires:
+      - name: "pos-discount-claims-kinesis"
     helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
@@ -48,6 +50,40 @@ services:
           env:
             COMPONENT: "app"
             ENV: "lifecycle"
+
+   - name: pos-discount-claims-kinesis
+    defaultUUID: "good-dev-0"
+    docker:
+      dockerImage: "localstack/localstack"
+      defaultTag: "2.0.1"
+      ports:
+        - 4566
+      env:
+        SERVICES: "kinesis"
+        PERSISTENCE: "1"
+        KINESIS_INITIALIZE_STREAMS: "rwd-segment-raw-events-stream:1:us-west-2"
+        EAGER_SERVICE_LOADING: "1"
+        LS_LOG: "warn"
+      deployment:
+        public: false
+        capacityType: "ON_DEMAND"
+        resource:
+          cpu:
+            request: "10m"
+          memory:
+            request: "100Mi"
+        readiness:
+          tcpSocketPort: 4566
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 10
+        serviceDisks:
+          - name: "localstack-volume"
+            mountPath: "/localstack/data"
+            accessModes: "ReadWriteOnce"
+            storageSize: "1Gi"
 
   - name: "redis-helm"
     helm:
