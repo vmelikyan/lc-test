@@ -2,6 +2,7 @@
 version: '1.0.0'
 
 environment:
+  githubDeployments: true
   defaultServices:
     - name: 'lc-test'
     - name: 'redis-helm'
