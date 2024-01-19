@@ -26,7 +26,7 @@ services:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
             WHAT: "is-this"
-            GOODRX_PYPI_USER: "${GOODRX_PYPI_USER}"
+            GOODRX_PYPI_USER: $GOODRX_PYPI_USER
           ports:
             - 8080  
   
