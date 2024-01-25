@@ -13,7 +13,6 @@ services:
     helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
-      disableIngressHost: true
       chart:
         name: 'goodrx-app'
         valueFiles:
