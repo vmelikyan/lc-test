@@ -4,7 +4,7 @@ version: '1.0.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'redis-helm'
+    - name: 'postgres-db'
     - name: 'grpc-echo'
 
     
@@ -49,12 +49,14 @@ services:
             COMPONENT: "app"
             ENV: "lifecycle"
 
-  - name: "redis-helm"
+  - name: "postgres-db"
     helm:
       repository: "vmelikyan/lc-test"
       branchName: "main"
       chart:
-        name: "redis"
+        name: "postgresql"
+        valueFiles:
+          - 'sysops/helm/db/db.yaml
 
 
         
