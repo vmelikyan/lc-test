@@ -20,6 +20,10 @@ service:
 ingress:
   port: 80
 
+primary:
+  service:
+    type: LoadBalancer
+
 deployment:
   customNodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
