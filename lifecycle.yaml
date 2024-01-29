@@ -16,7 +16,7 @@ services:
       chart:
         name: 'goodrx-app'
         values:
-          - testValue={{postgres-db_internalHostname}}
+          - 'testValue={{postgres-db_internalHostname}}'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
@@ -58,7 +58,7 @@ services:
       chart:
         name: "postgresql"
         valueFiles:
-          - 'sysops/helm/db/db.yaml
+          - 'sysops/helm/db/db.yaml'
 
 
         
