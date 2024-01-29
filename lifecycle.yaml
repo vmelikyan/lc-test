@@ -58,7 +58,7 @@ services:
       chart:
         name: "postgresql"
         valueFiles:
-          - 'sysops/helm/db/db.yaml'
+          - 'sysops/helm/lfc/db/db.yaml'
 
 
         
