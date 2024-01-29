@@ -17,6 +17,7 @@ services:
         name: 'goodrx-app'
         values:
           - 'testValue={{postgres-db_internalHostname}}'
+          - 'ingress.extraAnnotations."external-dns\.alpha\.kubernetes\.io/hostname"={{cwf_internalHostname}}'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
