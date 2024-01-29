@@ -15,6 +15,8 @@ services:
       branchName: 'main'
       chart:
         name: 'goodrx-app'
+        values:
+          - 'testValue={{postgres-db_internalHostname}}
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
