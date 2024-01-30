@@ -15,6 +15,9 @@ services:
       branchName: 'main'
       chart:
         name: 'goodrx-app'
+        values:
+          - 'testValue={{postgres-db_internalHostname}}'
+          - 'ingress.extraAnnotations."external-dns\.alpha\.kubernetes\.io/hostname"={{lc-test_internalHostname}}'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
@@ -56,7 +59,7 @@ services:
       chart:
         name: "postgresql"
         valueFiles:
-          - 'sysops/helm/db/db.yaml
+          - 'sysops/helm/lfc/db/db.yaml'
 
 
         
