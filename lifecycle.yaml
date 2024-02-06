@@ -29,6 +29,7 @@ services:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
             WHAT: "is-this"
+            BUILD_ID: 'lc-test_sha'
           ports:
             - 8080  
   
