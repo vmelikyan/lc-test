@@ -37,6 +37,7 @@ services:
       repository: "vmelikyan/lc-test"
       branchName: "main"
       grpc: true
+      disableIngressHost: false
       chart:
         name: 'goodrx-app'
         valueFiles:
