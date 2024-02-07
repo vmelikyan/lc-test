@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_vmelikyan_lc_test_1707341050886-pr-trigger-input-set
+  identifier: Build_vmelikyan_lc_test_1707341050886prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_vmelikyan_lc_test_1707341050886
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
