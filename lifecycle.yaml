@@ -19,7 +19,7 @@ services:
           - 'testValue={{postgres-db_internalHostname}}'
           - 'ingress.extraAnnotations."external-dns\.alpha\.kubernetes\.io/hostname"={{lc-test_internalHostname}}'
         valueFiles:
-          - 'sysops/helm/common.yaml'
+          - 'sysops/helm/asdasdasdcommon.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
       docker:
         defaultTag: 'main'
