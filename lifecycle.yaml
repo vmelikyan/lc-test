@@ -1,7 +1,20 @@
 ---
-version: '1.0.0'
+version: '1.1.0'
 
 environment:
+  job:
+    repository: 'vmelikyan/lc-test'
+    branchName: 'main'
+    docker:
+      defaultTag: 'main'
+      app:
+        dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+        env:
+          CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+          TEST_TEST: 'test'
+          WHAT: "is-this"
+        ports:
+          - 8080
   defaultServices:
     - name: 'lc-test'
     - name: 'postgres-db'
