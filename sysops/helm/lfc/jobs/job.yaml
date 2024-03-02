@@ -4,6 +4,18 @@ component: buydownautomation # Component name, should be equal to component name
 
 componentType: job # Component (server, cron, migrations, etc)
 
+serviceAccount:
+
+  name: default
+
+deployment:
+
+  enabled: false
+
+service:
+
+  enabled: false
+
 job:
   enabled: true
   # By default, this will be an IAM role matching the standard in the eks-app
