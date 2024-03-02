@@ -1,0 +1,51 @@
+---
+# yamllint hates the spacing used by the go yaml encoder
+# yamllint disable rule:indentation rule:comments
+
+env: lfc                  # Short name of the environment (sbx, stg or prd)
+
+component: buydownautomation # Component name, should be equal to component name in Codefresh pipeline and name of this yml file.
+
+componentType: cron # Component (server, cron, migrations, etc)
+
+serviceAccount:
+
+  name: default
+
+deployment:
+
+  enabled: false
+
+service:
+
+  enabled: false
+
+cronjob:
+
+  enabled: true
+
+  schedule: "0 * * * *"
+
+  safeToEvict: false
+
+  livenessProbe: {}
+
+  readinessProbe: {}
+
+  startupProbe: {}
+
+  terminationGracePeriodSeconds: 30
+
+  restartPolicy: Never
+
+  startingDeadlineSeconds: 300
+
+  backoffLimit: 0
+
+  activeDeadlineSeconds: 86400
+
+  concurrencyPolicy: Forbid
+
+  suspend: false
+
+args: ["echo", "hello from a job"]

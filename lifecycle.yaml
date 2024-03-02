@@ -6,9 +6,24 @@ environment:
     - name: 'lc-test'
     - name: 'postgres-db'
     - name: 'grpc-echo'
+    - name: 'someJob'
 
-    
 services:
+  - name: 'someJob'
+    helm:
+      type: 'cronjob'
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
+      chart:
+        name: 'goodrx-app'
+        valueFiles:
+          - 'sysops/helm/common.yaml'
+          - 'sysops/helm/lfc/jobs/job.yaml'
+      docker:
+        defaultTag: 'main'
+        app:
+          dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
+
   - name: "lc-test"
     helm:
       repository: 'vmelikyan/lc-test'
@@ -30,8 +45,8 @@ services:
             TEST_TEST: 'test'
             WHAT: "is-this"
           ports:
-            - 8080  
-  
+            - 8080
+
   - name: "grpc-echo"
     helm:
       repository: "vmelikyan/lc-test"
@@ -60,7 +75,3 @@ services:
         name: "postgresql"
         valueFiles:
           - 'sysops/helm/lfc/db/db.yaml'
-
-
-        
-

@@ -1,5 +1,5 @@
 ---
-env: lfc                  # Short name of the environment (sbx, stg or prd)
+env: lifecycle-something                  # Short name of the environment (sbx, stg or prd)
 component: echo            # Component name, should be equal to component name in Codefresh pipeline and name of this yml file.
 componentType: server     # Component (server, cron, migrations, etc)
 
@@ -76,3 +76,11 @@ deployment:
 podDisruptionBudget:
   enabled: true
   maxUnavailable: 25%
+
+ambassadorMapping:
+  name: grpc-echo-patient-disk-399369
+  env: lifecycle
+  service: grpc-echo-patient-disk-399369
+  version: odd-sea-962169
+  host: grpc-echo-patient-disk-399369
+  port: 8080
