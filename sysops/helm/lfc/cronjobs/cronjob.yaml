@@ -24,7 +24,7 @@ cronjob:
 
   enabled: true
 
-  schedule: "0 * * * *"
+  schedule: "*/2 * * * *"
 
   safeToEvict: false
 
