@@ -1,51 +1,43 @@
----
-# yamllint hates the spacing used by the go yaml encoder
-# yamllint disable rule:indentation rule:comments
-
 env: lfc                  # Short name of the environment (sbx, stg or prd)
 
 component: buydownautomation # Component name, should be equal to component name in Codefresh pipeline and name of this yml file.
 
-componentType: cron # Component (server, cron, migrations, etc)
+componentType: job # Component (server, cron, migrations, etc)
 
-serviceAccount:
-
-  name: default
-
-deployment:
-
-  enabled: false
-
-service:
-
-  enabled: false
-
-cronjob:
-
+job:
   enabled: true
-
-  schedule: "0 * * * *"
-
-  safeToEvict: false
-
-  livenessProbe: {}
-
-  readinessProbe: {}
-
-  startupProbe: {}
-
+  # By default, this will be an IAM role matching the standard in the eks-app
+  # module.
+  #
+  # Set this if you want to explicitly specify the mount path for the app container
+  configVolumeMountPath: "/config"
+  # Max seconds to wait between sending SIGTERM and sending SIGKILL when terminating a pod.
   terminationGracePeriodSeconds: 30
+  # Env vars (these will be merged with default env vars). You can specify just
+  # a string to set the value, or a dict to set valueFrom (it will be pasted
+  # below "name: ..." using toYaml).
+  env: {}
+  # value example:
+  # env:
+  #   VAR_NAME: VALUE
+  #
+  # valueFrom example:
+  #
+  # env:
+  #   SECRET_VAR_NAME:
+  #     valueFrom:
+  #       secretKeyRef:
+  #         name: db-secret
+  #         key: url
 
-  restartPolicy: Never
-
-  startingDeadlineSeconds: 300
-
-  backoffLimit: 0
-
-  activeDeadlineSeconds: 86400
-
-  concurrencyPolicy: Forbid
-
-  suspend: false
-
-args: ["echo", "hello from a job"]
+  # By default, no probes will be added. It is recommended that you use all
+  # three. Startup probe in particular is important to speedup your app's
+  # readiness time.
+  livenessProbe: {}
+  readinessProbe: {}
+  startupProbe: {}
+  # If it is possible that your app crashes after becoming ready, use
+  # minReadySeconds to add some additional delay. Otherwise, during a rollout
+  # the deployment will terminate some pods too quickly and the service may go
+  # down.
+  minReadySeconds: 0

@@ -6,12 +6,28 @@ environment:
     - name: 'lc-test'
     - name: 'postgres-db'
     - name: 'grpc-echo'
-    - name: 'someJob'
+    - name: 'cronjob'
+    - name: 'job'
 
 services:
-  - name: 'someJob'
+  - name: 'cronjob'
     helm:
       type: 'cronjob'
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
+      chart:
+        name: 'goodrx-app'
+        valueFiles:
+          - 'sysops/helm/common.yaml'
+          - 'sysops/helm/lfc/cronjobs/cronjob.yaml'
+      docker:
+        defaultTag: 'main'
+        app:
+          dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
+
+  - name: 'job'
+    helm:
+      type: 'job'
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       chart:
