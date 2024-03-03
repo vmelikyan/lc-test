@@ -11,7 +11,7 @@ environment:
 services:
   - name: "lc-test"
     deploymentDependsOn:
-      - name: 'grpc-echo'
+      - 'grpc-echo'
     helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
