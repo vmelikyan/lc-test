@@ -11,6 +11,7 @@ environment:
 services:
   - name: "lc-test"
     deploymentDependsOn:
+      - grpc-echo
       - 'postgres-db'
     helm:
       repository: 'vmelikyan/lc-test'
@@ -57,6 +58,8 @@ services:
             ENV: "lifecycle"
 
   - name: "postgres-db"
+    deploymentDependsOn:
+      - 'postgres-dbasdasd'
     helm:
       repository: "vmelikyan/lc-test"
       branchName: "main"
