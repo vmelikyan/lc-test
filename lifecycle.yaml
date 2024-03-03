@@ -24,6 +24,9 @@ services:
         defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/init.dockerfile'
+          env:
+            ENV: lifecycle
+            COMPONENT: cronjob
 
   - name: 'job'
     helm:
