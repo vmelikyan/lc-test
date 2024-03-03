@@ -12,6 +12,7 @@ services:
   - name: "lc-test"
     deploymentDependsOn:
       - 'grpc-echo'
+      - 'postgres-db'
     helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
@@ -35,6 +36,8 @@ services:
             - 8080  
   
   - name: "grpc-echo"
+    deploymentDependsOn:
+      - 'postgres-db'
     helm:
       repository: "vmelikyan/lc-test"
       branchName: "main"
