@@ -1,5 +1,5 @@
 ---
-version: '1.0.0'
+version: '1.1.0'
 
 environment:
   defaultServices:
@@ -10,6 +10,9 @@ environment:
     
 services:
   - name: "lc-test"
+    deploymentDependsOn:
+      - grpc-echo
+      - 'postgres-db'
     helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
@@ -33,6 +36,8 @@ services:
             - 8080  
   
   - name: "grpc-echo"
+    deploymentDependsOn:
+      - 'postgres-db'
     helm:
       repository: "vmelikyan/lc-test"
       branchName: "main"
@@ -53,6 +58,8 @@ services:
             ENV: "lifecycle"
 
   - name: "postgres-db"
+    deploymentDependsOn:
+      - 'postgres-dbasdasd'
     helm:
       repository: "vmelikyan/lc-test"
       branchName: "main"
