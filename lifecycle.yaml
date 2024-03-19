@@ -35,6 +35,7 @@ services:
       branchName: 'main'
       chart:
         name: 'goodrx-app'
+        version: '1.2.4'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/jobs/job.yaml'
