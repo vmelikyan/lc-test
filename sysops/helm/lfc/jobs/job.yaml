@@ -48,6 +48,7 @@ job:
   livenessProbe: {}
   readinessProbe: {}
   startupProbe: {}
+  restartPolicy: Never
   # If it is possible that your app crashes after becoming ready, use
   # minReadySeconds to add some additional delay. Otherwise, during a rollout
   # the deployment will terminate some pods too quickly and the service may go

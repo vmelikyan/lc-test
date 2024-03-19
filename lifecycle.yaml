@@ -1,12 +1,12 @@
 ---
-version: '1.0.0'
+version: '1.1.0'
 
 environment:
   defaultServices:
-    - name: 'lc-test'
-    - name: 'postgres-db'
-    - name: 'grpc-echo'
-    - name: 'cronjob'
+    # - name: 'lc-test'
+    # - name: 'postgres-db'
+    # - name: 'grpc-echo'
+    # - name: 'cronjob'
     - name: 'job'
 
 services:
@@ -35,6 +35,7 @@ services:
       branchName: 'main'
       chart:
         name: 'goodrx-app'
+        version: '1.2.4'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/jobs/job.yaml'
