@@ -3,10 +3,10 @@ version: '1.1.0'
 
 environment:
   defaultServices:
-    - name: 'lc-test'
-    - name: 'postgres-db'
-    - name: 'grpc-echo'
-    - name: 'cronjob'
+    # - name: 'lc-test'
+    # - name: 'postgres-db'
+    # - name: 'grpc-echo'
+    # - name: 'cronjob'
     - name: 'job'
 
 services:
