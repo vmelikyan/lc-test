@@ -6,6 +6,9 @@ environment:
     - name: 'lc-test'
     - name: 'redis-helm'
     - name: 'grpc-echo'
+    - name: 'lc-test-4'
+      repository: 'vmelikyan/lc-test-4'
+      branch: 'main'
 
     
 services:
