@@ -4,52 +4,52 @@ version: '1.0.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'redis-helm'
-    - name: 'grpc-echo'
+    # - name: 'redis-helm'
+    # - name: 'grpc-echo'
 
     
 services:
-  - name: "lc-test"
-    helm:
-      repository: 'vmelikyan/lc-test'
-      branchName: 'main'
-      chart:
-        name: 'goodrx-app'
-        valueFiles:
-          - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/app.yaml'
-      docker:
-        defaultTag: 'main'
-        app:
-          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
-          env:
-            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-            TEST_TEST: 'test'
-            WHAT: "is-this"
-          ports:
-            - 8080  
+  # - name: "lc-test"
+  #   helm:
+  #     repository: 'vmelikyan/lc-test'
+  #     branchName: 'main'
+  #     chart:
+  #       name: 'goodrx-app'
+  #       valueFiles:
+  #         - 'sysops/helm/common.yaml'
+  #         - 'sysops/helm/lfc/service/app.yaml'
+  #     docker:
+  #       defaultTag: 'main'
+  #       app:
+  #         dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+  #         env:
+  #           CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+  #           TEST_TEST: 'test'
+  #           WHAT: "is-this"
+  #         ports:
+  #           - 8080  
   
-  - name: "grpc-echo"
-    helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      grpc: true
-      chart:
-        name: 'goodrx-app'
-        valueFiles:
-          - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/grpc-service.yaml'
-      docker:
-        defaultTag: "main"
-        app:
-          dockerfilePath: "grpc-echo/Dockerfile"
-          ports:
-            - 8080
-          env:
-            COMPONENT: "app"
-            ENV: "lifecycle"
+  # - name: "grpc-echo"
+  #   helm:
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     grpc: true
+  #     chart:
+  #       name: 'goodrx-app'
+  #       valueFiles:
+  #         - 'sysops/helm/common.yaml'
+  #         - 'sysops/helm/lfc/service/grpc-service.yaml'
+  #     docker:
+  #       defaultTag: "main"
+  #       app:
+  #         dockerfilePath: "grpc-echo/Dockerfile"
+  #         ports:
+  #           - 8080
+  #         env:
+  #           COMPONENT: "app"
+  #           ENV: "lifecycle"
 
-  - name: "redis-helm"
+  - name: "lc-test"
     helm:
       repository: "vmelikyan/lc-test"
       branchName: "main"
