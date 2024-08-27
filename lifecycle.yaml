@@ -12,6 +12,7 @@ services:
   - name: "lc-test"
     requires:
       - name: 'grpc-echo'
+      - name: 'redis-helm'
     deploymentDependsOn:
       - 'grpc-echo'
     helm:
