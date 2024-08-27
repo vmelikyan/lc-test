@@ -10,6 +10,8 @@ environment:
     
 services:
   - name: "lc-test"
+    requires:
+      - name: 'grpc-echo'
     deploymentDependsOn:
       - 'grpc-echo'
     helm:
@@ -32,6 +34,8 @@ services:
             - 8080  
   
   - name: "grpc-echo"
+    requires:
+      - name: 'redis-helm'
     deploymentDependsOn:
       - 'redis-helm'
     helm:
