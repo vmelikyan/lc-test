@@ -1,5 +1,5 @@
 ---
-version: '1.1.0'
+version: '1.1.1'
 
 environment:
   defaultServices:
@@ -10,6 +10,19 @@ environment:
     
 services:
   - name: "lc-test"
+    scaleToZeroHttp:
+      enabled: true
+      replicas:
+        min: 0
+        max: 3
+      scaledownPeriod: 300
+      scalingMetric: # requestRate and concurrency are mutually exclusive
+        requestRate:
+          granularity: 1s
+          targetValue: 100
+          window: 1m
+        concurrency:
+          targetValue: 100
     requires:
       - name: 'grpc-echo'
       - name: 'redis-helm'
