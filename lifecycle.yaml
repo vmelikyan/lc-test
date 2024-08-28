@@ -4,8 +4,8 @@ version: '1.1.1'
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'redis-helm'
-    - name: 'grpc-echo'
+    # - name: 'redis-helm'
+    # - name: 'grpc-echo'
 
     
 services:
@@ -47,36 +47,36 @@ services:
           ports:
             - 8080  
   
-  - name: "grpc-echo"
-    requires:
-      - name: 'redis-helm'
-    deploymentDependsOn:
-      - 'redis-helm'
-    helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      grpc: true
-      chart:
-        name: 'goodrx-app'
-        valueFiles:
-          - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/grpc-service.yaml'
-      docker:
-        defaultTag: "main"
-        app:
-          dockerfilePath: "grpc-echo/Dockerfile"
-          ports:
-            - 8080
-          env:
-            COMPONENT: "app"
-            ENV: "lifecycle"
+  # - name: "grpc-echo"
+  #   requires:
+  #     - name: 'redis-helm'
+  #   deploymentDependsOn:
+  #     - 'redis-helm'
+  #   helm:
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     grpc: true
+  #     chart:
+  #       name: 'goodrx-app'
+  #       valueFiles:
+  #         - 'sysops/helm/common.yaml'
+  #         - 'sysops/helm/lfc/service/grpc-service.yaml'
+  #     docker:
+  #       defaultTag: "main"
+  #       app:
+  #         dockerfilePath: "grpc-echo/Dockerfile"
+  #         ports:
+  #           - 8080
+  #         env:
+  #           COMPONENT: "app"
+  #           ENV: "lifecycle"
 
-  - name: "redis-helm"
-    helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      chart:
-        name: "redis"
+  # - name: "redis-helm"
+  #   helm:
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     chart:
+  #       name: "redis"
 
 
         
