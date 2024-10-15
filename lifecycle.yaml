@@ -10,8 +10,6 @@ environment:
     
 services:
   - name: "lc-test"
-    kedaScaleToZero:
-      type: http
     requires:
       - name: 'grpc-echo'
       - name: 'redis-helm'
