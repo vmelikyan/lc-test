@@ -1,5 +1,5 @@
 ---
-version: '1.1.0'
+version: '1.1.1'
 
 environment:
   defaultServices:
@@ -10,11 +10,11 @@ environment:
     
 services:
   - name: "lc-test"
+    kedaScaleToZero:
+      type: http
     requires:
       - name: 'grpc-echo'
       - name: 'redis-helm'
-    deploymentDependsOn:
-      - 'grpc-echo'
     helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
@@ -37,8 +37,6 @@ services:
   - name: "grpc-echo"
     requires:
       - name: 'redis-helm'
-    deploymentDependsOn:
-      - 'redis-helm'
     helm:
       repository: "vmelikyan/lc-test"
       branchName: "main"
