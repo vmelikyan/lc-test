@@ -18,6 +18,7 @@ services:
     helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
+      cfStepType: 'goodrx/helm'
       chart:
         name: 'goodrx-app'
         valueFiles:
