@@ -7,7 +7,7 @@ environment:
     - name: 'postgres-db'
     - name: 'grpc-echo'
 
-    
+    #asdasd
 services:
   - name: "lc-test"
     helm:
