@@ -57,7 +57,7 @@ services:
           env:
             COMPONENT: "app"
             ENV: "lifecycle"
-            REDIS_HOST: {{redis-helm_internalHostname}}
+            REDIS_HOST: "{{redis-helm_internalHostname}}"
 
   - name: "redis-helm"
     helm:
