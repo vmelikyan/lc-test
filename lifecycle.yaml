@@ -29,7 +29,7 @@ services:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           env:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-            TEST_TEST: 'test{{YOLO_internalHostname}}'
+            TEST_TEST: 'test{{service-A_internalHostname}}'
             WHAT: "is-this"
           ports:
             - 8080  
@@ -58,7 +58,7 @@ services:
             COMPONENT: "app"
             ENV: "lifecycle"
             REDIS_HOST: "{{redis-helm_internalHostname}}"
-            SOMETHING: "{{VAHAN_internalHostname}}"
+            SOMETHING: "{{service-B_internalHostname}}"
 
   - name: "redis-helm"
     helm:
