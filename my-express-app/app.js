@@ -17,7 +17,16 @@ const echo_proto = grpc.loadPackageDefinition(packageDefinition).simple;
 const client = new echo_proto.SimpleService(process.env.CLIENT_HOST, grpc.credentials.createInsecure());
 
 app.get('/', (req, res) => {
-    res.send(`Hello from express app: CLIENT_HOST: ${process.env.CLIENT_HOST}`);
+  res.send(`<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Express App</title>
+  </head>
+  <body>
+    <h1>Hello from express app: CLIENT_HOST: ${process.env.CLIENT_HOST}</h1>
+  </body>
+</html>`);
 });
 
 app.get('/echo', (req, res) => {
