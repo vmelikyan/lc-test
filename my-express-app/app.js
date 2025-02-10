@@ -17,6 +17,7 @@ const echo_proto = grpc.loadPackageDefinition(packageDefinition).simple;
 const client = new echo_proto.SimpleService(process.env.CLIENT_HOST, grpc.credentials.createInsecure());
 
 app.get('/', (req, res) => {
+    console.log('got request on "/"')
   res.send(`<!DOCTYPE html>
 <html>
   <head>
