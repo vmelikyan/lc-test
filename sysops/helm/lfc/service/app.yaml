@@ -19,6 +19,14 @@ service:
 
 ingress:
   port: 80
+  extraAnnotations:
+    nginx.ingress.kubernetes.io/client-body-buffer-size: 1M
+    nginx.ingress.kubernetes.io/proxy-body-size: 8M
+    nginx.ingress.kubernetes.io/proxy-buffer-size: 16k
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers 'Cache-Control: no-cache, max-age=0' 'Vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding, X-HCP-Mode';
+    nginx.ingress.kubernetes.io/server-snippet: |
+      large_client_header_buffers 4 16k;
 
 deployment:
   customNodeAffinity:
