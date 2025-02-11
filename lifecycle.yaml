@@ -13,8 +13,8 @@ services:
     requires:
       - name: 'grpc-echo'
       - name: 'redis-helm'
-    deploymentDependsOn:
-      - 'grpc-echo'
+    # deploymentDependsOn:
+    #   - 'grpc-echo'
     helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
