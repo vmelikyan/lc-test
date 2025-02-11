@@ -17,6 +17,7 @@ const echo_proto = grpc.loadPackageDefinition(packageDefinition).simple;
 const client = new echo_proto.SimpleService(process.env.CLIENT_HOST, grpc.credentials.createInsecure());
 
 app.get('/', (req, res) => {
+    console.log('got request on "/"')
   res.send(`<!DOCTYPE html>
 <html>
   <head>
@@ -31,12 +32,23 @@ app.get('/', (req, res) => {
 
 app.get('/echo', (req, res) => {
     let message = req.query.message || "You did not specify a message!";
-
+console.log('got request on "/echo"')
     client.Echo({ value: message }, function(err, response) {
         if (err) {
             res.send('Error: ' + err.message);
         } else {
-            res.send(`Received from gRPC server: ${response.value}`);
+            console.log(response.value)
+            res.send(`<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Express App</title>
+  </head>
+  <body>
+    <h1>Received from gRPC server: ${response.value}</h1>
+  </body>
+</html>`);
+});
         }
     });
 });
