@@ -31,12 +31,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/echo', (req, res) => {
+    console.log('got request on "/echo"')
+    
     let message = req.query.message || "You did not specify a message!";
 
     client.Echo({ value: message }, function(err, response) {
         if (err) {
             res.send('Error: ' + err.message);
         } else {
+            console.log(`message: ${response.value}`)
   res.send(`<!DOCTYPE html>
 <html>
   <head>
