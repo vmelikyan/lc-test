@@ -31,14 +31,16 @@ app.get('/', (req, res) => {
 });
 
 app.get('/echo', (req, res) => {
+    console.log('got request on "/echo"')
+    
     let message = req.query.message || "You did not specify a message!";
-console.log('got request on "/echo"')
+
     client.Echo({ value: message }, function(err, response) {
         if (err) {
             res.send('Error: ' + err.message);
         } else {
-            console.log(response.value)
-            res.send(`<!DOCTYPE html>
+            console.log(`message: ${response.value}`)
+  res.send(`<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -48,7 +50,6 @@ console.log('got request on "/echo"')
     <h1>Received from gRPC server: ${response.value}</h1>
   </body>
 </html>`);
-});
         }
     });
 });
