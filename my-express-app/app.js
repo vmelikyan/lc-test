@@ -32,25 +32,33 @@ app.get('/', (req, res) => {
 
 app.get('/echo', (req, res) => {
     let message = req.query.message || "You did not specify a message!";
-console.log('got request on "/echo"')
+
     client.Echo({ value: message }, function(err, response) {
         if (err) {
             res.send('Error: ' + err.message);
         } else {
-            console.log(response.value)
-            res.send(`<!DOCTYPE html>
+  res.send(`<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>My Express App</title>
   </head>
   <body>
-    <h1>Received from gRPC server: ${response.value}</h1>
+    <h1><Received from gRPC server: ${response.value}/h1>
   </body>
 </html>`);
-});
         }
     });
+});
+
+app.get('/echo', (req, res) => {
+  let message = req.query.message || "You did not specify a message!";
+  console.log('got request on "/echo"')
+  client.Echo({ value: message }, function(err, response) {
+    if (err) {
+      res.send('Error: ' + err.message);
+    } else {
+      console.log(response.value)
 });
 
 app.get('/__lbheartbeat__', (req, res) => {
@@ -60,3 +68,4 @@ app.get('/__lbheartbeat__', (req, res) => {
 app.listen(port, () => {
     console.log(`App running on http://localhost:${port}`);
 });
+
