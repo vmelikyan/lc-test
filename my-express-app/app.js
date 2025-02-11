@@ -45,7 +45,7 @@ console.log('got request on "/echo"')
     <title>My Express App</title>
   </head>
   <body>
-    <h1>`Received from gRPC server: ${response.value}`</h1>
+    <h1>Received from gRPC server: ${response.value}</h1>
   </body>
 </html>`);
 });
