@@ -38,7 +38,17 @@ console.log('got request on "/echo"')
             res.send('Error: ' + err.message);
         } else {
             console.log(response.value)
-            res.send(`Received from gRPC server: ${response.value}`);
+            res.send(`<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Express App</title>
+  </head>
+  <body>
+    <h1>`Received from gRPC server: ${response.value}`</h1>
+  </body>
+</html>`);
+});
         }
     });
 });
