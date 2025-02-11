@@ -4,7 +4,7 @@ version: '1.1.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'redis-helm'
+    # - name: 'redis-helm'
     - name: 'grpc-echo'
 
     
@@ -37,8 +37,8 @@ services:
   - name: "grpc-echo"
     requires:
       - name: 'redis-helm'
-    deploymentDependsOn:
-      - 'redis-helm'
+    # deploymentDependsOn:
+    #   - 'redis-helm'
     helm:
       repository: "vmelikyan/lc-test"
       branchName: "main"
@@ -58,12 +58,12 @@ services:
             COMPONENT: "app"
             ENV: "lifecycle"
 
-  - name: "redis-helm"
-    helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      chart:
-        name: "redis"
+  # - name: "redis-helm"
+  #   helm:
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     chart:
+  #       name: "redis"
 
 
         
