@@ -32,11 +32,12 @@ app.get('/', (req, res) => {
 
 app.get('/echo', (req, res) => {
     let message = req.query.message || "You did not specify a message!";
-
+console.log('got request on "/echo"')
     client.Echo({ value: message }, function(err, response) {
         if (err) {
             res.send('Error: ' + err.message);
         } else {
+            console.log(response.value)
             res.send(`Received from gRPC server: ${response.value}`);
         }
     });
