@@ -64,8 +64,8 @@ services:
   - name: 'cf-echo'
     defaultUUID: 'good-dev-0'
     codefresh:
-      repository: 'GoodRx/fastly-infrastructure'
-      branchName: 'master'
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
 
       deploy:
         pipelineId: '67980112017cf51e16cbb419'
