@@ -29,7 +29,6 @@ services:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
             WHAT: "is-this"
-            DEPENDING: '{{{lc-test.buildOutput(Started server on port (\d+))}}}'
           ports:
             - 8080  
   
@@ -50,6 +49,7 @@ services:
           ports:
             - 8080
           env:
+            DEPENDING: '{{{lc-test.buildOutput(Started server on port (\d+))}}}'
             COMPONENT: "app"
             ENV: "lifecycle"
 
