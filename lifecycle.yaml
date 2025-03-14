@@ -6,6 +6,7 @@ environment:
     - name: 'lc-test'
     - name: 'postgres-db'
     - name: 'grpc-echo'
+    - name: 'cf-echo'
 
     
 services:
@@ -61,6 +62,17 @@ services:
         valueFiles:
           - 'sysops/helm/lfc/db/db.yaml'
 
+  - name: 'cf-echo'
+    defaultUUID: 'good-dev-0'
+    codefresh:
+      repository: 'GoodRx/fastly-infrastructure'
+      branchName: 'master'
 
+      deploy:
+        pipelineId: '67980112017cf51e16cbb419'
+        trigger: 'GoodRx/lifecycle'
+      destroy:
+        pipelineId: '67980112017cf51e16cbb419'
+        trigger: 'GoodRx/lifecycle'
         
 
