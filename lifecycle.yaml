@@ -6,7 +6,6 @@ environment:
     - name: 'lc-test'
     - name: 'postgres-db'
     - name: 'grpc-echo'
-    - name: 'cf-echo'
 
 services:
   - name: "lc-test"
@@ -49,7 +48,7 @@ services:
           ports:
             - 8080
           env:
-            DEPENDING: '{{{cf-echo.buildOutput(Started server on port (\d+))}}}'
+            DEPENDING: '{{{cf-echo.buildOutput(lifecycle-deployments:([a-f0-9]+-[a-f0-9]+)}}}'
             COMPONENT: "app"
             ENV: "lifecycle"
 
@@ -61,18 +60,5 @@ services:
         name: "postgresql"
         valueFiles:
           - 'sysops/helm/lfc/db/db.yaml'
-
-  - name: 'cf-echo'
-    defaultUUID: 'good-dev-0'
-    codefresh:
-      repository: 'goodrx/lifecycle'
-      branchName: 'main'
-
-      deploy:
-        pipelineId: '67980112017cf51e16cbb419'
-        trigger: 'GoodRx/lifecycle'
-      destroy:
-        pipelineId: '67980112017cf51e16cbb419'
-        trigger: 'GoodRx/lifecycle'
         
 
