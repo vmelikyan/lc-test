@@ -49,7 +49,7 @@ services:
           ports:
             - 8080
           env:
-            DEPENDING: '{{{lc-test.buildOutput(Started server on port (\d+))}}}'
+            DEPENDING: '{{{cf-echo.buildOutput(Started server on port (\d+))}}}'
             COMPONENT: "app"
             ENV: "lifecycle"
 
