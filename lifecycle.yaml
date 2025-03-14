@@ -8,7 +8,6 @@ environment:
     - name: 'grpc-echo'
     - name: 'cf-echo'
 
-    
 services:
   - name: "lc-test"
     helm:
