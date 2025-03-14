@@ -65,7 +65,7 @@ services:
   - name: 'cf-echo'
     defaultUUID: 'good-dev-0'
     codefresh:
-      repository: 'vmelikyan/lc-test'
+      repository: 'goodrx/lifecycle'
       branchName: 'main'
 
       deploy:
