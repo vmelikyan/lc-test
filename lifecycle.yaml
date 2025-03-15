@@ -6,6 +6,7 @@ environment:
     - name: 'lc-test'
     - name: 'postgres-db'
     - name: 'grpc-echo'
+    - name: 'yolo-grpc-echo'
 
 services:
   - name: "lc-test"
@@ -32,6 +33,28 @@ services:
             - 8080  
   
   - name: "grpc-echo"
+    helm:
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
+      grpc: true
+      chart:
+        name: 'goodrx-app'
+        valueFiles:
+          - 'sysops/helm/common.yaml'
+          - 'sysops/helm/lfc/service/grpc-service.yaml'
+      docker:
+        defaultTag: "main"
+        app:
+          dockerfilePath: "grpc-echo/Dockerfile"
+          ports:
+            - 8080
+          env:
+            DEPENDING: '{{{lc-test.buildOutput(lifecycle-deployments:([a-f0-9]+-[a-f0-9]+))}}}'
+            YOLO: '{{{yolo-grpc-echo.buildOutput(lifecycle-deployments:([a-f0-9]+-[a-f0-9]+))}}}'
+            COMPONENT: "app"
+            ENV: "lifecycle"
+
+  - name: "yolo-grpc-echo"
     helm:
       repository: "vmelikyan/lc-test"
       branchName: "main"
