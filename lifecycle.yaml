@@ -71,7 +71,7 @@ services:
           ports:
             - 8080
           env:
-            VOID: '{{{grpc-echo.buildOutput()}}}'
+            VOID: '{{{lc-test.buildOutput()}}}'
             COMPONENT: "app"
             ENV: "lifecycle"
 
