@@ -48,8 +48,8 @@ services:
           ports:
             - 8080
           env:
-            DEPENDING: '{{{lc-test.buildOutput(lifecycle-deployments:([a-f0-9]+-[a-f0-9]+)}}}'
-            DEPENDING2: '{{{lc-test.buildOutput(lifecycle-deployments:([a-f0-5]+-[a-d0-5]+)}}}'
+            DEPENDING: '{{{lc-test.buildOutput(lifecycle-deployments:([a-f0-9]+-[a-f0-9]+))}}}'
+            DEPENDING2: '{{{lc-test.buildOutput(lifecycle-deployments:([a-f0-5]+-[a-d0-5]+))}}}'
             COMPONENT: "app"
             ENV: "lifecycle"
 
