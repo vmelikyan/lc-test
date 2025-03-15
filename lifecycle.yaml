@@ -71,8 +71,7 @@ services:
           ports:
             - 8080
           env:
-            DEPENDING: '{{{lc-test.buildOutput(lifecycle-deployments:([a-f0-9]+-[a-f0-9]+))}}}'
-            DEPENDING2: '{{{lc-test.buildOutput(lifecycle-deployments:([a-f0-9]+-[a-f0-9]+))}}}'
+            VOID: '{{{grpc-echo.buildOutput()}}}'
             COMPONENT: "app"
             ENV: "lifecycle"
 
