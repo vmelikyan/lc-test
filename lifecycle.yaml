@@ -9,6 +9,8 @@ environment:
 
     
 services:
+  enabledFeatures:
+    - 'enable_buildkit'
   - name: "lc-test"
     helm:
       repository: 'vmelikyan/lc-test'
