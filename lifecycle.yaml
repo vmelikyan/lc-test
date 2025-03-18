@@ -2,6 +2,8 @@
 version: '1.0.0'
 
 environment:
+  enabledFeatures:
+    - 'enable_buildkit'
   defaultServices:
     - name: 'lc-test'
     - name: 'postgres-db'
