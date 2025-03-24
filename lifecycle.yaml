@@ -34,7 +34,7 @@ services:
           ports:
             - 8080
         init:
-          dockerfilePath: 'sysops/dockerfiles/db.Dockerfile'
+          dockerfilePath: 'sysops/dockerfiles/db.dockerfile'
   
   - name: "grpc-echo"
     helm:
