@@ -10,6 +10,7 @@ COPY my-express-app/package*.json ./
 # Install the dependencies
 RUN npm install --only=production
 
+RUN echo yolo
 # Copy all files from the my-express-app directory to the working directory in the container
 COPY my-express-app/ .
 
