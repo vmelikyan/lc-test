@@ -32,7 +32,9 @@ services:
             TEST_TEST: 'test'
             WHAT: "is-this"
           ports:
-            - 8080  
+            - 8080
+        init:
+          dockerfilePath: 'sysops/dockerfiles/db.Dockerfile'
   
   - name: "grpc-echo"
     helm:
