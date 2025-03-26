@@ -45,7 +45,6 @@ services:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/grpc-service.yaml'
       docker:
-        builder: buildkit
         defaultTag: "main"
         app:
           dockerfilePath: "grpc-echo/Dockerfile"
