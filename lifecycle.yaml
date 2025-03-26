@@ -23,7 +23,7 @@ services:
           - 'sysops/helm/lfc/service/app.yaml'
       docker:
         builder:
-          engine: 'buildkit'
+          engine: 'kaniko'
         defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
