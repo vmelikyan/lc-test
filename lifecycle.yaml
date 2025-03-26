@@ -22,6 +22,8 @@ services:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
       docker:
+        builder:
+          engine: 'buildkit'
         defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
