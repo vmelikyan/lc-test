@@ -1,5 +1,5 @@
 ---
-version: '1.0.0'
+version: '2.1.0'
 
 environment:
   defaultServices:
@@ -22,6 +22,8 @@ services:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
       docker:
+        builder:
+          engine: 'buildkit'
         defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
@@ -43,6 +45,7 @@ services:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/grpc-service.yaml'
       docker:
+        builder: buildkit
         defaultTag: "main"
         app:
           dockerfilePath: "grpc-echo/Dockerfile"
