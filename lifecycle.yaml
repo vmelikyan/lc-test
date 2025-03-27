@@ -48,7 +48,7 @@ services:
           - 'sysops/helm/lfc/service/grpc-service.yaml'
       docker:
         builder:
-          engine: 'buildkit'
+          engine: 'kaniko'
         defaultTag: "main"
         app:
           dockerfilePath: "grpc-echo/Dockerfile"
