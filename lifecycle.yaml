@@ -32,7 +32,9 @@ services:
             TEST_TEST: 'test'
             WHAT: "is-this"
           ports:
-            - 8080  
+            - 8080
+        init:
+          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
   
   - name: "grpc-echo"
     helm:
@@ -55,6 +57,8 @@ services:
           env:
             COMPONENT: "app"
             ENV: "lifecycle"
+        init:
+          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
 
   - name: "postgres-db"
     helm:
