@@ -1,11 +1,16 @@
 ---
-version: '1.0.0'
+version: '2.1.0'
 
 environment:
   defaultServices:
     - name: 'lc-test'
     - name: 'postgres-db'
+    
+  onChangeServices:
     - name: 'grpc-echo'
+      paths:
+        - 'testPath/**'
+        - 'testPath2/8'
 
     
 services:
