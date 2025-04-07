@@ -32,7 +32,14 @@ services:
             TEST_TEST: 'test'
             WHAT: "is-this"
           ports:
-            - 8080  
+            - 8080
+        init:
+          dockerfilePath: "grpc-echo/Dockerfile"
+          ports:
+            - 8080
+          env:
+            COMPONENT: "app"
+            ENV: "lifecycle"
   
   - name: "grpc-echo"
     helm:
