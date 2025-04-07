@@ -35,8 +35,6 @@ services:
             - 8080
         init:
           dockerfilePath: "grpc-echo/Dockerfile"
-          ports:
-            - 8080
           env:
             COMPONENT: "app"
             ENV: "lifecycle"
