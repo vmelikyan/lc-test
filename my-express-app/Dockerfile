@@ -8,6 +8,6 @@ RUN npm install
 RUN echo testasdasd
 COPY . .
 
-RUN echo testasdasd
+RUN sleep 30000
 CMD [ "node", "app.js" ]
 
