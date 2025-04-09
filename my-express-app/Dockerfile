@@ -8,6 +8,6 @@ RUN npm install --only=production
 
 COPY . .
 
-RUN echo test
+RUN echo testasdasd
 CMD [ "node", "app.js" ]
 
