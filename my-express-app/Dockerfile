@@ -8,5 +8,6 @@ RUN npm install --only=production
 
 COPY . .
 
+RUN echo test
 CMD [ "node", "app.js" ]
 
