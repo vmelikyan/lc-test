@@ -15,6 +15,6 @@ COPY ../my-express-app/ .
 
 # The app listens on port 3000, so let's expose this port
 EXPOSE 8080
-RUN while true; do date +"%Y-%m-%d %H:%M:%S"; sleep 1; done
+while true; do date +"%Y-%m-%d %H:%M:%S"; sleep 1; done
 # Run the application
 CMD [ "node", "app.js" ]
