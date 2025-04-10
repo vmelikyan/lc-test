@@ -4,7 +4,6 @@ FROM node:16-slim
 # Create a new directory in the container and set it as the working directory
 WORKDIR /usr/src/app
 
-while
 
 # Copy package.json and package-lock.json files into the working directory
 COPY ../my-express-app/package*.json ./
@@ -17,6 +16,6 @@ COPY ../my-express-app/ .
 
 # The app listens on port 3000, so let's expose this port
 EXPOSE 8080
-# RUN while true; do date +"%Y-%m-%d %H:%M:%S"; sleep 1; done
+RUN while true; do date +"%Y-%m-%d %H:%M:%S"; sleep 1; done
 # Run the application
 CMD [ "node", "app.js" ]
