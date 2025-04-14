@@ -4,8 +4,8 @@ version: '2.1.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'postgres-db'
-    - name: 'grpc-echo'
+    # - name: 'postgres-db'
+    # - name: 'grpc-echo'
 
     
 services:
@@ -28,7 +28,6 @@ services:
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           env:
-            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
             WHAT: "is-this"
           ports:
