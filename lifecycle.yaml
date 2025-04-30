@@ -1,67 +1,62 @@
 ---
-version: '2.1.0'
+version: '1.0.0'
 
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'postgres-db'
-    - name: 'grpc-echo'
+    # - name: 'postgres-db'
+    # - name: 'grpc-echo'
 
     
 services:
   - name: "lc-test"
-    helm:
-      repository: 'vmelikyan/lc-test'
-      branchName: 'main'
-      chart:
-        name: 'goodrx-app'
-        values:
-          - 'testValue={{postgres-db_internalHostname}}'
-          - 'ingress.extraAnnotations."external-dns\.alpha\.kubernetes\.io/hostname"={{lc-test_internalHostname}}'
-        valueFiles:
-          - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/app.yaml'
-      docker:
-        builder:
-          engine: 'buildkit'
-        defaultTag: 'main'
-        app:
-          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
-          env:
-            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-            TEST_TEST: 'test'
-            WHAT: "is-this"
-          ports:
-            - 8080  
+    defaultUUID: "dev-0"
+    docker:
+      dockerImage: "bitnami/memcached"
+      defaultTag: "latest"
+      ports:
+        - 11211
+      env:
+        MEMCACHED_CACHE_SIZE: "512"
+      deployment:
+        public: false
+        capacityType: "ON_DEMAND"
+        resource:
+          cpu:
+            request: "10m"
+          memory:
+            request: "200Mi"
+        readiness:
+          tcpSocketPort: 11211
   
-  - name: "grpc-echo"
-    helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      grpc: true
-      chart:
-        name: 'goodrx-app'
-        valueFiles:
-          - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/grpc-service.yaml'
-      docker:
-        defaultTag: "main"
-        app:
-          dockerfilePath: "grpc-echo/Dockerfile"
-          ports:
-            - 8080
-          env:
-            COMPONENT: "app"
-            ENV: "lifecycle"
+  # - name: "grpc-echo"
+  #   helm:
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     grpc: true
+  #     chart:
+  #       name: 'goodrx-app'
+  #       valueFiles:
+  #         - 'sysops/helm/common.yaml'
+  #         - 'sysops/helm/lfc/service/grpc-service.yaml'
+  #     docker:
+  #       defaultTag: "main"
+  #       app:
+  #         dockerfilePath: "grpc-echo/Dockerfile"
+  #         ports:
+  #           - 8080
+  #         env:
+  #           COMPONENT: "app"
+  #           ENV: "lifecycle"
 
-  - name: "postgres-db"
-    helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      chart:
-        name: "postgresql"
-        valueFiles:
-          - 'sysops/helm/lfc/db/db.yaml'
+  # - name: "postgres-db"
+  #   helm:
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     chart:
+  #       name: "postgresql"
+  #       valueFiles:
+  #         - 'sysops/helm/lfc/db/db.yaml'
 
 
         
