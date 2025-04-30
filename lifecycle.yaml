@@ -20,7 +20,6 @@ services:
         MEMCACHED_CACHE_SIZE: "512"
       deployment:
         public: false
-        capacityType: "ON_DEMAND"
         resource:
           cpu:
             request: "10m"
