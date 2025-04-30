@@ -34,7 +34,7 @@ services:
       dockerImage: "nginx"
       defaultTag: "latest"
       ports:
-        - 8080
+        - 80
       deployment:
         public: true
         resource:
@@ -43,7 +43,7 @@ services:
           memory:
             request: "200Mi"
         readiness:
-          tcpSocketPort: 8080
+          tcpSocketPort: 80
   
   # - name: "grpc-echo"
   #   helm:
