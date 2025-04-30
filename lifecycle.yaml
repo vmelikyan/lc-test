@@ -11,8 +11,6 @@ environment:
 services:
   - name: "lc-test"
     helm:
-      builder:
-        engine: 'buildkit'
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       chart:
@@ -24,6 +22,8 @@ services:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
       docker:
+        builder:
+          engine: 'buildkit'
         defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
