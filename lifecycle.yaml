@@ -4,7 +4,7 @@ version: '2.1.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    # - name: 'postgres-db'
+    - name: 'nginx'
     # - name: 'grpc-echo'
 
     
@@ -27,6 +27,23 @@ services:
             request: "200Mi"
         readiness:
           tcpSocketPort: 11211
+
+  - name: "nginx"
+    defaultUUID: "dev-0"
+    docker:
+      dockerImage: "nginx"
+      defaultTag: "latest"
+      ports:
+        - 8080
+      deployment:
+        public: true
+        resource:
+          cpu:
+            request: "10m"
+          memory:
+            request: "200Mi"
+        readiness:
+          tcpSocketPort: 8080
   
   # - name: "grpc-echo"
   #   helm:
