@@ -11,6 +11,8 @@ environment:
 services:
   - name: "lc-test"
     helm:
+      builder:
+        engine: 'buildkit'
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       chart:
