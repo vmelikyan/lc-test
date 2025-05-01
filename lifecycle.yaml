@@ -4,8 +4,9 @@ version: '2.1.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    - name: 'postgres-db'
-    - name: 'grpc-echo'
+    - name: 'nginx'
+    # - name: 'postgres-db'
+    # - name: 'grpc-echo'
 
     
 services:
@@ -22,6 +23,8 @@ services:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
       docker:
+        builder:
+          engine: 'buildkit'
         defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
@@ -30,36 +33,54 @@ services:
             TEST_TEST: 'test'
             WHAT: "is-this"
           ports:
-            - 8080  
-  
-  - name: "grpc-echo"
-    helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      grpc: true
-      chart:
-        name: 'goodrx-app'
-        valueFiles:
-          - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/grpc-service.yaml'
-      docker:
-        defaultTag: "main"
-        app:
-          dockerfilePath: "grpc-echo/Dockerfile"
-          ports:
             - 8080
-          env:
-            COMPONENT: "app"
-            ENV: "lifecycle"
+            
+  - name: "nginx"
+    defaultUUID: "dev-0"
+    docker:
+      dockerImage: "nginx"
+      defaultTag: "latest"
+      ports:
+        - 80
+      deployment:
+        public: true
+        resource:
+          cpu:
+            request: "10m"
+          memory:
+            request: "200Mi"
+        readiness:
+          tcpSocketPort: 80
 
-  - name: "postgres-db"
-    helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      chart:
-        name: "postgresql"
-        valueFiles:
-          - 'sysops/helm/lfc/db/db.yaml'
+  
+  # - name: "grpc-echo"
+  #   helm:
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     grpc: true
+  #     chart:
+  #       name: 'goodrx-app'
+  #       valueFiles:
+  #         - 'sysops/helm/common.yaml'
+  #         - 'sysops/helm/lfc/service/grpc-service.yaml'
+  #     docker:
+  #       defaultTag: "main"
+  #       app:
+  #         dockerfilePath: "grpc-echo/Dockerfile"
+  #         ports:
+  #           - 8080
+  #         env:
+  #           COMPONENT: "app"
+  #           ENV: "lifecycle"
+
+  # - name: "postgres-db"
+  #   helm:
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     chart:
+  #       name: "postgresql"
+  #       valueFiles:
+  #         - 'sysops/helm/lfc/db/db.yaml'
 
 
         
