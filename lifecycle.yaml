@@ -34,7 +34,7 @@ services:
           memory:
             request: '50Mi'
         readiness:
-          tcpSocketPort: 3000
+          tcpSocketPort: 80
         hostnames:
           host: '0env.com'
           defaultInternalHostname: 'lc-test-dev-0'
