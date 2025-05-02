@@ -5,8 +5,8 @@ environment:
   defaultServices:
     - name: 'lc-test'
     # - name: 'nginx'
-    # - name: 'postgres-db'
-    # - name: 'grpc-echo'
+    - name: 'postgres-db'
+    - name: 'grpc-echo'
 
     
 services:
@@ -59,34 +59,34 @@ services:
   #         tcpSocketPort: 80
 
   
-  # - name: "grpc-echo"
-  #   helm:
-  #     repository: "vmelikyan/lc-test"
-  #     branchName: "main"
-  #     grpc: true
-  #     chart:
-  #       name: 'goodrx-app'
-  #       valueFiles:
-  #         - 'sysops/helm/common.yaml'
-  #         - 'sysops/helm/lfc/service/grpc-service.yaml'
-  #     docker:
-  #       defaultTag: "main"
-  #       app:
-  #         dockerfilePath: "grpc-echo/Dockerfile"
-  #         ports:
-  #           - 8080
-  #         env:
-  #           COMPONENT: "app"
-  #           ENV: "lifecycle"
+  - name: "grpc-echo"
+    helm:
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
+      grpc: true
+      chart:
+        name: 'goodrx-app'
+        valueFiles:
+          - 'sysops/helm/common.yaml'
+          - 'sysops/helm/lfc/service/grpc-service.yaml'
+      docker:
+        defaultTag: "main"
+        app:
+          dockerfilePath: "grpc-echo/Dockerfile"
+          ports:
+            - 8080
+          env:
+            COMPONENT: "app"
+            ENV: "lifecycle"
 
-  # - name: "postgres-db"
-  #   helm:
-  #     repository: "vmelikyan/lc-test"
-  #     branchName: "main"
-  #     chart:
-  #       name: "postgresql"
-  #       valueFiles:
-  #         - 'sysops/helm/lfc/db/db.yaml'
+  - name: "postgres-db"
+    helm:
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
+      chart:
+        name: "postgresql"
+        valueFiles:
+          - 'sysops/helm/lfc/db/db.yaml'
 
 
         
