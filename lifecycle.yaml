@@ -11,17 +11,9 @@ environment:
     
 services:
   - name: "lc-test"
-    helm:
+    github:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
-      chart:
-        name: 'goodrx-app'
-        values:
-          - 'testValue={{postgres-db_internalHostname}}'
-          - 'ingress.extraAnnotations."external-dns\.alpha\.kubernetes\.io/hostname"={{lc-test_internalHostname}}'
-        valueFiles:
-          - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/app.yaml'
       docker:
         builder:
           engine: 'buildkit'
@@ -34,7 +26,21 @@ services:
             WHAT: "is-this"
           ports:
             - 8080
-            
+      deployment:
+        public: true
+        resource:
+          cpu:
+            request: '10m'
+          memory:
+            request: '50Mi'
+        readiness:
+          tcpSocketPort: 3000
+        hostnames:
+          host: '0env.com'
+          defaultInternalHostname: 'lc-test-dev-0'
+          defaultPublicUrl: 'lc-test-dev-0.0env.com'
+
+  
   # - name: "nginx"
   #   defaultUUID: "dev-0"
   #   docker:
