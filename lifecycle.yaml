@@ -16,7 +16,7 @@ services:
       branchName: 'main'
       docker:
         builder:
-          engine: 'kaniko'
+          engine: 'buildkit'
         defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
