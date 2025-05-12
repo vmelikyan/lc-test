@@ -7,6 +7,7 @@ environment:
     # - name: 'nginx'
     - name: 'postgres-db'
     - name: 'grpc-echo'
+    - name: 'doom'
 
     
 services:
@@ -95,6 +96,28 @@ services:
             mountPath: '/var/lib/postgresql/data'
             accessModes: 'ReadWriteOnce'
             storageSize: '5Gi'
+            
+   - name: 'doom'
+    docker:
+      dockerImage: 'elliottking/doom-wasm'
+      defaultTag: '0.1.1'
+      ports:
+        - 8000
+      env:
+        
+      deployment:
+        public: true
+        resource:
+          cpu:
+            request: '10m'
+          memory:
+            request: '100Mi'
+        readiness:
+          tcpSocketPort: 8000
+        hostnames:
+          host: '0env.com'
+          defaultInternalHostname: 'doom-dev-0'
+          defaultPublicUrl: 'doom-dev-0.0env.com'
 
   # - name: "postgres-db"
   #   helm:
