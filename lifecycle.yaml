@@ -97,7 +97,7 @@ services:
             accessModes: 'ReadWriteOnce'
             storageSize: '5Gi'
             
-   - name: 'doom'
+  - name: 'doom'
     docker:
       dockerImage: 'elliottking/doom-wasm'
       defaultTag: '0.1.1'
