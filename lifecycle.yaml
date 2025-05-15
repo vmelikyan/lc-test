@@ -26,6 +26,14 @@ services:
             WHAT: "is-this"
           ports:
             - 8080
+        init:
+          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          env:
+            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+            TEST_TEST: 'test'
+            WHAT: "is-this"
+          ports:
+            - 8080
       deployment:
         public: true
         resource:
