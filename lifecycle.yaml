@@ -55,7 +55,7 @@ services:
 
   - name: "redis"
     helm:
-      repository: 'GoodRx/lc-test'
+      repository: 'vmelikyan/lc-test'
       branchName: 'master'
       chart:
         name: 'redis'
