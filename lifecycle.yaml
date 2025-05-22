@@ -3,34 +3,34 @@ version: '2.4.0'
 
 environment:
   defaultServices:
-    # - name: 'lc-test'
+    - name: 'lc-test'
     - name: 'postgres-db'
     # - name: 'grpc-echo'
 
     
 services:
-  # - name: "lc-test"
-  #   helm:
-  #     repository: 'vmelikyan/lc-test'
-  #     branchName: 'main'
-  #     chart:
-  #       name: 'goodrx-app'
-  #       values:
-  #         - 'testValue={{postgres-db_internalHostname}}'
-  #         - 'ingress.extraAnnotations."external-dns\.alpha\.kubernetes\.io/hostname"={{lc-test_internalHostname}}'
-  #       valueFiles:
-  #         - 'sysops/helm/common.yaml'
-  #         - 'sysops/helm/lfc/service/app.yaml'
-  #     docker:
-  #       defaultTag: 'main'
-  #       app:
-  #         dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
-  #         env:
-  #           CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-  #           TEST_TEST: 'test'
-  #           WHAT: "is-this"
-  #         ports:
-  #           - 8080  
+  - name: "lc-test"
+    helm:
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
+      chart:
+        name: 'goodrx-app'
+        values:
+          - 'testValue={{postgres-db_internalHostname}}'
+          - 'ingress.extraAnnotations."external-dns\.alpha\.kubernetes\.io/hostname"={{lc-test_internalHostname}}'
+        valueFiles:
+          - 'sysops/helm/common.yaml'
+          - 'sysops/helm/lfc/service/app.yaml'
+      docker:
+        defaultTag: 'main'
+        app:
+          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          env:
+            # CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+            TEST_TEST: 'test'
+            WHAT: "is-this"
+          ports:
+            - 8080  
   
   # - name: "grpc-echo"
   #   helm:
