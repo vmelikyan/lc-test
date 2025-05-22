@@ -5,6 +5,7 @@ environment:
   defaultServices:
     - name: 'lc-test'
     - name: 'postgres-db'
+    - name: 'redis'
     # - name: 'grpc-echo'
 
     
@@ -51,6 +52,16 @@ services:
   #         env:
   #           COMPONENT: "app"
   #           ENV: "lifecycle"
+
+  - name: "redis"
+    helm:
+      repository: 'GoodRx/lc-test'
+      branchName: 'master'
+      chart:
+        name: 'redis'
+        values:
+          - 'master.readinessProbe.timeoutSeconds=1'
+          - 'master.readinessProbe.periodSeconds=10'
 
   - name: "postgres-db"
     helm:
