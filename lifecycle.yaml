@@ -7,6 +7,7 @@ environment:
     # - name: 'nginx'
     - name: 'postgres-db'
     - name: 'grpc-echo'
+    - name: 'redis'
 
     
 services:
@@ -105,6 +106,14 @@ services:
         name: "postgresql"
         valueFiles:
           - 'sysops/helm/lfc/db/db.yaml'
+
+  - name: "redisb"
+    helm:
+      deploymentMethod: "native"
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
+      chart:
+        name: "redis"
   
   # - name: "nginx"
   #   defaultUUID: "dev-0"
