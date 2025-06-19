@@ -108,6 +108,7 @@ services:
           - 'sysops/helm/lfc/db/db.yaml'
 
   - name: "redis"
+    deploymentDependsOn: 'postgres-db'
     helm:
       deploymentMethod: "native"
       repository: "vmelikyan/lc-test"
