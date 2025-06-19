@@ -69,41 +69,42 @@ services:
           defaultInternalHostname: 'grpc-echo-dev-0'
           defaultPublicUrl: 'grpc-echo-dev-0.0env.com'
 
-  - name: 'postgres-db'
-    docker:
-      dockerImage: 'postgres'
-      defaultTag: '14.3-alpine'
-      ports:
-        - 5432
-      env:
-        POSTGRES_USER: 'postgres_user'
-        POSTGRES_PASSWORD: 'mysecretpassword'
-        POSTGRES_DB: 'postgres_db'
-        SERVICE: 'postgres-db'
-        PGDATA: '/var/lib/postgresql/data/pgdata'
-      deployment:
-        public: false
-        resource:
-          cpu:
-            request: '10m'
-          memory:
-            request: '100Mi'
-        readiness:
-          tcpSocketPort: 5432
-        serviceDisks:
-          - name: 'postgres-volume'
-            mountPath: '/var/lib/postgresql/data'
-            accessModes: 'ReadWriteOnce'
-            storageSize: '5Gi'
+  # - name: 'postgres-db'
+  #   docker:
+  #     dockerImage: 'postgres'
+  #     defaultTag: '14.3-alpine'
+  #     ports:
+  #       - 5432
+  #     env:
+  #       POSTGRES_USER: 'postgres_user'
+  #       POSTGRES_PASSWORD: 'mysecretpassword'
+  #       POSTGRES_DB: 'postgres_db'
+  #       SERVICE: 'postgres-db'
+  #       PGDATA: '/var/lib/postgresql/data/pgdata'
+  #     deployment:
+  #       public: false
+  #       resource:
+  #         cpu:
+  #           request: '10m'
+  #         memory:
+  #           request: '100Mi'
+  #       readiness:
+  #         tcpSocketPort: 5432
+  #       serviceDisks:
+  #         - name: 'postgres-volume'
+  #           mountPath: '/var/lib/postgresql/data'
+  #           accessModes: 'ReadWriteOnce'
+  #           storageSize: '5Gi'
 
-  # - name: "postgres-db"
-  #   helm:
-  #     repository: "vmelikyan/lc-test"
-  #     branchName: "main"
-  #     chart:
-  #       name: "postgresql"
-  #       valueFiles:
-  #         - 'sysops/helm/lfc/db/db.yaml'
+  - name: "postgres-db"
+    helm:
+      deploymentMethod: "native"
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
+      chart:
+        name: "postgresql"
+        valueFiles:
+          - 'sysops/helm/lfc/db/db.yaml'
   
   # - name: "nginx"
   #   defaultUUID: "dev-0"
