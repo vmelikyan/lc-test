@@ -99,7 +99,6 @@ services:
 
   - name: "postgres-db"
     helm:
-      deploymentMethod: "native"
       repository: "vmelikyan/lc-test"
       branchName: "main"
       chart:
@@ -111,7 +110,6 @@ services:
     deploymentDependsOn:
       - 'postgres-db'
     helm:
-      deploymentMethod: "native"
       repository: "vmelikyan/lc-test"
       branchName: "main"
       chart:
