@@ -107,7 +107,7 @@ services:
         valueFiles:
           - 'sysops/helm/lfc/db/db.yaml'
 
-  - name: "redisb"
+  - name: "redis"
     helm:
       deploymentMethod: "native"
       repository: "vmelikyan/lc-test"
