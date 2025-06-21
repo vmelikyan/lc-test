@@ -30,6 +30,8 @@ deployment:
   lifecycle: {}
   terminationGracePeriodSeconds: 30
   args: []
+  env: []
+  envFrom: []
 
 podDisruptionBudget:
   enabled: false

@@ -41,6 +41,14 @@ spec:
         args:
           {{- toYaml . | nindent 10 }}
         {{- end }}
+        {{- with .Values.deployment.env }}
+        env:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.deployment.envFrom }}
+        envFrom:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         {{- with .Values.ports }}
         ports:
         {{- range . }}
