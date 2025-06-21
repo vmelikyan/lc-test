@@ -1,16 +1,18 @@
-{{- $selectedApp := include "lc-apps.selectedApp" . | fromYaml }}
-{{- if and $selectedApp .Values.service.enabled }}
+{{- if and .Values.service.enabled .Values.image }}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "lc-apps.fullname" . }}
   labels:
     {{- include "lc-apps.labels" . | nindent 4 }}
-    component: {{ $selectedApp.component }}
+    {{- if .Values.component }}
+    component: {{ .Values.component }}
+    {{- end }}
 spec:
-  type: ClusterIP
+  type: {{ .Values.service.type }}
+  {{- with .Values.ports }}
   ports:
-    {{- range $selectedApp.ports }}
+    {{- range . }}
     - port: {{ .servicePort }}
       targetPort: {{ .containerPort }}
       protocol: {{ .protocol }}
@@ -19,6 +21,7 @@ spec:
       appProtocol: {{ .appProtocol }}
       {{- end }}
     {{- end }}
+  {{- end }}
   selector:
     {{- include "lc-apps.selectorLabels" . | nindent 4 }}
 {{- end }} 

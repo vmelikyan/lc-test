@@ -1,53 +1,89 @@
 # LC Apps Helm Chart
 
-This Helm chart can deploy either `grpc-echo` or `my-express-app` independently.
+A generic Helm chart for deploying Kubernetes applications.
 
 ## Installation
 
-### Deploy grpc-echo
-
 ```bash
-helm install grpc-echo ./helm/lc-apps \
-  --set appName=grpc-echo \
-  --set image=your-registry/grpc-echo:latest
-```
-
-### Deploy my-express-app
-
-```bash
-helm install my-express-app ./helm/lc-apps \
-  --set appName=my-express-app \
-  --set image=your-registry/my-express-app:latest
+helm install my-app ./helm/lc-apps \
+  --set image=your-registry/your-app:tag \
+  -f your-values.yaml
 ```
 
 ## Configuration
 
-### Required Values
+### Minimal Required Values
 
-- `appName`: Must be either `grpc-echo` or `my-express-app`
 - `image`: The container image with tag (e.g., `your-registry/app:v1.0.0`)
 
-### Optional Values
+### Using External Values Files
 
-You can override any values in the `values.yaml` file. For example:
+You can provide configuration through external YAML files:
 
 ```bash
 helm install my-app ./helm/lc-apps \
-  --set appName=grpc-echo \
-  --set image=your-registry/grpc-echo:v1.2.3 \
-  --set apps.grpc-echo.deployment.replicaCount=3 \
-  --set apps.grpc-echo.deployment.resources.requests.memory=200Mi
+  --set image=your-registry/your-app:v1.0.0 \
+  -f ./sysops/helm/common.yaml \
+  -f ./sysops/helm/lfc/service/app.yaml
 ```
 
-### Enable Ingress for my-express-app
+### Common Configuration Options
 
-```bash
-helm install my-express-app ./helm/lc-apps \
-  --set appName=my-express-app \
-  --set image=your-registry/my-express-app:latest \
-  --set apps.my-express-app.ingress.enabled=true \
-  --set apps.my-express-app.ingress.hosts[0].host=myapp.example.com \
-  --set apps.my-express-app.ingress.hosts[0].paths[0].path=/
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `image` | Container image with tag | `""` |
+| `imagePullPolicy` | Image pull policy | `IfNotPresent` |
+| `deployment.replicaCount` | Number of replicas | `1` |
+| `service.enabled` | Enable service | `true` |
+| `service.type` | Service type | `ClusterIP` |
+| `ingress.enabled` | Enable ingress | `false` |
+| `podDisruptionBudget.enabled` | Enable PDB | `false` |
+| `nodeAffinity` | Node affinity rules | `{}` |
+| `commonLabels` | Additional labels to add to all resources | `{}` |
+
+### Full Values Example
+
+```yaml
+image: your-registry/your-app:v1.0.0
+component: app
+componentType: server
+
+ports:
+  - name: tcp
+    protocol: TCP
+    servicePort: 80
+    containerPort: 8080
+    appProtocol: http
+
+deployment:
+  replicaCount: 2
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: 8080
+    periodSeconds: 10
+  readinessProbe:
+    httpGet:
+      path: /ready
+      port: 8080
+    periodSeconds: 5
+
+service:
+  enabled: true
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  port: 80
+  hosts:
+    - host: myapp.example.com
+      paths:
+        - path: /
+          pathType: Prefix
 ```
 
 ## Uninstall

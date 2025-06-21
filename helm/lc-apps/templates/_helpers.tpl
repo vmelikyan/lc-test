@@ -40,6 +40,9 @@ helm.sh/chart: {{ include "lc-apps.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- with .Values.commonLabels }}
+{{ toYaml . }}
+{{- end }}
 {{- end }}
 
 {{/*
@@ -48,9 +51,6 @@ Selector labels
 {{- define "lc-apps.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "lc-apps.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-{{- if .Values.appName }}
-app: {{ .Values.appName }}
-{{- end }}
 {{- end }}
 
 {{/*
@@ -61,53 +61,5 @@ Create the name of the service account to use
 {{- default (include "lc-apps.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}
-
-{{/*
-Get the selected app configuration
-*/}}
-{{- define "lc-apps.selectedApp" -}}
-{{- if .Values.appName }}
-{{- if hasKey .Values.apps .Values.appName }}
-{{- index .Values.apps .Values.appName | toYaml }}
-{{- else }}
-{{- fail (printf "App '%s' not found in values.apps" .Values.appName) }}
-{{- end }}
-{{- else }}
-{{- range $name, $app := .Values.apps }}
-{{- if $app.enabled }}
-{{- $app | toYaml }}
-{{- end }}
-{{- end }}
-{{- end }}
-{{- end }}
-
-{{/*
-Get the selected app name
-*/}}
-{{- define "lc-apps.selectedAppName" -}}
-{{- if .Values.appName }}
-{{- .Values.appName }}
-{{- else }}
-{{- range $name, $app := .Values.apps }}
-{{- if $app.enabled }}
-{{- $name }}
-{{- end }}
-{{- end }}
-{{- end }}
-{{- end }}
-
-{{/*
-Get the image for the deployment
-*/}}
-{{- define "lc-apps.image" -}}
-{{- $selectedApp := include "lc-apps.selectedApp" . | fromYaml }}
-{{- if .Values.image }}
-{{- .Values.image }}
-{{- else if $selectedApp.image }}
-{{- $selectedApp.image }}
-{{- else }}
-{{- fail "Image must be specified via --set image=<repository:tag>" }}
 {{- end }}
 {{- end }} 

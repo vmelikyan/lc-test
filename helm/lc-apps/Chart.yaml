@@ -1,6 +1,7 @@
 apiVersion: v2
 name: lc-apps
-description: A Helm chart for LC Test applications (grpc-echo and my-express-app)
+description: A generic Helm chart for Kubernetes applications
 type: application
 version: 0.1.0
-appVersion: "1.0" 
+appVersion: "1.0"
+

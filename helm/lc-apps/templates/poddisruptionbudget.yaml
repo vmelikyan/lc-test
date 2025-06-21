@@ -1,6 +1,4 @@
-{{- $selectedApp := include "lc-apps.selectedApp" . | fromYaml }}
-{{- if $selectedApp }}
-{{- if $selectedApp.podDisruptionBudget.enabled }}
+{{- if and .Values.podDisruptionBudget.enabled .Values.image }}
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
@@ -8,14 +6,13 @@ metadata:
   labels:
     {{- include "lc-apps.labels" . | nindent 4 }}
 spec:
-  {{- if $selectedApp.podDisruptionBudget.maxUnavailable }}
-  maxUnavailable: {{ $selectedApp.podDisruptionBudget.maxUnavailable }}
+  {{- if .Values.podDisruptionBudget.maxUnavailable }}
+  maxUnavailable: {{ .Values.podDisruptionBudget.maxUnavailable }}
   {{- end }}
-  {{- if $selectedApp.podDisruptionBudget.minAvailable }}
-  minAvailable: {{ $selectedApp.podDisruptionBudget.minAvailable }}
+  {{- if .Values.podDisruptionBudget.minAvailable }}
+  minAvailable: {{ .Values.podDisruptionBudget.minAvailable }}
   {{- end }}
   selector:
     matchLabels:
       {{- include "lc-apps.selectorLabels" . | nindent 6 }}
-{{- end }}
 {{- end }} 

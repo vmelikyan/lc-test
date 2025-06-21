@@ -1,131 +1,46 @@
-global:
-  appShort: lct
-  appLong: lc-test
-  env: lfc
-  ou: engineering
+# Default values for lc-apps.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
 
-appName: ""
+nameOverride: ""
+fullnameOverride: ""
 
 image: ""
 imagePullPolicy: IfNotPresent
 
-apps:
-  grpc-echo:
-    enabled: false
-    component: echo
-    componentType: server
-    image: ""
-    ports:
-      - name: tcp
-        protocol: TCP
-        servicePort: 8080
-        containerPort: 8080
-        appProtocol: http
-    deployment:
-      replicaCount: 1
-      resources:
-        requests:
-          cpu: 10m
-          memory: 100Mi
-      readinessProbe:
-        periodSeconds: 10
-        failureThreshold: 30
-        timeoutSeconds: 1
-        successThreshold: 1
-        tcpSocket:
-          port: 8080
-      livenessProbe:
-        periodSeconds: 10
-        timeoutSeconds: 1
-        failureThreshold: 30
-        successThreshold: 1
-        tcpSocket:
-          port: 8080
-      strategy:
-        type: RollingUpdate
-        rollingUpdate:
-          maxUnavailable: 50%
-          maxSurge: 100%
-      terminationGracePeriodSeconds: 300
-      lifecycle:
-        preStop:
-          exec:
-            command: ["/bin/sh", "-c", "sleep 120"]
-    podDisruptionBudget:
-      enabled: true
-      maxUnavailable: 25%
-  
-  my-express-app:
-    enabled: false
-    component: app
-    componentType: server
-    image: ""
-    ports:
-      - name: tcp
-        protocol: TCP
-        servicePort: 80
-        containerPort: 8080
-        appProtocol: http
-    deployment:
-      replicaCount: 1
-      resources:
-        requests:
-          cpu: 10m
-          memory: 100Mi
-      startupProbe:
-        periodSeconds: 5
-        failureThreshold: 60
-        httpGet:
-          scheme: HTTP
-          path: /__lbheartbeat__
-          port: 8080
-      readinessProbe:
-        periodSeconds: 10
-        failureThreshold: 3
-        httpGet:
-          scheme: HTTP
-          path: /__lbheartbeat__
-          port: 8080
-      livenessProbe:
-        periodSeconds: 60
-        timeoutSeconds: 59
-        failureThreshold: 5
-        httpGet:
-          scheme: HTTP
-          path: /__lbheartbeat__
-          port: 8080
-      strategy:
-        type: RollingUpdate
-        rollingUpdate:
-          maxUnavailable: 50%
-          maxSurge: 100%
-      terminationGracePeriodSeconds: 300
-      lifecycle:
-        preStop:
-          exec:
-            command: ["/bin/sh", "-c", "sleep 120"]
-      args: ["app", "-config", "/config/config.toml"]
-    podDisruptionBudget:
-      enabled: true
-      maxUnavailable: 25%
-    ingress:
-      enabled: false
-      port: 80
+component: ""
+componentType: ""
+
+ports: []
+
+service:
+  enabled: true
+  type: ClusterIP
+
+ingress:
+  enabled: false
+
+deployment:
+  replicaCount: 1
+  strategy: {}
+  resources: {}
+  livenessProbe: {}
+  readinessProbe: {}
+  startupProbe: {}
+  lifecycle: {}
+  terminationGracePeriodSeconds: 30
+  args: []
+
+podDisruptionBudget:
+  enabled: false
+  maxUnavailable: ""
+  minAvailable: ""
 
 serviceAccount:
   create: false
   name: "default"
+  annotations: {}
 
-service:
-  enabled: true
-  
-# nodeAffinity:
-#   customNodeAffinity:
-#     requiredDuringSchedulingIgnoredDuringExecution:
-#       nodeSelectorTerms:
-#         - matchExpressions:
-#           - key: eks.amazonaws.com/capacityType
-#             operator: In
-#             values:
-#               - ON_DEMAND 
-nodeAffinity: {} 
+nodeAffinity: {}
+
+commonLabels: {} 

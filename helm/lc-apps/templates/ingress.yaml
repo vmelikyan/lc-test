@@ -1,26 +1,23 @@
-{{- $selectedApp := include "lc-apps.selectedApp" . | fromYaml }}
-{{- $appName := include "lc-apps.selectedAppName" . }}
-{{- if $selectedApp }}
-{{- if and $selectedApp.ingress $selectedApp.ingress.enabled }}
+{{- if .Values.ingress.enabled }}
 {{- $fullName := include "lc-apps.fullname" . -}}
-{{- $svcPort := $selectedApp.ingress.port -}}
+{{- $svcPort := .Values.ingress.port | default 80 -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
     {{- include "lc-apps.labels" . | nindent 4 }}
-  {{- with $selectedApp.ingress.annotations }}
+  {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  {{- if $selectedApp.ingress.className }}
-  ingressClassName: {{ $selectedApp.ingress.className }}
+  {{- if .Values.ingress.className }}
+  ingressClassName: {{ .Values.ingress.className }}
   {{- end }}
-  {{- if $selectedApp.ingress.tls }}
+  {{- if .Values.ingress.tls }}
   tls:
-    {{- range $selectedApp.ingress.tls }}
+    {{- range .Values.ingress.tls }}
     - hosts:
         {{- range .hosts }}
         - {{ . | quote }}
@@ -29,7 +26,7 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range $selectedApp.ingress.hosts }}
+    {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
@@ -43,5 +40,4 @@ spec:
                   number: {{ $svcPort }}
           {{- end }}
     {{- end }}
-{{- end }}
 {{- end }} 

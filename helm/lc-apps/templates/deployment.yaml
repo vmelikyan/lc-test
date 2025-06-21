@@ -1,16 +1,18 @@
-{{- $selectedApp := include "lc-apps.selectedApp" . | fromYaml }}
-{{- $appName := include "lc-apps.selectedAppName" . }}
-{{- if $selectedApp }}
+{{- if .Values.image }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "lc-apps.fullname" . }}
   labels:
     {{- include "lc-apps.labels" . | nindent 4 }}
-    component: {{ $selectedApp.component }}
-    componentType: {{ $selectedApp.componentType }}
+    {{- if .Values.component }}
+    component: {{ .Values.component }}
+    {{- end }}
+    {{- if .Values.componentType }}
+    componentType: {{ .Values.componentType }}
+    {{- end }}
 spec:
-  replicas: {{ $selectedApp.deployment.replicaCount }}
+  replicas: {{ .Values.deployment.replicaCount }}
   selector:
     matchLabels:
       {{- include "lc-apps.selectorLabels" . | nindent 6 }}
@@ -18,50 +20,58 @@ spec:
     metadata:
       labels:
         {{- include "lc-apps.selectorLabels" . | nindent 8 }}
-        component: {{ $selectedApp.component }}
-        componentType: {{ $selectedApp.componentType }}
+        {{- if .Values.component }}
+        component: {{ .Values.component }}
+        {{- end }}
+        {{- if .Values.componentType }}
+        componentType: {{ .Values.componentType }}
+        {{- end }}
     spec:
-      {{- if .Values.nodeAffinity.customNodeAffinity }}
+      {{- with .Values.nodeAffinity }}
       affinity:
         nodeAffinity:
-          {{- toYaml .Values.nodeAffinity.customNodeAffinity | nindent 10 }}
+          {{- toYaml . | nindent 10 }}
       {{- end }}
       serviceAccountName: {{ include "lc-apps.serviceAccountName" . }}
       containers:
-      - name: {{ $appName }}
-        image: {{ include "lc-apps.image" . }}
+      - name: {{ include "lc-apps.name" . }}
+        image: {{ .Values.image }}
         imagePullPolicy: {{ .Values.imagePullPolicy }}
-        {{- if $selectedApp.deployment.args }}
+        {{- with .Values.deployment.args }}
         args:
-          {{- toYaml $selectedApp.deployment.args | nindent 10 }}
+          {{- toYaml . | nindent 10 }}
         {{- end }}
+        {{- with .Values.ports }}
         ports:
-        {{- range $selectedApp.ports }}
+        {{- range . }}
         - name: {{ .name }}
           containerPort: {{ .containerPort }}
           protocol: {{ .protocol }}
         {{- end }}
-        {{- if $selectedApp.deployment.startupProbe }}
+        {{- end }}
+        {{- with .Values.deployment.startupProbe }}
         startupProbe:
-          {{- toYaml $selectedApp.deployment.startupProbe | nindent 10 }}
+          {{- toYaml . | nindent 10 }}
         {{- end }}
-        {{- if $selectedApp.deployment.livenessProbe }}
+        {{- with .Values.deployment.livenessProbe }}
         livenessProbe:
-          {{- toYaml $selectedApp.deployment.livenessProbe | nindent 10 }}
+          {{- toYaml . | nindent 10 }}
         {{- end }}
-        {{- if $selectedApp.deployment.readinessProbe }}
+        {{- with .Values.deployment.readinessProbe }}
         readinessProbe:
-          {{- toYaml $selectedApp.deployment.readinessProbe | nindent 10 }}
+          {{- toYaml . | nindent 10 }}
         {{- end }}
+        {{- with .Values.deployment.resources }}
         resources:
-          {{- toYaml $selectedApp.deployment.resources | nindent 10 }}
-        {{- if $selectedApp.deployment.lifecycle }}
-        lifecycle:
-          {{- toYaml $selectedApp.deployment.lifecycle | nindent 10 }}
+          {{- toYaml . | nindent 10 }}
         {{- end }}
-      terminationGracePeriodSeconds: {{ $selectedApp.deployment.terminationGracePeriodSeconds }}
-  {{- if $selectedApp.deployment.strategy }}
+        {{- with .Values.deployment.lifecycle }}
+        lifecycle:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+      terminationGracePeriodSeconds: {{ .Values.deployment.terminationGracePeriodSeconds }}
+  {{- with .Values.deployment.strategy }}
   strategy:
-    {{- toYaml $selectedApp.deployment.strategy | nindent 4 }}
+    {{- toYaml . | nindent 4 }}
   {{- end }}
 {{- end }} 
