@@ -17,7 +17,7 @@ services:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       chart:
-        name: './helm'
+        name: './helm/lc-apps'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
