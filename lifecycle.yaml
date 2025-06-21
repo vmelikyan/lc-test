@@ -19,7 +19,7 @@ services:
       args: "--debug"
       envMapping:
         app:
-          format: 'array'
+          format: 'map'
           path: 'deployment.env'
       chart:
         name: './helm/lc-apps'
