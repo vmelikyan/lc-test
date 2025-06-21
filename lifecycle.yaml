@@ -21,6 +21,9 @@ services:
         name: './helm/lc-apps'
         values:
           - 'image="{{{lc-test_dockerImage}}}"'
+          - 'env.CLIENT_HOST={{grpc-echo_internalHostname}}:8080'
+            'env.TEST_TEST=test'
+            'env.WHAT=is-this'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
