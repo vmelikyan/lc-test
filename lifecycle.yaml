@@ -17,6 +17,10 @@ services:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       args: "--debug"
+      envMapping:
+        app:
+          format: 'array'
+          path: 'deployment.env'
       chart:
         name: './helm/lc-apps'
         values:
@@ -24,10 +28,6 @@ services:
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
-        envMapping:
-          app:
-            format: 'array'
-            path: 'deployment.env'
       docker:
         builder:
           engine: 'buildkit'
