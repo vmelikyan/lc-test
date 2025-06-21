@@ -1,0 +1,47 @@
+{{- $selectedApp := include "lc-apps.selectedApp" . | fromYaml }}
+{{- $appName := include "lc-apps.selectedAppName" . }}
+{{- if $selectedApp }}
+{{- if and $selectedApp.ingress $selectedApp.ingress.enabled }}
+{{- $fullName := include "lc-apps.fullname" . -}}
+{{- $svcPort := $selectedApp.ingress.port -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "lc-apps.labels" . | nindent 4 }}
+  {{- with $selectedApp.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if $selectedApp.ingress.className }}
+  ingressClassName: {{ $selectedApp.ingress.className }}
+  {{- end }}
+  {{- if $selectedApp.ingress.tls }}
+  tls:
+    {{- range $selectedApp.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
+  rules:
+    {{- range $selectedApp.ingress.hosts }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+          {{- range .paths }}
+          - path: {{ .path }}
+            pathType: {{ .pathType | default "ImplementationSpecific" }}
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+          {{- end }}
+    {{- end }}
+{{- end }}
+{{- end }} 

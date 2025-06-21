@@ -1,0 +1,21 @@
+{{- $selectedApp := include "lc-apps.selectedApp" . | fromYaml }}
+{{- if $selectedApp }}
+{{- if $selectedApp.podDisruptionBudget.enabled }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "lc-apps.fullname" . }}
+  labels:
+    {{- include "lc-apps.labels" . | nindent 4 }}
+spec:
+  {{- if $selectedApp.podDisruptionBudget.maxUnavailable }}
+  maxUnavailable: {{ $selectedApp.podDisruptionBudget.maxUnavailable }}
+  {{- end }}
+  {{- if $selectedApp.podDisruptionBudget.minAvailable }}
+  minAvailable: {{ $selectedApp.podDisruptionBudget.minAvailable }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "lc-apps.selectorLabels" . | nindent 6 }}
+{{- end }}
+{{- end }} 
