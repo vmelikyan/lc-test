@@ -16,7 +16,7 @@ services:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       chart:
-        name: 'goodrx-app'
+        name: './helm'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
