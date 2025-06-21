@@ -18,6 +18,8 @@ services:
       branchName: 'main'
       chart:
         name: './helm/lc-apps'
+        values:
+          -'image={{lc-test_dockerImage}}'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
