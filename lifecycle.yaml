@@ -23,6 +23,8 @@ services:
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
+        args:
+          - --debug
       docker:
         builder:
           engine: 'buildkit'
