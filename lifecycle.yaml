@@ -27,6 +27,10 @@ services:
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
+        envMapping:
+          app:
+            format: 'array'
+            path: 'deployment.env'
       docker:
         builder:
           engine: 'buildkit'
