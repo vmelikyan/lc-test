@@ -29,7 +29,7 @@ services:
           - 'sysops/helm/lfc/service/app.yaml'
         envMapping:
           app:
-            format: 'array'
+            format: 'map'
             path: 'deployment.env'
       docker:
         builder:
