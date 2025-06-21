@@ -13,14 +13,19 @@ environment:
 services:
   - name: "lc-test"
     helm:
+      version: "3.12.0"
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       chart:
-        name: 'goodrx-app'
+        name: './helm/lc-apps'
+        values:
+          - 'image="{{lc-test_dockerImage}}"'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
       docker:
+        builder:
+          engine: 'buildkit'
         defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
