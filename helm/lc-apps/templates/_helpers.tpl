@@ -103,11 +103,11 @@ Get the image for the deployment
 */}}
 {{- define "lc-apps.image" -}}
 {{- $selectedApp := include "lc-apps.selectedApp" . | fromYaml }}
-{{- if .Values.image.repository }}
-{{- .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
-{{- else if $selectedApp.image.repository }}
-{{- $selectedApp.image.repository }}:{{ $selectedApp.image.tag | default .Chart.AppVersion }}
+{{- if .Values.image }}
+{{- .Values.image }}
+{{- else if $selectedApp.image }}
+{{- $selectedApp.image }}
 {{- else }}
-{{- fail "Image repository must be specified via --set image.repository=<value>" }}
+{{- fail "Image must be specified via --set image=<repository:tag>" }}
 {{- end }}
 {{- end }} 

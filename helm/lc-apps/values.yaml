@@ -6,19 +6,15 @@ global:
 
 appName: ""
 
-image:
-  repository: ""
-  tag: ""
-  pullPolicy: IfNotPresent
+image: ""
+imagePullPolicy: IfNotPresent
 
 apps:
   grpc-echo:
     enabled: false
     component: echo
     componentType: server
-    image:
-      repository: ""
-      tag: ""
+    image: ""
     ports:
       - name: tcp
         protocol: TCP
@@ -63,9 +59,7 @@ apps:
     enabled: false
     component: app
     componentType: server
-    image:
-      repository: ""
-      tag: ""
+    image: ""
     ports:
       - name: tcp
         protocol: TCP

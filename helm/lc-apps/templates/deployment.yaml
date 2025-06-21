@@ -30,7 +30,7 @@ spec:
       containers:
       - name: {{ $appName }}
         image: {{ include "lc-apps.image" . }}
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
         {{- if $selectedApp.deployment.args }}
         args:
           {{- toYaml $selectedApp.deployment.args | nindent 10 }}
