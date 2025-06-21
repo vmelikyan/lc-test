@@ -16,6 +16,7 @@ services:
       version: "3.12.0"
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
+      args: "--debug"
       chart:
         name: './helm/lc-apps'
         values:
@@ -23,8 +24,6 @@ services:
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
-        args:
-          - --debug
       docker:
         builder:
           engine: 'buildkit'
