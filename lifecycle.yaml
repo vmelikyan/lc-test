@@ -43,6 +43,7 @@ services:
   
   - name: "grpc-echo"
     helm:
+      version: "3.12.0"
       repository: "vmelikyan/lc-test"
       branchName: "main"
       envMapping:
@@ -67,19 +68,6 @@ services:
           env:
             COMPONENT: "app"
             ENV: "lifecycle"
-      deployment:
-        public: true
-        resource:
-          cpu:
-            request: '10m'
-          memory:
-            request: '50Mi'
-        readiness:
-          tcpSocketPort: 8080
-        hostnames:
-          host: '0env.com'
-          defaultInternalHostname: 'grpc-echo-dev-0'
-          defaultPublicUrl: 'grpc-echo-dev-0.0env.com'
 
   # - name: 'postgres-db'
   #   docker:
