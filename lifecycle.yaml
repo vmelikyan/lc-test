@@ -12,12 +12,15 @@ environment:
     
 services:
   - name: "lc-test"
-    github:
+    helm:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
+      chart:
+        name: 'goodrx-app'
+        valueFiles:
+          - 'sysops/helm/common.yaml'
+          - 'sysops/helm/lfc/service/app.yaml'
       docker:
-        builder:
-          engine: 'buildkit'
         defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
@@ -26,20 +29,7 @@ services:
             TEST_TEST: 'test'
             WHAT: "is-this"
           ports:
-            - 8080
-      deployment:
-        public: true
-        resource:
-          cpu:
-            request: '10m'
-          memory:
-            request: '50Mi'
-        readiness:
-          tcpSocketPort: 8080
-        hostnames:
-          host: '0env.com'
-          defaultInternalHostname: 'lc-test-dev-0'
-          defaultPublicUrl: 'lc-test-dev-0.0env.com'
+            - 8080  
   
   - name: "grpc-echo"
     github:
