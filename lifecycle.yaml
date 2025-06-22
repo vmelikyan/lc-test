@@ -118,10 +118,8 @@ services:
 
   - name: "jenkins"
     helm:
-      version: "3.12.0"
       repository: "vmelikyan/lc-test"
       branchName: "main"
-      args: "--force --timeout 60m0s --wait"
       chart:
         name: "jenkins"
         repoUrl: "https://charts.bitnami.com/bitnami"
