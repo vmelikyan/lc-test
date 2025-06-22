@@ -117,14 +117,14 @@ services:
         name: "redis"
         
    - name: "jenkins"
-      helm:
-        repository: "vmelikyan/lc-test"
-        branchName: "main"
-        "args": "--force --timeout 60m0s --wait",
-        chart:
-          name: "jenkins"
-          repoUrl: "oci://registry-1.docker.io/bitnamicharts/jenkins"
-          version: "13.6.8"
+     helm:
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
+      args: "--force --timeout 60m0s --wait",
+      chart:
+        name: "jenkins"
+        repoUrl: "oci://registry-1.docker.io/bitnamicharts/jenkins"
+        version: "13.6.8"
         
   
   # - name: "nginx"
