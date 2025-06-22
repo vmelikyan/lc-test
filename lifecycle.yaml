@@ -30,7 +30,7 @@ services:
           - 'sysops/helm/lfc/service/app.yaml'
       docker:
         builder:
-          engine: 'kaniko'
+          engine: 'buildkit'
           buildMethod: 'nativeV2'
         defaultTag: 'main'
         app:
@@ -60,7 +60,7 @@ services:
           - 'sysops/helm/lfc/service/grpc-service.yaml'
       docker:
         builder:
-          engine: 'buildkit'
+          engine: 'kaniko'
           buildMethod: 'nativeV2'
         defaultTag: "main"
         app:
