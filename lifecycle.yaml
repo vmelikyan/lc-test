@@ -61,6 +61,7 @@ services:
       docker:
         builder:
           engine: 'buildkit'
+          buildMethod: 'nativeV2'
         defaultTag: "main"
         app:
           dockerfilePath: "grpc-echo/Dockerfile"
