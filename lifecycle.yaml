@@ -116,8 +116,8 @@ services:
       chart:
         name: "redis"
         
-   - name: "jenkins"
-     helm:
+  - name: "jenkins"
+    helm:
       repository: "vmelikyan/lc-test"
       branchName: "main"
       args: "--force --timeout 60m0s --wait",
