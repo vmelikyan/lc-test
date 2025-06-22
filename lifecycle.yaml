@@ -5,7 +5,7 @@ environment:
   defaultServices:
     - name: 'lc-test'
     # - name: 'nginx'
-    # - name: 'postgres-db'
+    - name: 'postgres-db'
     - name: 'grpc-echo'
     # - name: 'redis'
 
