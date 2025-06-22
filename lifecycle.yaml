@@ -13,14 +13,8 @@ environment:
 services:
   - name: "lc-test"
     helm:
-      version: "3.12.0"
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
-      args: "--debug"
-      envMapping:
-        app:
-          format: 'array'
-          path: 'deployment.env'
       chart:
         name: './helm/lc-apps'
         values:
@@ -44,13 +38,8 @@ services:
   
   - name: "grpc-echo"
     helm:
-      version: "3.12.0"
       repository: "vmelikyan/lc-test"
       branchName: "main"
-      envMapping:
-        app:
-          format: 'array'
-          path: 'deployment.env'
       chart:
         name: './helm/lc-apps'
         values:
@@ -61,6 +50,7 @@ services:
       docker:
         builder:
           engine: 'buildkit'
+          buildMethod: 'nativeV2'
         defaultTag: "main"
         app:
           dockerfilePath: "grpc-echo/Dockerfile"
