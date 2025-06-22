@@ -120,7 +120,7 @@ services:
     helm:
       repository: "vmelikyan/lc-test"
       branchName: "main"
-      args: "--force --timeout 60m0s --wait",
+      args: "--force --timeout 60m0s --wait"
       chart:
         name: "jenkins"
         repoUrl: "oci://registry-1.docker.io/bitnamicharts/jenkins"
