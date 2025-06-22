@@ -8,6 +8,7 @@ environment:
     # - name: 'postgres-db'
     - name: 'grpc-echo'
     # - name: 'redis'
+    - name: 'jenkins'
 
     
 services:
@@ -114,6 +115,17 @@ services:
       branchName: "main"
       chart:
         name: "redis"
+        
+ - name: "jenkins"
+    helm:
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
+      "args": "--force --timeout 60m0s --wait",
+      chart:
+        name: "jenkins"
+        repoUrl: "oci://registry-1.docker.io/bitnamicharts/jenkins"
+        version: "13.6.8"
+        
   
   # - name: "nginx"
   #   defaultUUID: "dev-0"
