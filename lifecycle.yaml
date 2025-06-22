@@ -124,7 +124,7 @@ services:
       args: "--force --timeout 60m0s --wait"
       chart:
         name: "jenkins"
-        repoUrl: "oci://registry-1.docker.io/bitnamicharts/jenkins"
+        repoUrl: "https://charts.bitnami.com/bitnami"
         version: "13.6.8"
             
   # - name: "nginx"
