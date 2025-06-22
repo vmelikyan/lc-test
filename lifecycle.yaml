@@ -3,10 +3,10 @@ version: '2.1.0'
 
 environment:
   defaultServices:
-    - name: 'lc-test'
+    # - name: 'lc-test'
     # - name: 'nginx'
-    - name: 'postgres-db'
-    - name: 'grpc-echo'
+    # - name: 'postgres-db'
+    # - name: 'grpc-echo'
     # - name: 'redis'
     - name: 'jenkins'
 
