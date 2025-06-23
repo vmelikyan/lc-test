@@ -4,10 +4,10 @@ version: '2.1.0'
 environment:
   defaultServices:
     - name: 'lc-test'
-    # - name: 'nginx'
-    # - name: 'postgres-db'
-    # - name: 'grpc-echo'
-    # - name: 'redis'
+    - name: 'nginx'
+    - name: 'postgres-db'
+    - name: 'grpc-echo'
+    - name: 'redis'
     - name: 'jenkins'
 
     
@@ -127,19 +127,19 @@ services:
         values:
           - "service.type=NodePort"
             
-  # - name: "nginx"
-  #   defaultUUID: "dev-0"
-  #   docker:
-  #     dockerImage: "nginx"
-  #     defaultTag: "latest"
-  #     ports:
-  #       - 80
-  #     deployment:
-  #       public: true
-  #       resource:
-  #         cpu:
-  #           request: "10m"
-  #         memory:
-  #           request: "200Mi"
-  #       readiness:
-  #         tcpSocketPort: 80
+  - name: "nginx"
+    defaultUUID: "dev-0"
+    docker:
+      dockerImage: "nginx"
+      defaultTag: "latest"
+      ports:
+        - 80
+      deployment:
+        public: true
+        resource:
+          cpu:
+            request: "10m"
+          memory:
+            request: "200Mi"
+        readiness:
+          tcpSocketPort: 80
