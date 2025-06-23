@@ -6,8 +6,9 @@ environment:
     - name: 'lc-test'
     # - name: 'nginx'
     # - name: 'postgres-db'
-    - name: 'grpc-echo'
+    # - name: 'grpc-echo'
     # - name: 'redis'
+    - name: 'jenkins'
 
     
 services:
@@ -31,6 +32,7 @@ services:
       docker:
         builder:
           engine: 'buildkit'
+          buildMethod: 'nativeV2'
         defaultTag: 'main'
         app:
           dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
@@ -113,7 +115,18 @@ services:
       branchName: "main"
       chart:
         name: "redis"
-  
+
+  - name: "jenkins"
+    helm:
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
+      chart:
+        name: "jenkins"
+        repoUrl: "https://charts.bitnami.com/bitnami"
+        version: "13.6.8"
+        values:
+          - "service.type=NodePort"
+            
   # - name: "nginx"
   #   defaultUUID: "dev-0"
   #   docker:
