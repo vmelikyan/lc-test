@@ -18,10 +18,6 @@ services:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       args: "--debug"
-      envMapping:
-        app:
-          format: 'array'
-          path: 'deployment.env'
       chart:
         name: './helm/lc-apps'
         values:
@@ -48,10 +44,6 @@ services:
       version: "3.12.0"
       repository: "vmelikyan/lc-test"
       branchName: "main"
-      envMapping:
-        app:
-          format: 'array'
-          path: 'deployment.env'
       chart:
         name: './helm/lc-apps'
         values:
