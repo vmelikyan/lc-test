@@ -26,7 +26,7 @@ services:
         name: './helm/lc-apps'
         values:
           - 'image="{{{lc-test_dockerImage}}}"'
-          - 'initImage="{{{lc-test_test_dockerImage}}}"'
+          - 'initImage="{{{lc-test_initDockerImage}}}"'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
@@ -40,7 +40,7 @@ services:
           env:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
-            INIT_CONTAINER: '{{{lc-test_test_dockerImage}}}'
+            INIT_CONTAINER: '{{{lc-test_initDockerImage}}}'
             WHAT: "is-this"
           ports:
             - 8080  
