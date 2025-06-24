@@ -26,7 +26,7 @@ services:
         name: './helm/lc-apps'
         values:
           - 'image="{{{lc-test_dockerImage}}}"'
-          - 'initImage="{{{lc-test_initDockerImage}}}"
+          - 'initImage="{{{lc-test_initDockerImage}}}"'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
