@@ -43,7 +43,14 @@ services:
             INIT_CONTAINER: '{{{lc-test_initDockerImage}}}'
             WHAT: "is-this"
           ports:
-            - 8080  
+            - 8080
+        init:
+          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          env:
+            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+            TEST_TEST: 'test'
+            INIT_CONTAINER: '{{{lc-test_initDockerImage}}}'
+            WHAT: "is-this"
   
   - name: "grpc-echo"
     helm:
