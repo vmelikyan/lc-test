@@ -3,74 +3,74 @@ version: '2.1.0'
 
 environment:
   defaultServices:
-    - name: 'lc-test'
-    - name: 'nginx'
-    - name: 'postgres-db'
-    - name: 'grpc-echo'
-    - name: 'redis'
-    - name: 'jenkins'
+    # - name: 'lc-test'
+    # - name: 'nginx'
+    # - name: 'postgres-db'
+    # - name: 'grpc-echo'
+    # - name: 'redis'
+    # - name: 'jenkins'
     - name: 'lc-test-gh-type'
 
     
 services:
-  - name: "lc-test"
-    helm:
-      version: "3.12.0"
-      repository: 'vmelikyan/lc-test'
-      branchName: 'main'
-      args: "--debug"
-      envMapping:
-        app:
-          format: 'array'
-          path: 'deployment.env'
-      chart:
-        name: './helm/lc-apps'
-        values:
-          - 'image="{{{lc-test_dockerImage}}}"'
-        valueFiles:
-          - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/app.yaml'
-      docker:
-        builder:
-          engine: 'buildkit'
-          buildMethod: 'nativeV2'
-        defaultTag: 'main'
-        app:
-          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
-          env:
-            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
-            TEST_TEST: 'test'
-            WHAT: "is-this"
-          ports:
-            - 8080  
+  # - name: "lc-test"
+  #   helm:
+  #     version: "3.12.0"
+  #     repository: 'vmelikyan/lc-test'
+  #     branchName: 'main'
+  #     args: "--debug"
+  #     envMapping:
+  #       app:
+  #         format: 'array'
+  #         path: 'deployment.env'
+  #     chart:
+  #       name: './helm/lc-apps'
+  #       values:
+  #         - 'image="{{{lc-test_dockerImage}}}"'
+  #       valueFiles:
+  #         - 'sysops/helm/common.yaml'
+  #         - 'sysops/helm/lfc/service/app.yaml'
+  #     docker:
+  #       builder:
+  #         engine: 'buildkit'
+  #         buildMethod: 'nativeV2'
+  #       defaultTag: 'main'
+  #       app:
+  #         dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+  #         env:
+  #           CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+  #           TEST_TEST: 'test'
+  #           WHAT: "is-this"
+  #         ports:
+  #           - 8080  
   
-  - name: "grpc-echo"
-    helm:
-      version: "3.12.0"
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      envMapping:
-        app:
-          format: 'array'
-          path: 'deployment.env'
-      chart:
-        name: './helm/lc-apps'
-        values:
-          - 'image="{{{grpc-echo_dockerImage}}}"'
-        valueFiles:
-          - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/grpc-service.yaml'
-      docker:
-        builder:
-          engine: 'buildkit'
-        defaultTag: "main"
-        app:
-          dockerfilePath: "grpc-echo/Dockerfile"
-          ports:
-            - 8080
-          env:
-            COMPONENT: "app"
-            ENV: "lifecycle"
+  # - name: "grpc-echo"
+  #   helm:
+  #     version: "3.12.0"
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     envMapping:
+  #       app:
+  #         format: 'array'
+  #         path: 'deployment.env'
+  #     chart:
+  #       name: './helm/lc-apps'
+  #       values:
+  #         - 'image="{{{grpc-echo_dockerImage}}}"'
+  #       valueFiles:
+  #         - 'sysops/helm/common.yaml'
+  #         - 'sysops/helm/lfc/service/grpc-service.yaml'
+  #     docker:
+  #       builder:
+  #         engine: 'buildkit'
+  #       defaultTag: "main"
+  #       app:
+  #         dockerfilePath: "grpc-echo/Dockerfile"
+  #         ports:
+  #           - 8080
+  #         env:
+  #           COMPONENT: "app"
+  #           ENV: "lifecycle"
             
   - name: "lc-test-gh-type"
     github:
@@ -130,51 +130,51 @@ services:
   #           accessModes: 'ReadWriteOnce'
   #           storageSize: '5Gi'
 
-  - name: "postgres-db"
-    helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      chart:
-        name: "postgresql"
-        valueFiles:
-          - 'sysops/helm/lfc/db/db.yaml'
+  # - name: "postgres-db"
+  #   helm:
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     chart:
+  #       name: "postgresql"
+  #       valueFiles:
+  #         - 'sysops/helm/lfc/db/db.yaml'
 
-  - name: "redis"
-    deploymentDependsOn:
-      - 'postgres-db'
-    helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      chart:
-        name: "redis"
+  # - name: "redis"
+  #   deploymentDependsOn:
+  #     - 'postgres-db'
+  #   helm:
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     chart:
+  #       name: "redis"
 
-  - name: "jenkins"
-    helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
-      chart:
-        name: "jenkins"
-        repoUrl: "https://charts.bitnami.com/bitnami"
-        version: "13.6.8"
-        values:
-          - "service.type=ClusterIP"
-          - "ingress.enabled=true"
-          - "ingress.hostname={{jenkins_publicUrl}}"
-          - "ingress.ingressClassName=nginx"
+  # - name: "jenkins"
+  #   helm:
+  #     repository: "vmelikyan/lc-test"
+  #     branchName: "main"
+  #     chart:
+  #       name: "jenkins"
+  #       repoUrl: "https://charts.bitnami.com/bitnami"
+  #       version: "13.6.8"
+  #       values:
+  #         - "service.type=ClusterIP"
+  #         - "ingress.enabled=true"
+  #         - "ingress.hostname={{jenkins_publicUrl}}"
+  #         - "ingress.ingressClassName=nginx"
             
-  - name: "nginx"
-    defaultUUID: "dev-0"
-    docker:
-      dockerImage: "nginx"
-      defaultTag: "latest"
-      ports:
-        - 80
-      deployment:
-        public: true
-        resource:
-          cpu:
-            request: "10m"
-          memory:
-            request: "200Mi"
-        readiness:
-          tcpSocketPort: 80
+  # - name: "nginx"
+  #   defaultUUID: "dev-0"
+  #   docker:
+  #     dockerImage: "nginx"
+  #     defaultTag: "latest"
+  #     ports:
+  #       - 80
+  #     deployment:
+  #       public: true
+  #       resource:
+  #         cpu:
+  #           request: "10m"
+  #         memory:
+  #           request: "200Mi"
+  #       readiness:
+  #         tcpSocketPort: 80
