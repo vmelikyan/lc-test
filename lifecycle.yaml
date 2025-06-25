@@ -136,7 +136,7 @@ services:
         values:
           - "service.type=ClusterIP"
           - "ingress.enabled=true"
-          - "ingress.hostname={{jenkins_puplicUrl}}"
+          - "ingress.hostname={{jenkins_publicUrl}}"
             
   - name: "nginx"
     defaultUUID: "dev-0"
