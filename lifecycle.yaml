@@ -118,8 +118,6 @@ services:
 
   - name: "jenkins"
     helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
       chart:
         name: "jenkins"
         repoUrl: "https://charts.bitnami.com/bitnami"
