@@ -45,6 +45,8 @@ services:
             - 8080  
   
   - name: "grpc-echo"
+    deploymentDependsOn:
+      - 'lc-test-gh-type'
     helm:
       version: "3.12.0"
       repository: "vmelikyan/lc-test"
@@ -73,6 +75,8 @@ services:
             ENV: "lifecycle"
             
   - name: "lc-test-gh-type"
+    deploymentDependsOn:
+      - 'redis'
     github:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
