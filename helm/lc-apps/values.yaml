@@ -1,0 +1,48 @@
+# Default values for lc-apps.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+image: ""
+imagePullPolicy: IfNotPresent
+
+component: ""
+componentType: ""
+
+ports: []
+
+service:
+  enabled: true
+  type: ClusterIP
+
+ingress:
+  enabled: false
+
+deployment:
+  replicaCount: 1
+  strategy: {}
+  resources: {}
+  livenessProbe: {}
+  readinessProbe: {}
+  startupProbe: {}
+  lifecycle: {}
+  terminationGracePeriodSeconds: 30
+  args: []
+  env: []
+  envFrom: []
+
+podDisruptionBudget:
+  enabled: false
+  maxUnavailable: ""
+  minAvailable: ""
+
+serviceAccount:
+  create: false
+  name: "default"
+  annotations: {}
+
+nodeAffinity: {}
+
+commonLabels: {} 

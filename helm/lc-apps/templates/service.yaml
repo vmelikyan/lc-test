@@ -1,0 +1,27 @@
+{{- if and .Values.service.enabled .Values.image }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "lc-apps.fullname" . }}
+  labels:
+    {{- include "lc-apps.labels" . | nindent 4 }}
+    {{- if .Values.component }}
+    component: {{ .Values.component }}
+    {{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  {{- with .Values.ports }}
+  ports:
+    {{- range . }}
+    - port: {{ .servicePort }}
+      targetPort: {{ .containerPort }}
+      protocol: {{ .protocol }}
+      name: {{ .name }}
+      {{- if .appProtocol }}
+      appProtocol: {{ .appProtocol }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+  selector:
+    {{- include "lc-apps.selectorLabels" . | nindent 4 }}
+{{- end }} 

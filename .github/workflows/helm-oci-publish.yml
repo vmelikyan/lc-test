@@ -1,0 +1,54 @@
+name: Publish Helm Chart to OCI Registry
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  CHART_PATH: ./helm/lc-apps
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: 'latest'
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Package Helm chart
+        run: |
+          helm package ${{ env.CHART_PATH }}
+
+      - name: Push Helm chart to OCI registry
+        run: |
+          CHART_VERSION=$(grep '^version:' ${{ env.CHART_PATH }}/Chart.yaml | awk '{print $2}')
+          helm push lc-apps-${CHART_VERSION}.tgz oci://${{ env.REGISTRY }}/${{ github.repository_owner }}
+          
+      - name: Create release notes
+        run: |
+          echo "## Helm Chart Release" >> release-notes.md
+          echo "" >> release-notes.md
+          echo "Chart has been published to OCI registry." >> release-notes.md
+          echo "" >> release-notes.md
+          echo "### Installation" >> release-notes.md
+          echo "\`\`\`bash" >> release-notes.md
+          echo "helm install my-release oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/lc-apps --version ${CHART_VERSION}" >> release-notes.md
+          echo "\`\`\`" >> release-notes.md

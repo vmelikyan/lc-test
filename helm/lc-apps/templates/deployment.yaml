@@ -1,0 +1,85 @@
+{{- if .Values.image }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "lc-apps.fullname" . }}
+  labels:
+    {{- include "lc-apps.labels" . | nindent 4 }}
+    {{- if .Values.component }}
+    component: {{ .Values.component }}
+    {{- end }}
+    {{- if .Values.componentType }}
+    componentType: {{ .Values.componentType }}
+    {{- end }}
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "lc-apps.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "lc-apps.selectorLabels" . | nindent 8 }}
+        {{- if .Values.component }}
+        component: {{ .Values.component }}
+        {{- end }}
+        {{- if .Values.componentType }}
+        componentType: {{ .Values.componentType }}
+        {{- end }}
+    spec:
+      {{- with .Values.nodeAffinity }}
+      affinity:
+        nodeAffinity:
+          {{- toYaml . | nindent 10 }}
+      {{- end }}
+      serviceAccountName: {{ include "lc-apps.serviceAccountName" . }}
+      containers:
+      - name: {{ include "lc-apps.name" . }}
+        image: {{ .Values.image }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        {{- with .Values.deployment.args }}
+        args:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.deployment.env }}
+        env:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.deployment.envFrom }}
+        envFrom:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.ports }}
+        ports:
+        {{- range . }}
+        - name: {{ .name }}
+          containerPort: {{ .containerPort }}
+          protocol: {{ .protocol }}
+        {{- end }}
+        {{- end }}
+        {{- with .Values.deployment.startupProbe }}
+        startupProbe:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.deployment.livenessProbe }}
+        livenessProbe:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.deployment.readinessProbe }}
+        readinessProbe:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.deployment.resources }}
+        resources:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.deployment.lifecycle }}
+        lifecycle:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+      terminationGracePeriodSeconds: {{ .Values.deployment.terminationGracePeriodSeconds }}
+  {{- with .Values.deployment.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }} 
