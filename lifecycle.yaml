@@ -24,7 +24,9 @@ services:
           format: 'array'
           path: 'deployment.env'
       chart:
-        name: './helm/lc-apps'
+        name: 'lc-apps'
+        repoUrl: 'oci://ghcr.io/vmelikyan/lc-apps'
+        version: '0.0.1'
         values:
           - 'image="{{{lc-test_dockerImage}}}"'
           - 'ingress.enabled=true'
