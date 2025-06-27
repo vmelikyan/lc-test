@@ -4,7 +4,25 @@ A generic Helm chart for deploying Kubernetes applications.
 
 ## Installation
 
+### Option 1: Install from OCI Registry (Recommended for Users)
+
 ```bash
+# Install directly from OCI registry
+helm install my-app oci://ghcr.io/vmelikyan/lc-apps \
+  --set image=your-registry/your-app:tag \
+  -f your-values.yaml
+
+# Install a specific version
+helm install my-app oci://ghcr.io/vmelikyan/lc-apps \
+  --version 0.1.0 \
+  --set image=your-registry/your-app:tag \
+  -f your-values.yaml
+```
+
+### Option 2: Install from Local Chart (For Development)
+
+```bash
+# Install from local directory
 helm install my-app ./helm/lc-apps \
   --set image=your-registry/your-app:tag \
   -f your-values.yaml
