@@ -10,6 +10,7 @@ environment:
     - name: 'redis'
     - name: 'jenkins'
     - name: 'lc-test-helm-oci'
+    - name: 'lc-test-gh-type'
 
     
 services:
