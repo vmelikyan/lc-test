@@ -27,6 +27,8 @@ services:
         name: './helm/lc-apps'
         values:
           - 'image="{{{lc-test_dockerImage}}}"'
+          - 'ingress.enabled=true'
+          - 'ingress.host={{{lc-test_publicUrl}}}'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/app.yaml'
