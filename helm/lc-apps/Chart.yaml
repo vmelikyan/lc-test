@@ -2,11 +2,10 @@ apiVersion: v2
 name: lc-apps
 description: A generic Helm chart for Kubernetes applications
 type: application
-version: 0.1.0
+version: 0.0.1
 appVersion: "1.0"
 home: https://github.com/vmelikyan/lc-test
 sources:
   - https://github.com/vmelikyan/lc-test
 maintainers:
   - name: vmelikyan
-
