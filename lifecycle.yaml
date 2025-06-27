@@ -3,17 +3,17 @@ version: '2.1.0'
 
 environment:
   defaultServices:
-    - name: 'lc-test'
+    - name: 'lc-test-helm-local'
     - name: 'nginx'
     - name: 'postgres-db'
     - name: 'grpc-echo'
     - name: 'redis'
     - name: 'jenkins'
-    - name: 'lc-test-gh-type'
+    - name: 'lc-test-helm-oci'
 
     
 services:
-  - name: "lc-test"
+  - name: 'lc-test-helm-local'
     helm:
       version: "3.12.0"
       repository: 'vmelikyan/lc-test'
@@ -24,7 +24,42 @@ services:
           format: 'array'
           path: 'deployment.env'
       chart:
-        name: './helm/lc-apps'
+        name: './helm/lc-apps' # local (in repo) helm chart
+        values:
+          - 'image="{{{lc-test_dockerImage}}}"'
+          - 'ingress.enabled=true'
+          - 'ingress.hostname={{{lc-test_publicUrl}}}'
+        valueFiles:
+          - 'sysops/helm/common.yaml'
+          - 'sysops/helm/lfc/service/app.yaml'
+      docker:
+        builder:
+          engine: 'buildkit'
+          buildMethod: 'nativeV2'
+        defaultTag: 'main'
+        app:
+          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          env:
+            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+            TEST_TEST: 'test'
+            WHAT: "is-this"
+          ports:
+            - 8080
+            
+  - name: 'lc-test-helm-oci'
+    helm:
+      version: "3.12.0"
+      repository: 'vmelikyan/lc-test'
+      branchName: 'main'
+      args: "--debug"
+      envMapping:
+        app:
+          format: 'array'
+          path: 'deployment.env'
+      chart:
+        name: 'lc-apps'
+        repoUrl: 'oci://ghcr.io/vmelikyan/lc-apps' # oci chart
+        version: '0.0.1'
         values:
           - 'image="{{{lc-test_dockerImage}}}"'
           - 'ingress.enabled=true'
