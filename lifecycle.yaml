@@ -25,7 +25,7 @@ services:
           path: 'deployment.env'
       chart:
         name: 'lc-apps'
-        repoUrl: 'oci://ghcr.io/vmelikyan'
+        repoUrl: 'oci://ghcr.io/vmelikyan/lc-apps/lc-apps'
         version: '0.0.1'
         values:
           - 'image="{{{lc-test_dockerImage}}}"'
