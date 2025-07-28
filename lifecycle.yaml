@@ -11,6 +11,7 @@ environment:
     - name: 'jenkins'
     - name: 'lc-test-helm-oci'
     - name: 'lc-test-gh-type'
+    - name: 'n8n'
 
     
 services:
@@ -220,3 +221,34 @@ services:
             request: "200Mi"
         readiness:
           tcpSocketPort: 80
+          
+  - name: "n8n"
+    defaultUUID: "dev-0"
+    requires:
+      - name: 'n8n-postgress'
+    docker:
+      dockerImage: "n8nio/n8n"
+      defaultTag: "latest"
+      ports:
+        - 5678
+      deployment:
+        public: true
+        resource:
+          cpu:
+            request: "10m"
+          memory:
+            request: "200Mi"
+        readiness:
+          tcpSocketPort: 5678
+  
+  - name: 'n8n-postgress'
+    defaultUUID: 'good-dev-0'
+    helm:
+      repository: 'GoodRx/lifecycle-example-go'
+      branchName: 'main'
+      chart:
+        name: 'postgresql'
+        values:
+          - 'auth.username=n8n'
+          - 'auth.password=mysecretpassword'
+          - 'auth.database=n8n'
