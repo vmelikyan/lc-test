@@ -244,8 +244,6 @@ services:
   - name: 'n8n-postgress'
     defaultUUID: 'good-dev-0'
     helm:
-      repository: 'GoodRx/lifecycle-example-go'
-      branchName: 'main'
       chart:
         name: 'postgresql'
         values:
