@@ -3,14 +3,14 @@ version: '2.1.0'
 
 environment:
   defaultServices:
-    - name: 'lc-test-helm-local'
-    - name: 'nginx'
-    - name: 'postgres-db'
+    # - name: 'lc-test-helm-local'
+    # - name: 'nginx'
+    # - name: 'postgres-db'
     - name: 'grpc-echo'
-    - name: 'redis'
-    - name: 'jenkins'
-    - name: 'lc-test-helm-oci'
-    - name: 'lc-test-gh-type'
+    # - name: 'redis'
+    # - name: 'jenkins'
+    # - name: 'lc-test-helm-oci'
+    # - name: 'lc-test-gh-type'
 
     
 services:
