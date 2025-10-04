@@ -100,13 +100,13 @@ services:
           - 'image="{{{grpc-echo_dockerImage}}}"'
         valueFiles:
           - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/grpc-service.yaml'
+          - 'sysops/helm/lfc/service/grpc-app-service.yaml'
       docker:
         builder:
           engine: 'buildkit'
         defaultTag: "main"
         app:
-          dockerfilePath: "grpc-echo/Dockerfile"
+          dockerfilePath: "grpc-echo/echo.Dockerfile"
           ports:
             - 8080
           env:
