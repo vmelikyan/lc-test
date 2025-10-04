@@ -2,24 +2,19 @@
 env: lfc                  # Short name of the environment (sbx, stg or prd)
 component: app            # Component name, should be equal to component name in Codefresh pipeline and name of this yml file.
 componentType: server     # Component (server, cron, migrations, etc)
-
 ports:
   - name: tcp
     protocol: TCP
     servicePort: 80
     containerPort: 8080
     appProtocol: http
-
 serviceAccount:
   create: false
   name: "default"
-
 service:
   enabled: true
-
 ingress:
   port: 80
-
 deployment:
   customNodeAffinity: {}
   # customNodeAffinity:
@@ -30,11 +25,9 @@ deployment:
   #           operator: In
   #           values:
   #             - ON_DEMAND
-
-  replicaCount: 0
+  replicaCount: 1
   # appImage: {{ $.Values.version }}
   # initImage: {{ $.Values.version }}
-
   terminationGracePeriodSeconds: 300
   # Resource limits can be tuned according to particular application requirements
   # https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes
@@ -51,7 +44,6 @@ deployment:
       scheme: HTTP
       path: /__lbheartbeat__
       port: 8080
-
   readinessProbe:
     periodSeconds: 10
     failureThreshold: 3
@@ -59,7 +51,6 @@ deployment:
       scheme: HTTP
       path: /__lbheartbeat__
       port: 8080
-
   livenessProbe:
     periodSeconds: 60
     timeoutSeconds: 59
@@ -68,12 +59,10 @@ deployment:
       scheme: HTTP
       path: /__lbheartbeat__
       port: 8080
-
   lifecycle:
     preStop:
       exec:
         command: ["/bin/sh", "-c", "sleep 120"]
-
   # Slowly rollout new pods during a deployment to
   # prevent too many being unavailable at any given time
   strategy:
@@ -81,10 +70,7 @@ deployment:
     rollingUpdate:
       maxUnavailable: 50%
       maxSurge: 100%
-
   args: ["app", "-config", "/config/config.toml"]
-
-
 podDisruptionBudget:
   enabled: true
   maxUnavailable: 25%
