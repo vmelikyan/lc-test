@@ -17,14 +17,14 @@ ingress:
   port: 80
 deployment:
   customNodeAffinity: {}
-  # customNodeAffinity:
-  #   requiredDuringSchedulingIgnoredDuringExecution:
-  #     nodeSelectorTerms:
-  #       - matchExpressions:
-  #         - key: eks.amazonaws.com/capacityType
-  #           operator: In
-  #           values:
-  #             - ON_DEMAND
+  customNodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+          - key: eks.amazonaws.com/capacityType
+            operator: In
+            values:
+              - ON_DEMAND
   replicaCount: 1
   # appImage: {{ $.Values.version }}
   # initImage: {{ $.Values.version }}
