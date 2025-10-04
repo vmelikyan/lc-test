@@ -99,7 +99,7 @@ services:
           - 'image="{{{grpc-echo_dockerImage}}}"'
         valueFiles:
           - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/grpc-echo-service.yaml'
+          - 'sysops/helm/lfc/service/grpc-service.yaml'
       docker:
         builder:
           engine: 'buildkit'
@@ -220,4 +220,3 @@ services:
             request: "200Mi"
         readiness:
           tcpSocketPort: 80
-
