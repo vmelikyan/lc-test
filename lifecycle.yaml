@@ -28,7 +28,7 @@ services:
       chart:
         name: './helm/lc-apps' # local (in repo) helm chart
         values:
-          - 'image="{{{lc-test_dockerImage}}}"'
+          - 'image="{{{lc-test-helm-local_dockerImage}}}"'
           - 'ingress.enabled=true'
           - 'ingress.hostname={{{lc-test_publicUrl}}}'
         valueFiles:
@@ -63,7 +63,7 @@ services:
         repoUrl: 'oci://ghcr.io/vmelikyan/lc-apps' # oci chart
         version: '0.0.1'
         values:
-          - 'image="{{{lc-test_dockerImage}}}"'
+          - 'image="{{{lc-test-helm-oci_dockerImage}}}"'
           - 'ingress.enabled=true'
           - 'ingress.hostname={{{lc-test_publicUrl}}}'
         valueFiles:
@@ -100,7 +100,7 @@ services:
           - 'image="{{{grpc-echo_dockerImage}}}"'
         valueFiles:
           - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/grpc-echo-service.yaml'
+          - 'sysops/helm/lfc/service/grpc-service.yaml'
       docker:
         builder:
           engine: 'buildkit'
@@ -124,7 +124,7 @@ services:
           engine: 'buildkit'
         defaultTag: 'main'
         app:
-          dockerfilePath: 'sysops/dockerfiles/app-main.dockerfile'
+          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           env:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
@@ -221,4 +221,3 @@ services:
             request: "200Mi"
         readiness:
           tcpSocketPort: 80
-
