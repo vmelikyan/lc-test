@@ -22,7 +22,7 @@ deployment:
             operator: In
             values:
               - ON_DEMAND
-  replicaCount: 1
+  replicaCount: 0
   # appImage: {{ $.Values.version }}
   # initImage: {{ $.Values.version }}
   terminationGracePeriodSeconds: 300
