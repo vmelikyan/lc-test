@@ -32,7 +32,7 @@ services:
           - 'ingress.hostname={{{lc-test_publicUrl}}}'
         valueFiles:
           - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/app-main-app.yaml'
+          - 'sysops/helm/lfc/service/app.yaml'
       docker:
         builder:
           engine: 'buildkit'
@@ -220,3 +220,4 @@ services:
             request: "200Mi"
         readiness:
           tcpSocketPort: 80
+
