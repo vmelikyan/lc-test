@@ -100,7 +100,7 @@ services:
           - 'image="{{{grpc-echo_dockerImage}}}"'
         valueFiles:
           - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/grpc-service.yaml'
+          - 'sysops/helm/lfc/service/grpc-echo-service.yaml'
       docker:
         builder:
           engine: 'buildkit'
@@ -124,7 +124,7 @@ services:
           engine: 'buildkit'
         defaultTag: 'main'
         app:
-          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          dockerfilePath: 'sysops/dockerfiles/app-main.dockerfile'
           env:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
