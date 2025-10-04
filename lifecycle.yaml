@@ -106,7 +106,7 @@ services:
           engine: 'buildkit'
         defaultTag: "main"
         app:
-          dockerfilePath: "grpc-echo/echo.Dockerfile"
+          dockerfilePath: "grpc-echo/Dockerfile"
           ports:
             - 8080
           env:
@@ -221,5 +221,3 @@ services:
             request: "200Mi"
         readiness:
           tcpSocketPort: 80
-
-
