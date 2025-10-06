@@ -17,7 +17,7 @@ WORKDIR /root/
 
 COPY --from=builder /app/grpc-server .
 
-EXPOSE 8090
+EXPOSE 8080
 
 CMD ["./grpc-server"]
 
