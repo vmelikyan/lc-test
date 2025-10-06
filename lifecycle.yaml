@@ -32,7 +32,7 @@ services:
           - 'ingress.hostname={{{lc-test_publicUrl}}}'
         valueFiles:
           - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/app-value.yaml'
+          - 'sysops/helm/lfc/service/app.yaml'
       docker:
         builder:
           engine: 'buildkit'
