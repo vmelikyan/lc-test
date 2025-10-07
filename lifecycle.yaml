@@ -203,6 +203,7 @@ services:
           - "ingress.enabled=true"
           - "ingress.hostname={{jenkins_publicUrl}}"
           - "ingress.ingressClassName=nginx"
+          - "controller.replicas=1"
             
   - name: "nginx"
     defaultUUID: "dev-0"
