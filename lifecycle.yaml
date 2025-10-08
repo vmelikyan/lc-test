@@ -189,6 +189,8 @@ services:
       branchName: "main"
       chart:
         name: "redis"
+      values:
+        - 'replica.replicaCount=1'
 
   - name: "jenkins"
     helm:
