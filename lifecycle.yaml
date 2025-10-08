@@ -205,18 +205,15 @@ services:
           - "ingress.ingressClassName=nginx"
             
   - name: "nginx"
-    defaultUUID: "dev-0"
-    docker:
-      dockerImage: "nginx"
-      defaultTag: "latest"
-      ports:
-        - 80
-      deployment:
-        public: true
-        resource:
-          cpu:
-            request: "10m"
-          memory:
-            request: "200Mi"
-        readiness:
-          tcpSocketPort: 80
+    helm:
+      repository: "vmelikyan/lc-test"
+      branchName: "main"
+      chart:
+        name: "nginx"
+        repoUrl: "https://charts.bitnami.com/bitnami"
+        version: "15.15.0"
+        values:
+          - "service.type=ClusterIP"
+          - "ingress.enabled=true"
+          - "ingress.hostname={{nginx_publicUrl}}"
+          - "ingress.ingressClassName=nginx"
