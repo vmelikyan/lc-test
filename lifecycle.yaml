@@ -32,14 +32,14 @@ services:
           - 'ingress.hostname={{{lc-test_publicUrl}}}'
         valueFiles:
           - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/app.yaml'
+          - 'sysops/helm/lfc/service/app-values.yaml'
       docker:
         builder:
           engine: 'buildkit'
           buildMethod: 'nativeV2'
         defaultTag: 'main'
         app:
-          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          dockerfilePath: 'sysops/dockerfiles/app-bad.dockerfile'
           env:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
@@ -74,7 +74,7 @@ services:
           buildMethod: 'nativeV2'
         defaultTag: 'main'
         app:
-          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          dockerfilePath: 'sysops/dockerfiles/app-new.dockerfile'
           env:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
