@@ -39,7 +39,7 @@ services:
           buildMethod: 'nativeV2'
         defaultTag: 'main'
         app:
-          dockerfilePath: 'sysops/dockerfiles/app-docker.dockerfile'
+          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           env:
             CLIENT_HOST: '{{grpc-echoing_internalHostname}}:8089'
             TEST_TEST: 'test'
