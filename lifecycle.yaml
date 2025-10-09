@@ -53,8 +53,8 @@ services:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       args: "--debug"
-        envMapping:
-          app:
+      envMapping:
+        app:
           format: 'array'
           path: 'deployment.env'
       chart:
