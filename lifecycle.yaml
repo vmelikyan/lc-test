@@ -67,7 +67,7 @@ services:
           - 'ingress.hostname={{{lc-test_publicUrl}}}'
         valueFiles:
           - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/app-oci.yaml'
+          - 'sysops/helm/lfc/service/app.yaml'
       docker:
         builder:
           engine: 'buildkit'
