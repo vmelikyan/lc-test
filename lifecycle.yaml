@@ -53,10 +53,10 @@ services:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       args: "--debug"
-        envMapping:
-          app:
-            format: 'array'
-            path: 'deployment.env'
+      envMapping:
+        app:
+          format: 'array'
+          path: 'deployment.env'
       chart:
         name: 'lc-apps'
         repoUrl: 'oci://ghcr.io/vmelikyan/lc-apps' # oci chart
