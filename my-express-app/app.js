@@ -5,7 +5,7 @@ const protoLoader = require('@grpc/proto-loader');
 const app = express();
 const port = 8080;
 
-const packageDefinition = protoLoader.loadSync(__dirname + '/echoing-me.proto', {
+const packageDefinition = protoLoader.loadSync(__dirname + '/echo-me.proto', {
   keepCase: true,
   longs: String,
   enums: String,
