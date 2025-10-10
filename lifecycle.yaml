@@ -32,15 +32,15 @@ services:
           - 'ingress.hostname={{{lc-test_publicUrl}}}'
         valueFiles:
           - 'sysops/helm/common.yaml'
-          - 'sysops/helm/lfc/service/app.yaml'
+          - 'sysops/helm/lfc/service/app-values.yaml'
       docker:
         builder:
           engine: 'buildkit'
         defaultTag: 'main'
         app:
-          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
+          dockerfilePath: 'sysops/dockerfiles/app-container.dockerfile'
           env:
-            CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
+            CLIENT_HOST: '{{grpc-echo-app-host_internalHostname}}:8080'
             TEST_TEST: 'test'
             WHAT: "is-this"
           ports:
