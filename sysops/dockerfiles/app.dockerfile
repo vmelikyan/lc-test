@@ -17,4 +17,4 @@ COPY ../my-express-app/ .
 EXPOSE 8080
 
 # Run the application
-CMD [ "node", "indext.js" ]
+CMD [ "node", "app.js" ]
