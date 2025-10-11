@@ -38,7 +38,7 @@ services:
           engine: 'buildkit'
         defaultTag: 'main'
         app:
-          dockerfilePath: 'sysops/dockerfiles/app-mynewapp.dockerfile'
+          dockerfilePath: 'sysops/dockerfiles/app.dockerfile'
           env:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
@@ -80,7 +80,7 @@ services:
           ports:
             - 8080  
   
-  - name: "grpc-echo"
+  - name: \"grpc-echo\"
     deploymentDependsOn:
       - 'lc-test-gh-type'
     helm:
@@ -110,7 +110,7 @@ services:
             COMPONENT: "app"
             ENV: "lifecycle"
             
-  - name: "lc-test-gh-type"
+  - name: \"lc-test-gh-type\"
     deploymentDependsOn:
       - 'redis'
     github:
@@ -170,51 +170,51 @@ services:
   #           accessModes: 'ReadWriteOnce'
   #           storageSize: '5Gi'
 
-  - name: "postgres-db"
+  - name: \"postgres-db\"
     helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
+      repository: \"vmelikyan/lc-test\"
+      branchName: \"main\"
       chart:
-        name: "postgresql"
+        name: \"postgresql\"
         valueFiles:
           - 'sysops/helm/lfc/db/db.yaml'
 
-  - name: "redis"
+  - name: \"redis\"
     deploymentDependsOn:
       - 'postgres-db'
     helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
+      repository: \"vmelikyan/lc-test\"
+      branchName: \"main\"
       chart:
-        name: "redis"
+        name: \"redis\"
 
-  - name: "jenkins"
+  - name: \"jenkins\"
     helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
+      repository: \"vmelikyan/lc-test\"
+      branchName: \"main\"
       chart:
-        name: "jenkins"
-        repoUrl: "https://charts.bitnami.com/bitnami"
-        version: "13.6.8"
+        name: \"jenkins\"
+        repoUrl: \"https://charts.bitnami.com/bitnami\"
+        version: \"13.6.8\"
         values:
-          - "service.type=ClusterIP"
-          - "ingress.enabled=true"
-          - "ingress.hostname={{jenkins_publicUrl}}"
-          - "ingress.ingressClassName=nginx"
+          - \"service.type=ClusterIP\"
+          - \"ingress.enabled=true\"
+          - \"ingress.hostname={{jenkins_publicUrl}}\"
+          - \"ingress.ingressClassName=nginx\"
             
-  - name: "nginx"
-    defaultUUID: "dev-0"
+  - name: \"nginx\"
+    defaultUUID: \"dev-0\"
     docker:
-      dockerImage: "nginx"
-      defaultTag: "latest"
+      dockerImage: \"nginx\"
+      defaultTag: \"latest\"
       ports:
         - 80
       deployment:
         public: true
         resource:
           cpu:
-            request: "10m"
+            request: \"10m\"
           memory:
-            request: "200Mi"
+            request: \"200Mi\"
         readiness:
           tcpSocketPort: 80
