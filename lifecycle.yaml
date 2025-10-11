@@ -20,7 +20,7 @@ services:
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
       args: "--debug"
-        envMapping:
+      envMapping:
           app:
             format: 'array'
             path: 'deployment.env'
