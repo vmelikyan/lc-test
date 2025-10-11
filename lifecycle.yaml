@@ -16,10 +16,10 @@ environment:
 services:
   - name: 'lc-test-helm-local'
     helm:
-      version: "3.12.0"
+      version: \"3.12.0\"
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
-      args: "--debug"
+      args: \"--debug\"
       envMapping:
         app:
           format: 'array'
@@ -27,7 +27,7 @@ services:
       chart:
         name: './helm/lc-apps' # local (in repo) helm chart
         values:
-          - 'image="{{{lc-test-helm-local_dockerImage}}}"'
+          - 'image=\"{{{lc-test-helm-local_dockerImage}}}\"'
           - 'ingress.enabled=true'
           - 'ingress.hostname={{{lc-test_publicUrl}}}'
         valueFiles:
@@ -42,16 +42,16 @@ services:
           env:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
-            WHAT: "is-this"
+            WHAT: \"is-this\"
           ports:
             - 8080
             
   - name: 'lc-test-helm-oci'
     helm:
-      version: "3.12.0"
+      version: \"3.12.0\"
       repository: 'vmelikyan/lc-test'
       branchName: 'main'
-      args: "--debug"
+      args: \"--debug\"
       envMapping:
         app:
           format: 'array'
@@ -61,7 +61,7 @@ services:
         repoUrl: 'oci://ghcr.io/vmelikyan/lc-apps' # oci chart
         version: '0.0.1'
         values:
-          - 'image="{{{lc-test-helm-oci_dockerImage}}}"'
+          - 'image=\"{{{lc-test-helm-oci_dockerImage}}}\"'
           - 'ingress.enabled=true'
           - 'ingress.hostname={{{lc-test_publicUrl}}}'
         valueFiles:
@@ -76,17 +76,17 @@ services:
           env:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
-            WHAT: "is-this"
+            WHAT: \"is-this\"
           ports:
             - 8080  
   
-  - name: "grpc-echo"
+  - name: \"grpc-echo\"
     deploymentDependsOn:
       - 'lc-test-gh-type'
     helm:
-      version: "3.12.0"
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
+      version: \"3.12.0\"
+      repository: \"vmelikyan/lc-test\"
+      branchName: \"main\"
       envMapping:
         app:
           format: 'array'
@@ -94,23 +94,23 @@ services:
       chart:
         name: './helm/lc-apps'
         values:
-          - 'image="{{{grpc-echo_dockerImage}}}"'
+          - 'image=\"{{{grpc-echo_dockerImage}}}\"'
         valueFiles:
           - 'sysops/helm/common.yaml'
           - 'sysops/helm/lfc/service/grpc-service.yaml'
       docker:
         builder:
           engine: 'buildkit'
-        defaultTag: "main"
+        defaultTag: \"main\"
         app:
-          dockerfilePath: "grpc-echo/Dockerfile"
+          dockerfilePath: \"grpc-echo/Dockerfile\"
           ports:
             - 8080
           env:
-            COMPONENT: "app"
-            ENV: "lifecycle"
+            COMPONENT: \"app\"
+            ENV: \"lifecycle\"
             
-  - name: "lc-test-gh-type"
+  - name: \"lc-test-gh-type\"
     deploymentDependsOn:
       - 'redis'
     github:
@@ -125,7 +125,7 @@ services:
           env:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
-            WHAT: "is-this"
+            WHAT: \"is-this\"
           ports:
             - 8080
       deployment:
@@ -170,51 +170,51 @@ services:
   #           accessModes: 'ReadWriteOnce'
   #           storageSize: '5Gi'
 
-  - name: "postgres-db"
+  - name: \"postgres-db\"
     helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
+      repository: \"vmelikyan/lc-test\"
+      branchName: \"main\"
       chart:
-        name: "postgresql"
+        name: \"postgresql\"
         valueFiles:
           - 'sysops/helm/lfc/db/db.yaml'
 
-  - name: "redis"
+  - name: \"redis\"
     deploymentDependsOn:
       - 'postgres-db'
     helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
+      repository: \"vmelikyan/lc-test\"
+      branchName: \"main\"
       chart:
-        name: "redis"
+        name: \"redis\"
 
-  - name: "jenkins"
+  - name: \"jenkins\"
     helm:
-      repository: "vmelikyan/lc-test"
-      branchName: "main"
+      repository: \"vmelikyan/lc-test\"
+      branchName: \"main\"
       chart:
-        name: "jenkins"
-        repoUrl: "https://charts.bitnami.com/bitnami"
-        version: "13.6.8"
+        name: \"jenkins\"
+        repoUrl: \"https://charts.bitnami.com/bitnami\"
+        version: \"13.6.8\"
         values:
-          - "service.type=ClusterIP"
-          - "ingress.enabled=true"
-          - "ingress.hostname={{jenkins_publicUrl}}"
-          - "ingress.ingressClassName=nginx"
+          - \"service.type=ClusterIP\"
+          - \"ingress.enabled=true\"
+          - \"ingress.hostname={{jenkins_publicUrl}}\"
+          - \"ingress.ingressClassName=nginx\"
             
-  - name: "nginx"
-    defaultUUID: "dev-0"
+  - name: \"nginx\"
+    defaultUUID: \"dev-0\"
     docker:
-      dockerImage: "nginx"
-      defaultTag: "latest"
+      dockerImage: \"nginx\"
+      defaultTag: \"latest\"
       ports:
         - 80
       deployment:
         public: true
         resource:
           cpu:
-            request: "10m"
+            request: \"10m\"
           memory:
-            request: "200Mi"
+            request: \"200Mi\"
         readiness:
           tcpSocketPort: 80
