@@ -218,3 +218,4 @@ services:
             request: "200Mi"
         readiness:
           tcpSocketPort: 80
+
