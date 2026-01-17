@@ -2,6 +2,7 @@
 version: '2.1.0'
 
 environment:
+  githubDeployments: true
   defaultServices:
     - name: 'lc-test-helm-local'
     - name: 'nginx'
