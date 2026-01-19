@@ -4,13 +4,13 @@ version: '2.1.0'
 environment:
   githubDeployments: true
   defaultServices:
-    - name: 'lc-test-helm-local'
-    - name: 'nginx'
-    - name: 'postgres-db'
-    - name: 'grpc-echo'
-    - name: 'redis'
-    - name: 'jenkins'
-    - name: 'lc-test-helm-oci'
+    # - name: 'lc-test-helm-local'
+    # - name: 'nginx'
+    # - name: 'postgres-db'
+    # - name: 'grpc-echo'
+    # - name: 'redis'
+    # - name: 'jenkins'
+    # - name: 'lc-test-helm-oci'
     - name: 'lc-test-gh-type'
 
     
@@ -127,6 +127,7 @@ services:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
             WHAT: "is-this"
+            AWS_SECRET_VAR: '{{aws:myapp/aws-config:key}}'
           ports:
             - 8080
       deployment:
