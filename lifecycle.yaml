@@ -127,7 +127,7 @@ services:
             CLIENT_HOST: '{{grpc-echo_internalHostname}}:8080'
             TEST_TEST: 'test'
             WHAT: "is-this"
-            AWS_SECRET_VAR: '{{aws:myapp/aws-config:key}}'
+            AWS_SECRET_VAR: '{{gcp:myapp:aws-config}}'
           ports:
             - 8080
       deployment:
