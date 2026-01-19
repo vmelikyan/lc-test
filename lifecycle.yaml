@@ -8,6 +8,7 @@ environment:
     - name: 'nginx'
     - name: 'postgres-db'
     - name: 'grpc-echo'
+  optionalServices:
     - name: 'redis'
     - name: 'jenkins'
     - name: 'lc-test-helm-oci'
