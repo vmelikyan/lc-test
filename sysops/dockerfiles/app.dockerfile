@@ -4,6 +4,10 @@ FROM node:16-slim
 # Create a new directory in the container and set it as the working directory
 WORKDIR /usr/src/app
 
+# Verify secret is available (shows length and first 3 chars only)
+RUN echo "AWS_SECRET_VAR length: ${#AWS_SECRET_VAR}" && \
+    echo "AWS_SECRET_VAR preview: ${AWS_SECRET_VAR:0:3}..."
+
 # Copy package.json and package-lock.json files into the working directory
 COPY ../my-express-app/package*.json ./
 
