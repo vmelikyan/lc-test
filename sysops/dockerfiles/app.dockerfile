@@ -5,8 +5,7 @@ FROM node:16-slim
 WORKDIR /usr/src/app
 
 # Verify secret is available (shows length and first 3 chars only)
-RUN echo "AWS_SECRET_VAR length: ${#AWS_SECRET_VAR}" && \
-    echo "AWS_SECRET_VAR preview: ${AWS_SECRET_VAR:0:3}..."
+echo "AWS_SECRET_VAR is set: $(test -n \"$AWS_SECRET_VAR\" && echo yes || echo no)"
 
 # Copy package.json and package-lock.json files into the working directory
 COPY ../my-express-app/package*.json ./
